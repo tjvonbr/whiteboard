@@ -12,6 +12,7 @@ import RegisterEmail from "./components/RegisterEmail";
 import RegisterPassword from "./components/RegisterPassword";
 import BackButton from "../../components/buttons/BackButton";
 import ExitButton from "../../components/buttons/ExitButton";
+import { Auth } from "aws-amplify";
 import { styles } from "./styles/RegisterStyles";
 
 const Register = ({ navigation }) => {
@@ -24,6 +25,26 @@ const Register = ({ navigation }) => {
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
+
+  const signUp = async () => {
+    try {
+      const { user } = await Auth.signUp({
+        username: email, // Email must be entered as username
+        password,
+        attributes: {
+          given_name: firstName,
+          family_name: lastName,
+        },
+      });
+      console.log("User info: ", user);
+      console.log(user["username"]);
+      navigation.navigate("Confirm", {
+        email: user["username"],
+      });
+    } catch (error) {
+      console.log("error signing up:", error);
+    }
+  };
 
   const handleFirstName = firstName => setFirstName(firstName);
   const handleLastName = lastName => setLastName(lastName);
@@ -69,7 +90,9 @@ const Register = ({ navigation }) => {
         </View>
         {renderStep()}
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={[styles.btnPrimary]} onPress={nextStep}>
+          <TouchableOpacity
+            style={[styles.btnPrimary]}
+            onPress={step != 3 ? nextStep : signUp}>
             <Text style={styles.btnTextPrimary}>
               {step != 3 ? "Continue" : "Submit"}
             </Text>
