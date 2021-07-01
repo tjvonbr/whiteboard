@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: colors.white,
   },
   textContainer: {
     flex: 1,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 5,
     borderRadius: 7,
     backgroundColor: colors.blue09,
   },

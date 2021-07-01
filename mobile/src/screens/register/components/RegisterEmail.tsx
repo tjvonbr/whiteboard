@@ -1,11 +1,23 @@
 import * as React from "react";
 import { Text, TextInput, View } from "react-native";
+import { styles } from "../styles/RegisterStyles";
 
-const RegisterEmail = () => {
+type RegisterEmailProps = {
+  email: string;
+  handleEmail: (email: string) => void;
+};
+
+const RegisterEmail = ({ email, handleEmail }: RegisterEmailProps) => {
   return (
-    <View>
-      <Text>What is your email?</Text>
-      <TextInput placeholder="Enter your email" />
+    <View style={styles.contentContainer}>
+      <Text style={styles.title}>What is your email?</Text>
+      <Text style={styles.inputTitle}>Email</Text>
+      <TextInput
+        style={styles.registerInput}
+        value={email}
+        onChangeText={handleEmail}
+        keyboardType="email-address"
+      />
     </View>
   );
 };
