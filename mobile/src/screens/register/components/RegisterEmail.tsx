@@ -16,6 +16,7 @@ const RegisterEmail = ({ email, handleEmail }: RegisterEmailProps) => {
         style={styles.registerInput}
         value={email}
         onChangeText={handleEmail}
+        autoCapitalize="none"
         keyboardType="email-address"
       />
     </View>
