@@ -21,12 +21,14 @@ const Register = ({ navigation }) => {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isValidInput, setIsValidInput] = React.useState(false);
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
-  const signUp = async () => {
+  async function signUp() {
+    setIsLoading(true);
     try {
       const { user } = await Auth.signUp({
         username: email, // Email must be entered as username
@@ -36,15 +38,16 @@ const Register = ({ navigation }) => {
           family_name: lastName,
         },
       });
+      setIsLoading(false);
       console.log("User info: ", user);
-      console.log(user["username"]);
       navigation.navigate("Confirm", {
         email: user["username"],
       });
     } catch (error) {
+      setIsLoading(false);
       console.log("error signing up:", error);
     }
-  };
+  }
 
   const handleFirstName = firstName => setFirstName(firstName);
   const handleLastName = lastName => setLastName(lastName);

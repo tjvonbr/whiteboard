@@ -19,6 +19,7 @@ const RegisterPassword = ({
         style={styles.registerInput}
         value={password}
         onChangeText={handlePassword}
+        autoCapitalize="none"
         secureTextEntry={true}
       />
       <Text style={styles.inputTitle}>Confirm Password</Text>
@@ -26,6 +27,7 @@ const RegisterPassword = ({
         style={styles.registerInput}
         value={password}
         onChangeText={handlePassword}
+        autoCapitalize="none"
         secureTextEntry={true}
       />
     </View>
