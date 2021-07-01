@@ -12,6 +12,7 @@ target 'whiteboard' do
     :hermes_enabled => false
   )
 
+
   target 'whiteboardTests' do
     inherit! :complete
     # Pods for testing
@@ -24,6 +25,8 @@ target 'whiteboard' do
   use_flipper!()
 
   post_install do |installer|
-    react_native_post_install(installer)
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
   end
 end
