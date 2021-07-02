@@ -25,6 +25,7 @@ const Login = ({ navigation }) => {
       const user = await Auth.signIn(email, password);
       setIsLoading(false);
       console.log("user logged in: ", user);
+      navigation.navigate("App");
     } catch (error) {
       setIsLoading(false);
       console.log("error signing in", error);
