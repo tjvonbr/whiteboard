@@ -1,7 +1,6 @@
 import * as React from "react";
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./LandingStyles";
-import { colors } from "../../styles/colors";
 
 const Landing = ({ navigation }) => {
   return (
