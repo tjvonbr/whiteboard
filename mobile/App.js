@@ -3,7 +3,6 @@ import * as React from "react";
 import Amplify from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from "./src/navigation/AppNavigator"
 import ConfirmRegistration from "./src/screens/register/ConfirmRegistration"
@@ -13,7 +12,6 @@ import Register from "./src/screens/register/Register"
 
 Amplify.configure(awsconfig);
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 const isLoggedIn = true
 
