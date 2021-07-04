@@ -26,6 +26,7 @@ const Login = ({ navigation }) => {
       setIsLoading(false);
       console.log("user logged in: ", user);
       navigation.navigate("App");
+      console.log("Pressed!");
     } catch (error) {
       setIsLoading(false);
       console.log("error signing in", error);

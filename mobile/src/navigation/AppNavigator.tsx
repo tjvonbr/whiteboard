@@ -1,19 +1,19 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import DashboardStackScreen from "./DashboardNavigator";
+import DashboardStack from "./DashboardStack";
 import Calendar from "../screens/calendar/Calendar";
 import Statistics from "../screens/statistics/Statistics";
 
-const AppTab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
-function AppTabs() {
+function AppNavigator() {
   return (
-    <AppTab.Navigator initialRouteName="Dashboard">
-      <AppTab.Screen name="Calendar" component={Calendar} />
-      <AppTab.Screen name="Dashboard" component={DashboardStackScreen} />
-      <AppTab.Screen name="Statistics" component={Statistics} />
-    </AppTab.Navigator>
+    <Tab.Navigator initialRouteName="DashboardStack">
+      <Tab.Screen name="Calendar" component={Calendar} />
+      <Tab.Screen name="DashboardStack" component={DashboardStack} />
+      <Tab.Screen name="Statistics" component={Statistics} />
+    </Tab.Navigator>
   );
 }
 
-export default AppTabs;
+export default AppNavigator;
