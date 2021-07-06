@@ -8,7 +8,11 @@ const Stack = createStackNavigator();
 function DashboardStack() {
   return (
     <Stack.Navigator initialRouteName="Dashboard">
-      <Stack.Screen name="AddWorkout" component={AddWorkout} />
+      <Stack.Screen
+        name="AddWorkout"
+        component={AddWorkout}
+        options={{ title: "Add Workout" }}
+      />
       <Stack.Screen name="Dashboard" component={Dashboard} />
     </Stack.Navigator>
   );

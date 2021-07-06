@@ -1,0 +1,11 @@
+type Exercise @model {
+  id: ID!
+  name: String!
+  description: String
+  equipment: ExerciseEquipment
+}
+
+enum ExerciseEquipment {
+  BARBELL
+  DUMBBELL
+}
