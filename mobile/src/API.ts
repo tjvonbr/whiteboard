@@ -2,18 +2,26 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateExerciseInput = {
   id?: string | null,
   name: string,
   description?: string | null,
+  equipment?: ExerciseEquipment | null,
 };
 
-export type ModelTodoConditionInput = {
+export enum ExerciseEquipment {
+  BARBELL = "BARBELL",
+  DUMBBELL = "DUMBBELL",
+}
+
+
+export type ModelExerciseConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+  equipment?: ModelExerciseEquipmentInput | null,
+  and?: Array< ModelExerciseConditionInput | null > | null,
+  or?: Array< ModelExerciseConditionInput | null > | null,
+  not?: ModelExerciseConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,32 +64,112 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
+export type ModelExerciseEquipmentInput = {
+  eq?: ExerciseEquipment | null,
+  ne?: ExerciseEquipment | null,
+};
+
+export type Exercise = {
+  __typename: "Exercise",
   id?: string,
   name?: string,
   description?: string | null,
+  equipment?: ExerciseEquipment | null,
   createdAt?: string,
   updatedAt?: string,
 };
 
-export type UpdateTodoInput = {
+export type UpdateExerciseInput = {
   id: string,
   name?: string | null,
   description?: string | null,
+  equipment?: ExerciseEquipment | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteExerciseInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type CreateWorkoutInput = {
+  id?: string | null,
+  name: string,
+  description?: string | null,
+  workoutType: WorkoutType,
+  scoringType: ScoringType,
+  date: string,
+};
+
+export enum WorkoutType {
+  CARDIO = "CARDIO",
+  STRENGTH = "STRENGTH",
+  WARMUP = "WARMUP",
+  WOD = "WOD",
+}
+
+
+export enum ScoringType {
+  REPS = "REPS",
+  ROUNDS = "ROUNDS",
+  ROUNDS_PLUS_REPS = "ROUNDS_PLUS_REPS",
+  TIME = "TIME",
+}
+
+
+export type ModelWorkoutConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  workoutType?: ModelWorkoutTypeInput | null,
+  scoringType?: ModelScoringTypeInput | null,
+  date?: ModelStringInput | null,
+  and?: Array< ModelWorkoutConditionInput | null > | null,
+  or?: Array< ModelWorkoutConditionInput | null > | null,
+  not?: ModelWorkoutConditionInput | null,
+};
+
+export type ModelWorkoutTypeInput = {
+  eq?: WorkoutType | null,
+  ne?: WorkoutType | null,
+};
+
+export type ModelScoringTypeInput = {
+  eq?: ScoringType | null,
+  ne?: ScoringType | null,
+};
+
+export type Workout = {
+  __typename: "Workout",
+  id?: string,
+  name?: string,
+  description?: string | null,
+  workoutType?: WorkoutType,
+  scoringType?: ScoringType,
+  exercises?:  Array<Exercise >,
+  date?: string,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateWorkoutInput = {
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  workoutType?: WorkoutType | null,
+  scoringType?: ScoringType | null,
+  date?: string | null,
+};
+
+export type DeleteWorkoutInput = {
+  id: string,
+};
+
+export type ModelExerciseFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  equipment?: ModelExerciseEquipmentInput | null,
+  and?: Array< ModelExerciseFilterInput | null > | null,
+  or?: Array< ModelExerciseFilterInput | null > | null,
+  not?: ModelExerciseFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -100,89 +188,196 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items?:  Array<Todo | null > | null,
+export type ModelExerciseConnection = {
+  __typename: "ModelExerciseConnection",
+  items?:  Array<Exercise | null > | null,
   nextToken?: string | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input?: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type ModelWorkoutFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  workoutType?: ModelWorkoutTypeInput | null,
+  scoringType?: ModelScoringTypeInput | null,
+  date?: ModelStringInput | null,
+  and?: Array< ModelWorkoutFilterInput | null > | null,
+  or?: Array< ModelWorkoutFilterInput | null > | null,
+  not?: ModelWorkoutFilterInput | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type ModelWorkoutConnection = {
+  __typename: "ModelWorkoutConnection",
+  items?:  Array<Workout | null > | null,
+  nextToken?: string | null,
+};
+
+export type CreateExerciseMutationVariables = {
+  input?: CreateExerciseInput,
+  condition?: ModelExerciseConditionInput | null,
+};
+
+export type CreateExerciseMutation = {
+  createExercise?:  {
+    __typename: "Exercise",
     id: string,
     name: string,
     description?: string | null,
+    equipment?: ExerciseEquipment | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input?: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateExerciseMutationVariables = {
+  input?: UpdateExerciseInput,
+  condition?: ModelExerciseConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateExerciseMutation = {
+  updateExercise?:  {
+    __typename: "Exercise",
     id: string,
     name: string,
     description?: string | null,
+    equipment?: ExerciseEquipment | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input?: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteExerciseMutationVariables = {
+  input?: DeleteExerciseInput,
+  condition?: ModelExerciseConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteExerciseMutation = {
+  deleteExercise?:  {
+    __typename: "Exercise",
     id: string,
     name: string,
     description?: string | null,
+    equipment?: ExerciseEquipment | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type CreateWorkoutMutationVariables = {
+  input?: CreateWorkoutInput,
+  condition?: ModelWorkoutConditionInput | null,
+};
+
+export type CreateWorkoutMutation = {
+  createWorkout?:  {
+    __typename: "Workout",
+    id: string,
+    name: string,
+    description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateWorkoutMutationVariables = {
+  input?: UpdateWorkoutInput,
+  condition?: ModelWorkoutConditionInput | null,
+};
+
+export type UpdateWorkoutMutation = {
+  updateWorkout?:  {
+    __typename: "Workout",
+    id: string,
+    name: string,
+    description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteWorkoutMutationVariables = {
+  input?: DeleteWorkoutInput,
+  condition?: ModelWorkoutConditionInput | null,
+};
+
+export type DeleteWorkoutMutation = {
+  deleteWorkout?:  {
+    __typename: "Workout",
+    id: string,
+    name: string,
+    description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetExerciseQueryVariables = {
   id?: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetExerciseQuery = {
+  getExercise?:  {
+    __typename: "Exercise",
     id: string,
     name: string,
     description?: string | null,
+    equipment?: ExerciseEquipment | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListExercisesQueryVariables = {
+  filter?: ModelExerciseFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListExercisesQuery = {
+  listExercises?:  {
+    __typename: "ModelExerciseConnection",
     items?:  Array< {
-      __typename: "Todo",
+      __typename: "Exercise",
       id: string,
       name: string,
       description?: string | null,
+      equipment?: ExerciseEquipment | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -190,34 +385,166 @@ export type ListTodosQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type GetWorkoutQueryVariables = {
+  id?: string,
+};
+
+export type GetWorkoutQuery = {
+  getWorkout?:  {
+    __typename: "Workout",
     id: string,
     name: string,
     description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
+export type ListWorkoutsQueryVariables = {
+  filter?: ModelWorkoutFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListWorkoutsQuery = {
+  listWorkouts?:  {
+    __typename: "ModelWorkoutConnection",
+    items?:  Array< {
+      __typename: "Workout",
+      id: string,
+      name: string,
+      description?: string | null,
+      workoutType: WorkoutType,
+      scoringType: ScoringType,
+      exercises:  Array< {
+        __typename: "Exercise",
+        id: string,
+        name: string,
+        description?: string | null,
+        equipment?: ExerciseEquipment | null,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      date: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateExerciseSubscription = {
+  onCreateExercise?:  {
+    __typename: "Exercise",
     id: string,
     name: string,
     description?: string | null,
+    equipment?: ExerciseEquipment | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnUpdateExerciseSubscription = {
+  onUpdateExercise?:  {
+    __typename: "Exercise",
     id: string,
     name: string,
     description?: string | null,
+    equipment?: ExerciseEquipment | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteExerciseSubscription = {
+  onDeleteExercise?:  {
+    __typename: "Exercise",
+    id: string,
+    name: string,
+    description?: string | null,
+    equipment?: ExerciseEquipment | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateWorkoutSubscription = {
+  onCreateWorkout?:  {
+    __typename: "Workout",
+    id: string,
+    name: string,
+    description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateWorkoutSubscription = {
+  onUpdateWorkout?:  {
+    __typename: "Workout",
+    id: string,
+    name: string,
+    description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteWorkoutSubscription = {
+  onDeleteWorkout?:  {
+    __typename: "Workout",
+    id: string,
+    name: string,
+    description?: string | null,
+    workoutType: WorkoutType,
+    scoringType: ScoringType,
+    exercises:  Array< {
+      __typename: "Exercise",
+      id: string,
+      name: string,
+      description?: string | null,
+      equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,

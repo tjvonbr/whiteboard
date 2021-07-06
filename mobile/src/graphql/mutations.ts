@@ -2,43 +2,121 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createExercise = /* GraphQL */ `
+  mutation CreateExercise(
+    $input: CreateExerciseInput!
+    $condition: ModelExerciseConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createExercise(input: $input, condition: $condition) {
       id
       name
       description
+      equipment
       createdAt
       updatedAt
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateExercise = /* GraphQL */ `
+  mutation UpdateExercise(
+    $input: UpdateExerciseInput!
+    $condition: ModelExerciseConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateExercise(input: $input, condition: $condition) {
       id
       name
       description
+      equipment
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteExercise = /* GraphQL */ `
+  mutation DeleteExercise(
+    $input: DeleteExerciseInput!
+    $condition: ModelExerciseConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteExercise(input: $input, condition: $condition) {
       id
       name
       description
+      equipment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createWorkout = /* GraphQL */ `
+  mutation CreateWorkout(
+    $input: CreateWorkoutInput!
+    $condition: ModelWorkoutConditionInput
+  ) {
+    createWorkout(input: $input, condition: $condition) {
+      id
+      name
+      description
+      workoutType
+      scoringType
+      exercises {
+        id
+        name
+        description
+        equipment
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWorkout = /* GraphQL */ `
+  mutation UpdateWorkout(
+    $input: UpdateWorkoutInput!
+    $condition: ModelWorkoutConditionInput
+  ) {
+    updateWorkout(input: $input, condition: $condition) {
+      id
+      name
+      description
+      workoutType
+      scoringType
+      exercises {
+        id
+        name
+        description
+        equipment
+        createdAt
+        updatedAt
+      }
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWorkout = /* GraphQL */ `
+  mutation DeleteWorkout(
+    $input: DeleteWorkoutInput!
+    $condition: ModelWorkoutConditionInput
+  ) {
+    deleteWorkout(input: $input, condition: $condition) {
+      id
+      name
+      description
+      workoutType
+      scoringType
+      exercises {
+        id
+        name
+        description
+        equipment
+        createdAt
+        updatedAt
+      }
+      date
       createdAt
       updatedAt
     }

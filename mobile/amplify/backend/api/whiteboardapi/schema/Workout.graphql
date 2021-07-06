@@ -1,0 +1,23 @@
+type Workout @model {
+  id: ID!
+  name: String!
+  description: String
+  workoutType: WorkoutType!
+  scoringType: ScoringType!
+  exercises: [Exercise!]!
+  date: String!
+}
+
+enum WorkoutType {
+  CARDIO
+  STRENGTH
+  WARMUP
+  WOD
+}
+
+enum ScoringType {
+  REPS
+  ROUNDS
+  ROUNDS_PLUS_REPS
+  TIME
+}
