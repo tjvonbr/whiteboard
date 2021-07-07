@@ -1,5 +1,6 @@
 type Exercise @model {
   id: ID!
+  userId: ID!
   name: String!
   description: String
   equipment: ExerciseEquipment

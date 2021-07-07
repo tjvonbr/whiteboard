@@ -6,6 +6,7 @@ export const getExercise = /* GraphQL */ `
   query GetExercise($id: ID!) {
     getExercise(id: $id) {
       id
+      userId
       name
       description
       equipment
@@ -23,9 +24,45 @@ export const listExercises = /* GraphQL */ `
     listExercises(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userId
         name
         description
         equipment
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      firstName
+      lastName
+      email
+      password
+      phoneNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        firstName
+        lastName
+        email
+        password
+        phoneNumber
         createdAt
         updatedAt
       }
@@ -43,6 +80,7 @@ export const getWorkout = /* GraphQL */ `
       scoringType
       exercises {
         id
+        userId
         name
         description
         equipment
@@ -70,6 +108,7 @@ export const listWorkouts = /* GraphQL */ `
         scoringType
         exercises {
           id
+          userId
           name
           description
           equipment

@@ -4,6 +4,7 @@
 
 export type CreateExerciseInput = {
   id?: string | null,
+  userId: string,
   name: string,
   description?: string | null,
   equipment?: ExerciseEquipment | null,
@@ -16,6 +17,7 @@ export enum ExerciseEquipment {
 
 
 export type ModelExerciseConditionInput = {
+  userId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   equipment?: ModelExerciseEquipmentInput | null,
@@ -24,7 +26,7 @@ export type ModelExerciseConditionInput = {
   not?: ModelExerciseConditionInput | null,
 };
 
-export type ModelStringInput = {
+export type ModelIDInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -64,6 +66,22 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
 export type ModelExerciseEquipmentInput = {
   eq?: ExerciseEquipment | null,
   ne?: ExerciseEquipment | null,
@@ -72,6 +90,7 @@ export type ModelExerciseEquipmentInput = {
 export type Exercise = {
   __typename: "Exercise",
   id?: string,
+  userId?: string,
   name?: string,
   description?: string | null,
   equipment?: ExerciseEquipment | null,
@@ -81,12 +100,70 @@ export type Exercise = {
 
 export type UpdateExerciseInput = {
   id: string,
+  userId?: string | null,
   name?: string | null,
   description?: string | null,
   equipment?: ExerciseEquipment | null,
 };
 
 export type DeleteExerciseInput = {
+  id: string,
+};
+
+export type CreateUserInput = {
+  id?: string | null,
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
+  phoneNumber?: number | null,
+};
+
+export type ModelUserConditionInput = {
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  phoneNumber?: ModelIntInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type User = {
+  __typename: "User",
+  id?: string,
+  firstName?: string,
+  lastName?: string,
+  email?: string,
+  password?: string,
+  phoneNumber?: number | null,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateUserInput = {
+  id: string,
+  firstName?: string | null,
+  lastName?: string | null,
+  email?: string | null,
+  password?: string | null,
+  phoneNumber?: number | null,
+};
+
+export type DeleteUserInput = {
   id: string,
 };
 
@@ -164,6 +241,7 @@ export type DeleteWorkoutInput = {
 
 export type ModelExerciseFilterInput = {
   id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   equipment?: ModelExerciseEquipmentInput | null,
@@ -172,25 +250,27 @@ export type ModelExerciseFilterInput = {
   not?: ModelExerciseFilterInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type ModelExerciseConnection = {
   __typename: "ModelExerciseConnection",
   items?:  Array<Exercise | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null,
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  phoneNumber?: ModelIntInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
+};
+
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items?:  Array<User | null > | null,
   nextToken?: string | null,
 };
 
@@ -221,6 +301,7 @@ export type CreateExerciseMutation = {
   createExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
@@ -238,6 +319,7 @@ export type UpdateExerciseMutation = {
   updateExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
@@ -255,9 +337,67 @@ export type DeleteExerciseMutation = {
   deleteExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateUserMutationVariables = {
+  input?: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input?: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input?: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -279,6 +419,7 @@ export type CreateWorkoutMutation = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
@@ -307,6 +448,7 @@ export type UpdateWorkoutMutation = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
@@ -335,6 +477,7 @@ export type DeleteWorkoutMutation = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
@@ -355,6 +498,7 @@ export type GetExerciseQuery = {
   getExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
@@ -375,9 +519,52 @@ export type ListExercisesQuery = {
     items?:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserQueryVariables = {
+  id?: string,
+};
+
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items?:  Array< {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      email: string,
+      password: string,
+      phoneNumber?: number | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -400,6 +587,7 @@ export type GetWorkoutQuery = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
@@ -431,6 +619,7 @@ export type ListWorkoutsQuery = {
       exercises:  Array< {
         __typename: "Exercise",
         id: string,
+        userId: string,
         name: string,
         description?: string | null,
         equipment?: ExerciseEquipment | null,
@@ -449,6 +638,7 @@ export type OnCreateExerciseSubscription = {
   onCreateExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
@@ -461,6 +651,7 @@ export type OnUpdateExerciseSubscription = {
   onUpdateExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
@@ -473,9 +664,52 @@ export type OnDeleteExerciseSubscription = {
   onDeleteExercise?:  {
     __typename: "Exercise",
     id: string,
+    userId: string,
     name: string,
     description?: string | null,
     equipment?: ExerciseEquipment | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    phoneNumber?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -492,6 +726,7 @@ export type OnCreateWorkoutSubscription = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
@@ -515,6 +750,7 @@ export type OnUpdateWorkoutSubscription = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
@@ -538,6 +774,7 @@ export type OnDeleteWorkoutSubscription = {
     exercises:  Array< {
       __typename: "Exercise",
       id: string,
+      userId: string,
       name: string,
       description?: string | null,
       equipment?: ExerciseEquipment | null,
