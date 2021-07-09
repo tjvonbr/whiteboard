@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.white,
   },
-  keyboardView: {
+  innerContainer: {
     flex: 1,
     width: "90%",
   },
@@ -17,10 +17,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
   },
-  innerContainer: {
-    width: "100%",
-    alignItems: "center",
-  },
   contentContainer: {
     flex: 3,
     width: "100%",
@@ -28,15 +24,27 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 20,
-    color: colors.black,
+    textAlign: "left",
+    borderColor: "black",
     fontWeight: "600",
     fontSize: 24,
   },
+  section: {
+    marginBottom: 20,
+  },
   subtitle: {
-    marginBottom: 15,
     color: colors.black,
-    fontWeight: "400",
-    fontSize: 15,
+    fontWeight: "500",
+    fontSize: 18,
+    marginLeft: 10,
+    marginBottom: 5,
+  },
+  description: {
+    height: 100,
+    borderColor: colors.inputBorderGray,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 7,
   },
   btnContainer: {
     flex: 1,
