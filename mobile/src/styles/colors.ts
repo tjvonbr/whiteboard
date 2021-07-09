@@ -5,6 +5,7 @@ const colors = {
 
   // Functionality
   inputBorderGray: "#E2E2E2",
+  checkMarkGreen: "green",
 };
 
 export { colors };

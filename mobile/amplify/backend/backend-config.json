@@ -24,5 +24,12 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "function": {
+    "addUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
   }
 }
