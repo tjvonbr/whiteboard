@@ -9,7 +9,7 @@ type ExerciseItemProps = {
     name: string;
   };
   selected: boolean;
-  handleSelect: (id: number) => void;
+  handleSelect: (exercise) => void;
 };
 
 const ExerciseItem = ({
@@ -20,7 +20,7 @@ const ExerciseItem = ({
   return (
     <TouchableOpacity
       style={styles.exerciseBtn}
-      onPress={() => handleSelect(exercise.id)}>
+      onPress={() => handleSelect(exercise)}>
       <View style={{ flexDirection: "row", flex: 1 }}>
         <View style={styles.exerciseTextContainer}>
           <Text style={styles.exerciseText}>{exercise.name}</Text>

@@ -1,35 +1,41 @@
 import * as React from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
+import DoneButton from "../buttons/DoneButton";
 import ExerciseItem from "./ExerciseItem";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import ExitButton from "../buttons/ExitButton";
 import { exercises } from "../../assets/data/exercises";
 import { colors } from "../../styles/colors";
 
 type ExercisePickerProps = {
   isVisible: boolean;
   closeModal: () => void;
+  selected: Exercise;
+  handleSelect: (id: number) => void;
 };
 
-const ExercisePicker = ({ isVisible, closeModal }: ExercisePickerProps) => {
-  const [selected, setSelected] = React.useState(new Map());
+type Exercise = {
+  id: number;
+  name: string;
+};
 
-  const onSelect = React.useCallback(
-    id => {
-      const newSelected = new Map(selected);
-      newSelected.set(id, !selected.get(id));
-
-      setSelected(newSelected);
-    },
-    [selected],
-  );
+const ExercisePicker = ({
+  isVisible,
+  closeModal,
+  selected,
+  handleSelect,
+}: ExercisePickerProps) => {
+  const clearAndClose = () => {
+    // Clears the previously selected exercises
+    closeModal();
+  };
 
   const renderItem = ({ item }) => {
     return (
       <ExerciseItem
         exercise={item}
         selected={!!selected.get(item.id)}
-        handleSelect={onSelect}
+        handleSelect={handleSelect}
       />
     );
   };
@@ -42,7 +48,15 @@ const ExercisePicker = ({ isVisible, closeModal }: ExercisePickerProps) => {
       onSwipeComplete={closeModal}>
       <SafeAreaView style={styles.modalView}>
         <View style={styles.headerView}>
-          <Text style={styles.headerTitle}>Pick some exercises</Text>
+          <View style={styles.exitBtnContainer}>
+            <ExitButton handlePress={clearAndClose} />
+          </View>
+          <View style={styles.headerTitleContainer}>
+            <Text style={styles.headerTitle}>Pick some exercises</Text>
+          </View>
+          <View style={styles.doneBtnContainer}>
+            <DoneButton handlePress={() => console.log("Done clicked!")} />
+          </View>
         </View>
         <FlatList
           data={exercises}
@@ -66,15 +80,29 @@ const styles = StyleSheet.create({
   headerView: {
     width: "100%",
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "row",
     borderBottomColor: colors.inputBorderGray,
     borderBottomWidth: 1,
+  },
+  exitBtnContainer: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerTitleContainer: {
+    flex: 8,
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerTitle: {
     fontSize: 21,
     fontWeight: "600",
     color: colors.black,
+  },
+  doneBtnContainer: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
