@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView, Text } from "react-native";
 import styles from "./AddWorkoutStyles";
 
 const WorkoutDetails = ({ route }) => {
-  const { exercises } = route.params;
+  const { name, description, time, type, score } = route.params;
 
   return (
     <SafeAreaView style={styles.container}>

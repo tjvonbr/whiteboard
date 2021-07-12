@@ -6,12 +6,19 @@ type IconButtonProps = {
   name: string;
   color: string;
   size: number;
+  buttonStyles: any;
   handlePress: () => void;
 };
 
-const IconButton = ({ name, color, size, handlePress }: IconButtonProps) => {
+const IconButton = ({
+  name,
+  color,
+  size,
+  buttonStyles,
+  handlePress,
+}: IconButtonProps) => {
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity onPress={handlePress} style={buttonStyles}>
       <Icon name={name} color={color} size={size} />
     </TouchableOpacity>
   );

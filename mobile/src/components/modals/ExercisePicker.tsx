@@ -9,19 +9,22 @@ import { colors } from "../../styles/colors";
 
 type ExercisePickerProps = {
   isVisible: boolean;
-  clearAndClose: () => void;
-  toggleModal: () => void;
+  closeModal: () => void;
   selected: Map<any, any>;
   handleSelect: (id: number) => void;
 };
 
 const ExercisePicker = ({
   isVisible,
-  toggleModal,
-  clearAndClose,
+  closeModal,
   selected,
   handleSelect,
 }: ExercisePickerProps) => {
+  const clearAndClose = () => {
+    // Clears the previously selected exercises
+    closeModal();
+  };
+
   const renderItem = ({ item }) => {
     return (
       <ExerciseItem
@@ -37,7 +40,7 @@ const ExercisePicker = ({
       style={{ margin: 0 }}
       isVisible={isVisible}
       swipeDirection="down"
-      onSwipeComplete={toggleModal}>
+      onSwipeComplete={closeModal}>
       <SafeAreaView style={styles.modalView}>
         <View style={styles.headerView}>
           <View style={styles.exitBtnContainer}>
@@ -47,7 +50,7 @@ const ExercisePicker = ({
             <Text style={styles.headerTitle}>Pick some exercises</Text>
           </View>
           <View style={styles.doneBtnContainer}>
-            <DoneButton handlePress={toggleModal} />
+            <DoneButton handlePress={() => console.log("Done clicked!")} />
           </View>
         </View>
         <FlatList
