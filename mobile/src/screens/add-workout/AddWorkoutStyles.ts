@@ -46,6 +46,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 7,
   },
+  timeLimitInput: {
+    height: 50,
+    borderColor: colors.inputBorderGray,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 7,
+  },
   btnContainer: {
     flex: 1,
     width: "100%",
