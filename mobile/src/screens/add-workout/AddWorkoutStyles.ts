@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
   },
+  addExerciseContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   title: {
     marginVertical: 20,
     textAlign: "left",
@@ -100,6 +104,24 @@ const styles = StyleSheet.create({
     color: "#4F4F4F",
     marginBottom: 3,
     paddingLeft: 5,
+  },
+  exerciseInputContainer: {
+    flex: 1,
+    marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  exerciseInput: {
+    width: 60,
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    color: colors.black,
+    fontSize: 15,
+    borderColor: colors.inputBorderGray,
+    borderWidth: 2,
+    borderRadius: 7,
   },
 });
 

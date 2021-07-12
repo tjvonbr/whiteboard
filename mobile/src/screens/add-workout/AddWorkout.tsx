@@ -65,23 +65,6 @@ const Dashboard = ({ navigation }) => {
     }
   };
 
-  // Handle selection of exercises in modal
-  // const handleSelect = React.useCallback(
-  //   item => {
-  //     const newSelected = new Map(selected);
-  //     newSelected.set(item.id, !selected.get(item.id));
-  //     setSelected(newSelected);
-
-  //     if (exercises.includes(item)) {
-  //       const filtered = exercises.filter(e => e.id != item.id);
-  //       setExercises(filtered);
-  //     } else {
-  //       setExercises([...exercises, item]);
-  //     }
-  //   },
-  //   [selected],
-  // );
-
   // Handle user input
   const handleName = (name: string) => setName(name);
   const handleDescription = (text: string) => setDescription(text);
@@ -156,9 +139,9 @@ const Dashboard = ({ navigation }) => {
             navigation.navigate("SubmitWorkout", {
               name,
               description,
-              timeLimit,
-              workoutDropdownValue,
-              scoreDropdownValue,
+              time: timeLimit,
+              type: workoutDropdownValue,
+              score: scoreDropdownValue,
             })
           }>
           <Text style={styles.btnTextPrimary}>Continue</Text>
