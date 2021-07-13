@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import ExerciseDetail from "./components/ExerciseDetail";
 import ExercisePicker from "../../components/modals/ExercisePicker";
-import AddExerciseButton from "../../components/buttons/AddExerciseButton";
 import styles from "./AddWorkoutStyles";
 
 const SubmitWorkout = ({ route }) => {
@@ -44,9 +43,7 @@ const SubmitWorkout = ({ route }) => {
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
         <View style={styles.section}>
-          <View style={styles.addExerciseContainer}>
-            <Text style={styles.subtitle}>Exercises</Text>
-          </View>
+          <View style={styles.addExerciseContainer}></View>
           <FlatList
             data={exercises}
             renderItem={renderItem}
