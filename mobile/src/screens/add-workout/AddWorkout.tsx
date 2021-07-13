@@ -18,7 +18,7 @@ const Dashboard = ({ navigation }) => {
   const [description, setDescription] = React.useState("");
   const [timeLimit, setTimeLimit] = React.useState(null);
   const [workoutTypes, setWorkoutTypes] = React.useState([
-    { value: "Time limit", label: "Time limit" },
+    { value: "AMRAP", label: "AMRAP" },
     { value: "EMOM", label: "EMOM" },
     { value: "Traditional", label: "Traditional" },
   ]);
@@ -31,10 +31,17 @@ const Dashboard = ({ navigation }) => {
   const [isWorkoutDropdownOpen, setIsWorkoutDropdownOpen] =
     React.useState(false);
   const [isScoreDropdownOpen, setIsScoreDropdownOpen] = React.useState(false);
+  const [isValidInput, setIsValidInput] = React.useState(false);
+
+  React.useEffect(() => {
+    workoutDropdownValue != null
+      ? setIsValidInput(true)
+      : setIsValidInput(false);
+  }, [scoreDropdownValue, workoutDropdownValue]);
 
   const renderTimeInput = () => {
     switch (workoutDropdownValue) {
-      case "Time limit":
+      case "AMRAP":
         return (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Time Limit</Text>
@@ -134,7 +141,14 @@ const Dashboard = ({ navigation }) => {
       </View>
       <View style={[styles.btnContainer, { width: "90%" }]}>
         <TouchableOpacity
-          style={styles.btnPrimary}
+          style={[
+            styles.btnPrimary,
+            {
+              backgroundColor: isValidInput
+                ? colors.blue09
+                : colors.inputBorderGray,
+            },
+          ]}
           onPress={() =>
             navigation.navigate("SubmitWorkout", {
               name,
@@ -143,7 +157,8 @@ const Dashboard = ({ navigation }) => {
               type: workoutDropdownValue,
               score: scoreDropdownValue,
             })
-          }>
+          }
+          disabled={!isValidInput}>
           <Text style={styles.btnTextPrimary}>Continue</Text>
         </TouchableOpacity>
       </View>
