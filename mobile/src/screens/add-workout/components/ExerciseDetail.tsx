@@ -3,7 +3,7 @@ import {
   SafeAreaView,
   Text,
   TextInput,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
 } from "react-native";
 import MoreButton from "../../../components/buttons/MoreButton";
@@ -34,13 +34,15 @@ const ExerciseDetail = ({ name }: ExerciseDetailProps) => {
           <Text style={styles.exerciseTitle}>{name}</Text>
           <MoreButton handlePress={toggleMoreModal} />
         </View>
-        <TouchableWithoutFeedback onPress={toggleInputModal}>
-          <Text>
+        <TouchableOpacity
+          style={styles.fauxInputButton}
+          onPress={toggleInputModal}>
+          <Text style={styles.fauxInputBtnText}>
             {description === null
               ? "Enter a description (optional)"
               : description}
           </Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         <View style={styles.setInputSectionContainer}>
           <View style={styles.setInputContainer}>
             <Text style={styles.setInputTitle}>Weight</Text>

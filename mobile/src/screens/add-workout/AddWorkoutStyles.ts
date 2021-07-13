@@ -120,13 +120,16 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: colors.black,
   },
-  exerciseDescriptionInput: {
+  fauxInputButton: {
     width: "100%",
     height: 40,
     marginVertical: 10,
     padding: 10,
     borderRadius: 5,
     backgroundColor: "#f5f2f2",
+  },
+  fauxInputBtnText: {
+    color: "gray",
   },
   setInputSectionContainer: {
     flex: 1,
