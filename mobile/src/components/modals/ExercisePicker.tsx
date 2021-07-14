@@ -20,9 +20,23 @@ const ExercisePicker = ({
   selected,
   handleSelect,
 }: ExercisePickerProps) => {
+  const [isExerciseSelected, setIsExerciseSelected] = React.useState(false);
+
+  React.useEffect(() => {
+    isTrue();
+  }, [selected]);
+
   const clearAndClose = () => {
     // Clears the previously selected exercises
     closeModal();
+  };
+
+  const isTrue = () => {
+    const selectedvalues = Array.from(selected.values());
+
+    selectedvalues.includes(true)
+      ? setIsExerciseSelected(true)
+      : setIsExerciseSelected(false);
   };
 
   const renderItem = ({ item }) => {
@@ -50,7 +64,11 @@ const ExercisePicker = ({
             <Text style={styles.headerTitle}>Pick some exercises</Text>
           </View>
           <View style={styles.doneBtnContainer}>
-            <DoneButton handlePress={() => console.log("Done clicked!")} />
+            <DoneButton
+              color={isExerciseSelected ? colors.black : "gray"}
+              handlePress={closeModal}
+              disabled={!isExerciseSelected}
+            />
           </View>
         </View>
         <FlatList

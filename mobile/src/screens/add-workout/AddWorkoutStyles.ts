@@ -23,8 +23,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   addExerciseContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
   },
   title: {
     marginVertical: 20,
@@ -45,10 +44,11 @@ const styles = StyleSheet.create({
   },
   description: {
     height: 100,
-    borderColor: colors.inputBorderGray,
-    borderWidth: 1,
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colors.inputBorderGray,
     padding: 7,
+    color: colors.black,
   },
   timeLimitInput: {
     height: 50,
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     padding: 7,
   },
   btnContainer: {
-    flex: 1,
     width: "100%",
-    marginBottom: 20,
+    position: "absolute",
+    bottom: 20,
     alignItems: "flex-start",
     justifyContent: "flex-end",
   },

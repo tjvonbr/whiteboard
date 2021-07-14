@@ -42,22 +42,23 @@ const SubmitWorkout = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        <View style={styles.section}>
-          <View style={styles.addExerciseContainer}></View>
+        <View style={styles.addExerciseContainer}>
           <FlatList
+            contentContainerStyle={{ paddingBottom: 70 }}
             data={exercises}
             renderItem={renderItem}
             keyExtractor={item => item.id.toString()}
+            showsVerticalScrollIndicator={false}
           />
         </View>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.btnSecondary} onPress={toggleModal}>
-            <Text style={styles.btnTextSecondary}>Add exercises</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnPrimary}>
-            <Text style={styles.btnTextPrimary}>Create workout</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={[
+            styles.btnPrimary,
+            { position: "absolute", bottom: 5, marginBottom: 10 },
+          ]}
+          onPress={toggleModal}>
+          <Text style={styles.btnTextPrimary}>Add Exercise</Text>
+        </TouchableOpacity>
       </View>
       <ExercisePicker
         isVisible={isVisible}

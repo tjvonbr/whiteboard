@@ -1,11 +1,6 @@
 import * as React from "react";
-import {
-  SafeAreaView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import CustomInput from "../../../components/CustomInput";
 import MoreButton from "../../../components/buttons/MoreButton";
 import InputModal from "./InputModal";
 import MoreModal from "../components/MoreModal";
@@ -16,7 +11,7 @@ type ExerciseDetailProps = {
 };
 
 const ExerciseDetail = ({ name }: ExerciseDetailProps) => {
-  const [description, setDescription] = React.useState(null);
+  const [instructions, setInstructions] = React.useState(null);
   const [sets, setSets] = React.useState(1);
   const [weight, setWeight] = React.useState(null);
   const [reps, setReps] = React.useState(null);
@@ -26,6 +21,11 @@ const ExerciseDetail = ({ name }: ExerciseDetailProps) => {
   // Toggle modals
   const toggleMoreModal = () => setMoreModalIsVisible(!moreModalIsVisible);
   const toggleInputModal = () => setInputModalIsVisible(!inputModalIsVisible);
+
+  // Handle change text
+  const handleInstructions = (text: string) => setInstructions(text);
+  const handleWeight = (weight: string) => setWeight(weight);
+  const handleReps = (reps: string) => setReps(reps);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,29 +37,27 @@ const ExerciseDetail = ({ name }: ExerciseDetailProps) => {
         <TouchableOpacity
           style={styles.fauxInputButton}
           onPress={toggleInputModal}>
-          <Text style={styles.fauxInputBtnText}>
-            {description === null
-              ? "Enter a description (optional)"
-              : description}
+          <Text style={styles.fauxInputBtnText} numberOfLines={1}>
+            {instructions ? instructions : "Enter a description..."}
           </Text>
         </TouchableOpacity>
         <View style={styles.setInputSectionContainer}>
           <View style={styles.setInputContainer}>
             <Text style={styles.setInputTitle}>Weight</Text>
-            <TextInput
+            <CustomInput
               style={styles.setInput}
               value={weight}
-              onChangeText={(weight: string) => setWeight(weight)}
+              onChangeText={handleWeight}
               keyboardType="number-pad"
               returnKeyType="done"
             />
           </View>
           <View style={styles.setInputContainer}>
             <Text style={styles.setInputTitle}>Reps</Text>
-            <TextInput
+            <CustomInput
               style={styles.setInput}
               value={reps}
-              onChangeText={(reps: string) => setReps(reps)}
+              onChangeText={handleReps}
               keyboardType="number-pad"
               returnKeyType="done"
             />
@@ -70,6 +68,8 @@ const ExerciseDetail = ({ name }: ExerciseDetailProps) => {
       <InputModal
         isVisible={inputModalIsVisible}
         closeModal={toggleInputModal}
+        instructions={instructions}
+        handleInstructions={handleInstructions}
       />
     </SafeAreaView>
   );
