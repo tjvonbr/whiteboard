@@ -3,14 +3,17 @@ import { colors } from "../../styles/colors";
 import IconButton from "./IconButton";
 
 type DoneButtonProps = {
+  color: string;
+  disabled: boolean;
   handlePress: () => void;
 };
 
-const DoneButton = ({ handlePress }: DoneButtonProps) => {
+const DoneButton = ({ color, disabled, handlePress }: DoneButtonProps) => {
   return (
     <IconButton
-      name="check-circle-outline"
-      color={colors.blue09}
+      name="check"
+      disabled={disabled}
+      color={color}
       size={30}
       handlePress={handlePress}
     />

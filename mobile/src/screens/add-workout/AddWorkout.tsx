@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import CustomInput from "../../components/CustomInput";
 import DropDownPicker from "react-native-dropdown-picker";
 import { format } from "date-fns";
 import styles from "./AddWorkoutStyles";
@@ -32,6 +33,7 @@ const Dashboard = ({ navigation }) => {
     React.useState(false);
   const [isScoreDropdownOpen, setIsScoreDropdownOpen] = React.useState(false);
   const [isValidInput, setIsValidInput] = React.useState(false);
+  const [borderColor, setBorderColor] = React.useState(null);
 
   React.useEffect(() => {
     workoutDropdownValue != null
@@ -45,12 +47,13 @@ const Dashboard = ({ navigation }) => {
         return (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Time Limit</Text>
-            <TextInput
+            <CustomInput
               style={styles.timeLimitInput}
               value={timeLimit}
               onChangeText={handleTimeLimit}
-              placeholder={"Enter a time limit (in minutes)"}
+              placeholder="Enter a time limit (in minutes)"
               keyboardType="number-pad"
+              returnKeyType="done"
             />
           </View>
         );
@@ -58,11 +61,11 @@ const Dashboard = ({ navigation }) => {
         return (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Minute Interval</Text>
-            <TextInput
+            <CustomInput
               style={styles.timeLimitInput}
               value={timeLimit}
               onChangeText={handleTimeLimit}
-              placeholder={"Enter a time interval (minute)"}
+              placeholder="Enter a time interval (minute)"
               keyboardType="number-pad"
             />
           </View>
@@ -87,21 +90,25 @@ const Dashboard = ({ navigation }) => {
     setIsWorkoutDropdownOpen(!isWorkoutDropdownOpen);
   };
 
+  // Handle onFocus and onBlur
+  const handleFocus = () => setBorderColor("red");
+  const handleBlur = () => setBorderColor(colors.inputBorderGray);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
-        <TextInput
+        <CustomInput
           style={styles.title}
           value={name}
           onChangeText={handleName}
         />
         <View style={styles.section}>
           <Text style={styles.subtitle}>Description</Text>
-          <TextInput
+          <CustomInput
             style={styles.description}
             value={description}
             onChangeText={handleDescription}
-            placeholder={"Enter a description (optional)"}
+            placeholder="Enter a description (optional)"
             multiline={true}
           />
         </View>
