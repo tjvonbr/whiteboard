@@ -1,5 +1,5 @@
 type Exercise @model {
-  id: ID!
+  exerciseId: ID!
   userId: ID!
   name: String!
   description: String
