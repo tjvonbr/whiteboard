@@ -10,7 +10,7 @@ import ExerciseDetail from "./components/ExerciseDetail";
 import ExercisePicker from "../../components/modals/ExercisePicker";
 import styles from "./AddWorkoutStyles";
 
-const SubmitWorkout = ({ route }) => {
+const SubmitWorkoutScreen = ({ route }) => {
   const [selected, setSelected] = React.useState(new Map());
   const [exercises, setExercises] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -70,4 +70,4 @@ const SubmitWorkout = ({ route }) => {
   );
 };
 
-export default SubmitWorkout;
+export default SubmitWorkoutScreen;

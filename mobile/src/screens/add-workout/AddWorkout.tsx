@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  SafeAreaView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import CustomInput from "../../components/CustomInput";
 import DropDownPicker from "react-native-dropdown-picker";
 import { format } from "date-fns";
@@ -21,11 +15,13 @@ const Dashboard = ({ navigation }) => {
   const [workoutTypes, setWorkoutTypes] = React.useState([
     { value: "AMRAP", label: "AMRAP" },
     { value: "EMOM", label: "EMOM" },
+    { value: "Max", label: "Max" },
     { value: "Traditional", label: "Traditional" },
   ]);
   const [scoringStyles, setScoringStyles] = React.useState([
     { value: "Rounds + Reps", label: "Rounds + Reps" },
     { value: "Rounds", label: "Rounds" },
+    { value: "Weight", label: "Weight" },
   ]);
   const [workoutDropdownValue, setWorkoutDropdownValue] = React.useState(null);
   const [scoreDropdownValue, setScoreDropdownValue] = React.useState(null);

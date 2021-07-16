@@ -1,13 +1,17 @@
 import * as React from "react";
+import { Text, Touchable, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AddWorkout from "../screens/add-workout/AddWorkout";
-import Dashboard from "../screens/dashboard/Dashboard";
-import SubmitWorkout from "../screens/add-workout/SubmitWorkout";
+import DashboardScreen from "../screens/dashboard/DashboardScreen";
+import SubmitWorkoutScreen from "../screens/add-workout/SubmitWorkoutScreen";
 import WorkoutDetails from "../screens/add-workout/WorkoutDetails";
+import { useTheme } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
 function DashboardStack() {
+  const { colors } = useTheme();
+
   return (
     <Stack.Navigator initialRouteName="Dashboard">
       <Stack.Screen
@@ -15,12 +19,28 @@ function DashboardStack() {
         component={AddWorkout}
         options={{ title: "Add Workout" }}
       />
-      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Details" component={WorkoutDetails} />
       <Stack.Screen
         name="SubmitWorkout"
-        component={SubmitWorkout}
-        options={{ title: "Add Workout", headerBackTitle: "Back" }}
+        component={SubmitWorkoutScreen}
+        options={{
+          title: "Add Workout",
+          headerBackTitle: "Back",
+          headerRight: () => {
+            return (
+              <TouchableOpacity style={{ marginRight: 8 }}>
+                <Text style={{ fontSize: 17, color: colors?.primary }}>
+                  Save
+                </Text>
+              </TouchableOpacity>
+            );
+          },
+        }}
       />
     </Stack.Navigator>
   );
