@@ -1,0 +1,10 @@
+type Workout @model {
+  workoutId: ID!
+  routineId: ID!
+  userId: ID!
+  name: String!
+  notes: String
+  score: Score
+  startedAt: String
+  completedAt: String
+}

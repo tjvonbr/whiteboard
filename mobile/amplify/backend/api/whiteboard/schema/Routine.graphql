@@ -1,23 +1,28 @@
-type Workout @model {
-  id: ID!
+type Routine @model {
+  routineId: ID!
   name: String!
   description: String
+  exercises: [Exercise!]!
   workoutType: WorkoutType!
   scoringType: ScoringType!
-  exercises: [Exercise!]!
-  date: String!
 }
 
 enum WorkoutType {
-  CARDIO
+  AMRAP
+  CHIPPER
+  EMOM
+  LADDER
+  RFT
   STRENGTH
-  WARMUP
-  WOD
+  TABATA
 }
 
 enum ScoringType {
-  REPS
+  MAX
+  NO_SCORE
   ROUNDS
   ROUNDS_PLUS_REPS
+  SLOWEST_SET
   TIME
+  WEIGHT
 }

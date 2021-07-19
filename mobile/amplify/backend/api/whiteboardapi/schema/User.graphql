@@ -1,8 +1,0 @@
-type User @model {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  email: String!
-  password: String!
-  phoneNumber: Int
-}
