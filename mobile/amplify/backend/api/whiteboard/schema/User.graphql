@@ -1,0 +1,10 @@
+type User @model {
+  userId: ID!
+  firstName: String!
+  lastName: String
+  email: String!
+  phoneNumber: String
+  birthday: String
+  height: String
+  weight: Float
+}

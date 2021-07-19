@@ -1,6 +1,6 @@
 {
   "api": {
-    "whiteboardapi": {
+    "whiteboard": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -9,27 +9,12 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7,
-              "description": ""
+              "description": "whiteboard api key"
             }
           },
           "additionalAuthenticationProviders": []
         }
       }
-    }
-  },
-  "auth": {
-    "whiteboardamplify0b6499d1": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
-  "function": {
-    "addUser": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   }
 }

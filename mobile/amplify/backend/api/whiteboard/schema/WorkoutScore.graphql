@@ -1,0 +1,16 @@
+type WorkoutScore @model {
+  scoreId: ID!
+  workoutId: ID!
+  routineId: ID!
+  score: Score!
+}
+
+union Score = IntScore | StringScore
+
+type IntScore {
+  value: Float
+}
+
+type StringScore {
+  value: String
+}

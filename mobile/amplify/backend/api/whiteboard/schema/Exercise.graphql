@@ -3,10 +3,5 @@ type Exercise @model {
   userId: ID!
   name: String!
   description: String
-  equipment: ExerciseEquipment
-}
-
-enum ExerciseEquipment {
-  BARBELL
-  DUMBBELL
+  muscles: String
 }
