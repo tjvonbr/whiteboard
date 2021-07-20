@@ -1,10 +1,19 @@
-type Workout @model {
-  workoutId: ID!
+type Workout
+  @model
+  @key(name: "byUserByStatusByDate", fields: ["userId", "status", "createdAt"])
+  @key(name: "byRoutine", fields: ["routineId", "id"]) {
+  id: ID!
   routineId: ID!
   userId: ID!
   name: String!
   notes: String
+  status: WorkoutStatus
   score: Score
-  startedAt: String
+  createdAt: String
   completedAt: String
+}
+
+enum WorkoutStatus {
+  COMPLETE
+  INCOMPLETE
 }

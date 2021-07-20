@@ -1,10 +1,11 @@
 type Routine @model {
-  routineId: ID!
+  id: ID!
   name: String!
   description: String
   exercises: [Exercise!]!
   workoutType: WorkoutType!
   scoringType: ScoringType!
+  workouts: [Workout] @connection(keyName: "byRoutine", fields: ["id"])
 }
 
 enum WorkoutType {
