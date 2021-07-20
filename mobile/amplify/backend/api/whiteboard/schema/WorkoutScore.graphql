@@ -1,13 +1,18 @@
 type WorkoutScore @model {
   scoreId: ID!
-  workoutId: ID!
-  routineId: ID!
+  user: User @connection
+  workoutId: Workout @connection
+  routineId: Routine @connection
   score: Score!
 }
 
-union Score = IntScore | StringScore
+union Score = IntScore | FloatScore | StringScore
 
 type IntScore {
+  value: Int
+}
+
+type FloatScore {
   value: Float
 }
 

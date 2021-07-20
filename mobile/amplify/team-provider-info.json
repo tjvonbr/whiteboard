@@ -10,6 +10,11 @@
       "StackName": "amplify-whiteboard-dev-160137",
       "StackId": "arn:aws:cloudformation:us-east-1:641107864585:stack/amplify-whiteboard-dev-160137/58d7e400-e80b-11eb-aa21-127fd1b91345",
       "AmplifyAppId": "djaxpp1tv8hh1"
+    },
+    "categories": {
+      "auth": {
+        "whiteboard7465068b": {}
+      }
     }
   }
 }
