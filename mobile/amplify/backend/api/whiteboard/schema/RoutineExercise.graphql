@@ -1,0 +1,10 @@
+type RoutineExercise
+  @model(queries: null)
+  @key(name: "byRoutine", fields: ["routineId", "exerciseId"])
+  @key(name: "byExercise", fields: ["exerciseId", "routineId"]) {
+  id: ID!
+  routineId: ID!
+  exerciseId: ID!
+  routine: Routine! @connection(fields: ["routineId"])
+  exercise: Exercise! @connection(fields: ["exerciseId"])
+}
