@@ -1,13 +1,12 @@
 type Routine
   @model
   @key(name: "byUser", fields: ["userId"])
-  @key(name: "byName", fields: ["name"])
-  @key(name: "byExercise", fields: ["exercises"]) {
+  @key(name: "byName", fields: ["name"]) {
   id: ID!
   userId: ID!
   name: String!
   description: String
-  exercises: [Exercise!]!
+  exercises: [RoutineExercise] @connection(keyName: "byRoutine", fields: ["id"])
   workoutType: WorkoutType!
   scoringType: ScoringType!
   workouts: [Workout] @connection(keyName: "byRoutine", fields: ["id"])

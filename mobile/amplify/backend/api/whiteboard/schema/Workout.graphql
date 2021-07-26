@@ -1,6 +1,6 @@
+# Workout
 type Workout
   @model
-  @key(name: "byUserByStatusByDate", fields: ["userId", "status", "createdAt"])
   @key(name: "byRoutine", fields: ["routineId", "id"])
   @key(name: "byUser", fields: ["userId"]) {
   id: ID!
@@ -16,4 +16,27 @@ type Workout
 enum WorkoutStatus {
   COMPLETE
   INCOMPLETE
+}
+
+# Workout Score
+type WorkoutScore @model {
+  scoreId: ID!
+  user: User @connection
+  workoutId: Workout @connection
+  routineId: Routine @connection
+  score: Score!
+}
+
+union Score = IntScore | FloatScore | StringScore
+
+type IntScore {
+  value: Int
+}
+
+type FloatScore {
+  value: Float
+}
+
+type StringScore {
+  value: String
 }

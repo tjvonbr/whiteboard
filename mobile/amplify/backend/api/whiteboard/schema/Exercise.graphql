@@ -4,6 +4,7 @@ type Exercise
   @key(name: "byName", fields: ["name"]) {
   id: ID!
   userId: ID!
+  routine: [RoutineExercise] @connection(keyName: "byExercise", fields: ["id"])
   name: String!
   description: String
   muscles: String
