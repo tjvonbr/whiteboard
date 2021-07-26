@@ -2,12 +2,13 @@ import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardStack from "./DashboardStack";
 import Calendar from "../screens/calendar/Calendar";
+import ProfileStack from "../screens/profile/ProfileScreen";
 import Statistics from "../screens/statistics/Statistics";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const Tab = createBottomTabNavigator();
 
-function AppNavigator() {
+const AppNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -18,6 +19,8 @@ function AppNavigator() {
             iconName = "home";
           } else if (route.name === "Calendar") {
             iconName = "event";
+          } else if (route.name === "Profile") {
+            iconName = "person";
           } else {
             iconName = "leaderboard";
           }
@@ -28,8 +31,9 @@ function AppNavigator() {
       <Tab.Screen name="Calendar" component={Calendar} />
       <Tab.Screen name="Dashboard" component={DashboardStack} />
       <Tab.Screen name="Statistics" component={Statistics} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
-}
+};
 
 export default AppNavigator;

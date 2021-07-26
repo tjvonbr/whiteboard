@@ -8,30 +8,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Auth } from "aws-amplify";
 import ExitButton from "../../components/buttons/ExitButton";
 import styles from "./styles/LoginStyles";
+import { useAuth } from "../../context/auth";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+
+  const { signIn, isLoading } = useAuth();
 
   const toLanding = (): void => navigation.navigate("Landing");
-
-  async function signIn() {
-    setIsLoading(true);
-    try {
-      const user = await Auth.signIn(email, password);
-      setIsLoading(false);
-      console.log("user logged in: ", user);
-      navigation.navigate("App");
-      console.log("Pressed!");
-    } catch (error) {
-      setIsLoading(false);
-      console.log("error signing in", error);
-    }
-  }
 
   const handleEmail = (email: string): void => setEmail(email);
   const handlePassword = (password: string): void => setPassword(password);
@@ -63,7 +50,9 @@ const Login = ({ navigation }) => {
           secureTextEntry={true}
         />
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={[styles.btnPrimary]} onPress={signIn}>
+          <TouchableOpacity
+            style={[styles.btnPrimary]}
+            onPress={() => signIn(email, password)}>
             {isLoading ? (
               <ActivityIndicator color="white" size="small" />
             ) : (

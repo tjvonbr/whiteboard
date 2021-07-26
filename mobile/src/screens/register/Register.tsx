@@ -21,6 +21,7 @@ const Register = ({ navigation }) => {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [isValidInput, setIsValidInput] = React.useState(false);
 
@@ -28,14 +29,15 @@ const Register = ({ navigation }) => {
   const prevStep = () => setStep(step - 1);
 
   async function signUp() {
+    console.log("Clicked sign up!");
     setIsLoading(true);
     try {
       const { user } = await Auth.signUp({
         username: email, // Email must be entered as username
         password,
         attributes: {
-          given_name: firstName,
-          family_name: lastName,
+          "custom:firstName": firstName,
+          "custom:lastName": lastName,
         },
       });
       setIsLoading(false);
@@ -53,6 +55,7 @@ const Register = ({ navigation }) => {
   const handleLastName = lastName => setLastName(lastName);
   const handleEmail = email => setEmail(email);
   const handlePassword = password => setPassword(password);
+  const handleConfirmPassword = password => setConfirmPassword(password);
 
   const renderStep = () => {
     switch (step) {
@@ -71,7 +74,9 @@ const Register = ({ navigation }) => {
         return (
           <RegisterPassword
             password={password}
+            confirmPassword={confirmPassword}
             handlePassword={handlePassword}
+            handleConfirmPassword={handleConfirmPassword}
           />
         );
       default:

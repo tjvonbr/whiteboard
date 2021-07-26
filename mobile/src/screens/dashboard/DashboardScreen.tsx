@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Animated, SafeAreaView, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import TodayWidget from "./components/TodayWidget";
 import styles from "./DashboardStyles";
 
@@ -11,7 +11,7 @@ const DashboardScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
-        <Animated.Text style={styles.title}>Dashboard</Animated.Text>
+        <Text style={styles.title}>Dashboard</Text>
         <TodayWidget handlePress={toAddWorkout} />
       </View>
     </SafeAreaView>
