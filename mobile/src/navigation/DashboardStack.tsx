@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, Touchable, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AddWorkout from "../screens/add-workout/AddWorkout";
 import DashboardScreen from "../screens/dashboard/DashboardScreen";

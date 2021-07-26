@@ -16,13 +16,14 @@ const ConfirmRegistration = ({ navigation, route }) => {
   const [code, setCode] = React.useState("");
   const { email } = route.params;
 
-  async function confirmSignUp() {
+  const confirmSignUp = async () => {
     try {
       await Auth.confirmSignUp(email, code);
+      navigation.navigate("Dashboard");
     } catch (error) {
       console.log("error confirming sign up", error);
     }
-  }
+  };
 
   const handleConfirmation = (code: string): void => setCode(code);
   const toLanding = () => navigation.navigate("Landing");
