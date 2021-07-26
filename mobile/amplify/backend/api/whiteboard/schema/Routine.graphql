@@ -1,5 +1,10 @@
-type Routine @model {
+type Routine
+  @model
+  @key(name: "byUser", fields: ["userId"])
+  @key(name: "byName", fields: ["name"])
+  @key(name: "byExercise", fields: ["exercises"]) {
   id: ID!
+  userId: ID!
   name: String!
   description: String
   exercises: [Exercise!]!

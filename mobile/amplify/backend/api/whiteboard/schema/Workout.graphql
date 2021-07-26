@@ -1,7 +1,8 @@
 type Workout
   @model
   @key(name: "byUserByStatusByDate", fields: ["userId", "status", "createdAt"])
-  @key(name: "byRoutine", fields: ["routineId", "id"]) {
+  @key(name: "byRoutine", fields: ["routineId", "id"])
+  @key(name: "byUser", fields: ["userId"]) {
   id: ID!
   routineId: ID!
   userId: ID!
@@ -9,7 +10,6 @@ type Workout
   notes: String
   status: WorkoutStatus
   score: Score
-  createdAt: String
   completedAt: String
 }
 
