@@ -1,4 +1,7 @@
-type Exercise @model {
+type Exercise
+  @model
+  @key(name: "byUser", fields: ["userId"])
+  @key(name: "byName", fields: ["name"]) {
   id: ID!
   userId: ID!
   name: String!
