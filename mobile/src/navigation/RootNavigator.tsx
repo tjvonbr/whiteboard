@@ -12,9 +12,9 @@ import { useAuth } from "../context/auth";
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
-  const { token, isLoading } = useAuth();
+  const { user, isIdle } = useAuth();
 
-  if (isLoading) {
+  if (isIdle) {
     return <Splash />;
   }
 
@@ -24,7 +24,7 @@ const RootNavigator = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        {token ? (
+        {user.jwt ? (
           <>
             <Stack.Screen name="App" component={AppNavigator} />
           </>
