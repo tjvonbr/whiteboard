@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -12,7 +13,7 @@ import RegisterEmail from "./components/RegisterEmail";
 import RegisterPassword from "./components/RegisterPassword";
 import BackButton from "../../components/buttons/BackButton";
 import ExitButton from "../../components/buttons/ExitButton";
-import { Auth } from "aws-amplify";
+import { useAuth } from "../../context/auth";
 import { styles } from "./styles/RegisterStyles";
 
 const Register = ({ navigation }) => {
@@ -22,34 +23,30 @@ const Register = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isValidInput, setIsValidInput] = React.useState(false);
 
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
+  const { isLoading, signUp } = useAuth();
 
-  async function signUp() {
-    console.log("Clicked sign up!");
-    setIsLoading(true);
-    try {
-      const { user } = await Auth.signUp({
-        username: email, // Email must be entered as username
-        password,
-        attributes: {
-          "custom:firstName": firstName,
-          "custom:lastName": lastName,
-        },
-      });
-      setIsLoading(false);
-      console.log("User info: ", user);
+  const signUpHelper = async () => {
+    const userDetails = {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    };
+    const user = await signUp(userDetails);
+
+    if (user) {
       navigation.navigate("Confirm", {
         email: user["username"],
       });
-    } catch (error) {
-      setIsLoading(false);
-      console.log("error signing up:", error);
     }
-  }
+
+    return;
+  };
+
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
 
   const handleFirstName = firstName => setFirstName(firstName);
   const handleLastName = lastName => setLastName(lastName);
@@ -100,10 +97,14 @@ const Register = ({ navigation }) => {
         <View style={styles.btnContainer}>
           <TouchableOpacity
             style={[styles.btnPrimary]}
-            onPress={step != 3 ? nextStep : signUp}>
-            <Text style={styles.btnTextPrimary}>
-              {step != 3 ? "Continue" : "Submit"}
-            </Text>
+            onPress={step != 3 ? nextStep : signUpHelper}>
+            {isLoading ? (
+              <ActivityIndicator color="white" size="small" />
+            ) : (
+              <Text style={styles.btnTextPrimary}>
+                {step != 3 ? "Continue" : "Submit"}
+              </Text>
+            )}
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnSecondary}
