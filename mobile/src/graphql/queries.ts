@@ -117,10 +117,10 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -139,10 +139,10 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height
@@ -220,10 +220,10 @@ export const getWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height
@@ -297,10 +297,10 @@ export const listWorkoutScores = /* GraphQL */ `
         scoreId
         user {
           id
-          userId
           firstName
           lastName
           email
+          password
           phoneNumber
           birthday
           height

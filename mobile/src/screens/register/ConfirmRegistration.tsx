@@ -19,7 +19,7 @@ const ConfirmRegistration = ({ navigation, route }) => {
   const confirmSignUp = async () => {
     try {
       await Auth.confirmSignUp(email, code);
-      navigation.navigate("Dashboard");
+      navigation.navigate("Login");
     } catch (error) {
       console.log("error confirming sign up", error);
     }

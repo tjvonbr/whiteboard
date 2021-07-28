@@ -336,10 +336,10 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -356,10 +356,10 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -376,10 +376,10 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -486,10 +486,10 @@ export const createWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height
@@ -561,10 +561,10 @@ export const updateWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height
@@ -636,10 +636,10 @@ export const deleteWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height

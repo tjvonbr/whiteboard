@@ -14,6 +14,7 @@ import RegisterPassword from "./components/RegisterPassword";
 import BackButton from "../../components/buttons/BackButton";
 import ExitButton from "../../components/buttons/ExitButton";
 import { useAuth } from "../../context/auth";
+import { upsertUser } from "./RegisterRequests";
 import { styles } from "./styles/RegisterStyles";
 
 const Register = ({ navigation }) => {
@@ -34,11 +35,15 @@ const Register = ({ navigation }) => {
       password,
       confirmPassword,
     };
-    const user = await signUp(userDetails);
+
+    const result = await signUp(userDetails);
+    const user = JSON.stringify(result);
 
     if (user) {
+      const newUser = await upsertUser(userDetails);
+
       navigation.navigate("Confirm", {
-        email: user["username"],
+        email: user?.email,
       });
     }
 
