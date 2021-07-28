@@ -306,10 +306,10 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -323,10 +323,10 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -340,10 +340,10 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
       id
-      userId
       firstName
       lastName
       email
+      password
       phoneNumber
       birthday
       height
@@ -438,10 +438,10 @@ export const onCreateWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height
@@ -510,10 +510,10 @@ export const onUpdateWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height
@@ -582,10 +582,10 @@ export const onDeleteWorkoutScore = /* GraphQL */ `
       scoreId
       user {
         id
-        userId
         firstName
         lastName
         email
+        password
         phoneNumber
         birthday
         height

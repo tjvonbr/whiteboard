@@ -2,7 +2,7 @@ import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardStack from "./DashboardStack";
 import Calendar from "../screens/calendar/Calendar";
-import ProfileStack from "../screens/profile/ProfileScreen";
+import ProfileStack from "./ProfileStack";
 import Statistics from "../screens/statistics/Statistics";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -19,7 +19,7 @@ const AppNavigator = () => {
             iconName = "home";
           } else if (route.name === "Calendar") {
             iconName = "event";
-          } else if (route.name === "Profile") {
+          } else if (route.name === "ProfileStack") {
             iconName = "person";
           } else {
             iconName = "leaderboard";
@@ -31,7 +31,7 @@ const AppNavigator = () => {
       <Tab.Screen name="Calendar" component={Calendar} />
       <Tab.Screen name="Dashboard" component={DashboardStack} />
       <Tab.Screen name="Statistics" component={Statistics} />
-      <Tab.Screen name="Profile" component={ProfileStack} />
+      <Tab.Screen name="ProfileStack" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

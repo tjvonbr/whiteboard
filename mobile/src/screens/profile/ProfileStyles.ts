@@ -11,10 +11,15 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   title: {
-    marginVertical: 20,
+    marginTop: 20,
     color: colors.black,
     fontWeight: "600",
     fontSize: 30,
+  },
+  userName: {
+    color: "gray",
+    fontWeight: "600",
+    fontSize: 21,
   },
   btnSecondary: {
     height: 53,
@@ -22,8 +27,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 7,
-    borderWidth: 1,
-    borderColor: colors.blue09,
     backgroundColor: "transparent",
   },
   btnTextSecondary: {
