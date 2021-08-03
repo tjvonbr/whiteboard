@@ -309,7 +309,6 @@ export const onCreateUser = /* GraphQL */ `
       firstName
       lastName
       email
-      password
       phoneNumber
       birthday
       height
@@ -326,7 +325,6 @@ export const onUpdateUser = /* GraphQL */ `
       firstName
       lastName
       email
-      password
       phoneNumber
       birthday
       height
@@ -343,7 +341,6 @@ export const onDeleteUser = /* GraphQL */ `
       firstName
       lastName
       email
-      password
       phoneNumber
       birthday
       height
@@ -441,7 +438,6 @@ export const onCreateWorkoutScore = /* GraphQL */ `
         firstName
         lastName
         email
-        password
         phoneNumber
         birthday
         height
@@ -513,7 +509,6 @@ export const onUpdateWorkoutScore = /* GraphQL */ `
         firstName
         lastName
         email
-        password
         phoneNumber
         birthday
         height
@@ -585,7 +580,6 @@ export const onDeleteWorkoutScore = /* GraphQL */ `
         firstName
         lastName
         email
-        password
         phoneNumber
         birthday
         height

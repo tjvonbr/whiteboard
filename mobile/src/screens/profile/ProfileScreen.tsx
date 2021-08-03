@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  ActivityIndicator,
   FlatList,
   SafeAreaView,
   Text,
@@ -9,9 +10,10 @@ import {
 import MenuItem from "./components/MenuItem";
 import { useAuth } from "../../context/auth";
 import styles from "./ProfileStyles";
+import { colors } from "../../styles/colors";
 
 const ProfileScreen = ({ navigation }) => {
-  const { signOut } = useAuth();
+  const { isLoading, signOut } = useAuth();
 
   const renderItem = ({ item, index }) => {
     const { title, subtitle } = item;
@@ -57,7 +59,11 @@ const ProfileScreen = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity style={styles.btnSecondary} onPress={signOut}>
-          <Text style={styles.btnTextSecondary}>Sign Out</Text>
+          {isLoading ? (
+            <ActivityIndicator color={colors.black} size="small" />
+          ) : (
+            <Text style={styles.btnTextSecondary}>Sign Out</Text>
+          )}
         </TouchableOpacity>
       </View>
     </SafeAreaView>

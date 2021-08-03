@@ -24,5 +24,21 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "function": {
+    "createUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "whiteboard",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    }
   }
 }

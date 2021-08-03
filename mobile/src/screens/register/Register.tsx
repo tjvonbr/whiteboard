@@ -33,17 +33,13 @@ const Register = ({ navigation }) => {
       lastName,
       email,
       password,
-      confirmPassword,
     };
 
     const result = await signUp(userDetails);
-    const user = JSON.stringify(result);
 
-    if (user) {
-      const newUser = await upsertUser(userDetails);
-
+    if (result) {
       navigation.navigate("Confirm", {
-        email: user?.email,
+        email: result["username"],
       });
     }
 
