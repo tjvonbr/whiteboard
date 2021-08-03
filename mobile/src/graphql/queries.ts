@@ -120,7 +120,6 @@ export const getUser = /* GraphQL */ `
       firstName
       lastName
       email
-      password
       phoneNumber
       birthday
       height
@@ -142,7 +141,6 @@ export const listUsers = /* GraphQL */ `
         firstName
         lastName
         email
-        password
         phoneNumber
         birthday
         height
@@ -223,7 +221,6 @@ export const getWorkoutScore = /* GraphQL */ `
         firstName
         lastName
         email
-        password
         phoneNumber
         birthday
         height
@@ -300,7 +297,6 @@ export const listWorkoutScores = /* GraphQL */ `
           firstName
           lastName
           email
-          password
           phoneNumber
           birthday
           height

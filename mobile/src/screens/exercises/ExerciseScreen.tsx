@@ -1,11 +1,31 @@
 import * as React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
+import ExerciseItem from "./components/ExerciseItem";
+import { addExercises } from "./ExerciseRequest";
+import { useAuth } from "../../context/auth";
+import styles from "./ExerciseStyles";
 
 const ExerciseScreen = () => {
+  const [exercises, setExercises] = React.useState([]);
+
+  const { user } = useAuth();
+
+  React.useEffect(() => {});
+
+  const renderItem = ({ item }) => {
+    const { name } = item;
+
+    return <ExerciseItem name={name} />;
+  };
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View>
-        <Text>Exercises</Text>
+        <FlatList
+          data={exercises}
+          extraData={exercises}
+          renderItem={renderItem}
+        />
       </View>
     </SafeAreaView>
   );

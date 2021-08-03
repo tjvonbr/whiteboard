@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "whiteboard7465068b": {}
+      },
+      "function": {
+        "createUser": {
+          "deploymentBucketName": "amplify-whiteboard-dev-160137-deployment",
+          "s3Key": "amplify-builds/createUser-37596c504b486e754877-build.zip"
+        }
       }
     }
   }

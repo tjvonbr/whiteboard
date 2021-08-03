@@ -1,5 +1,7 @@
 import * as React from "react";
+import { API } from "aws-amplify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getUser } from "../graphql/queries";
 import { Auth } from "aws-amplify";
 
 type AuthContextData = {
@@ -16,6 +18,9 @@ type UserData = {
 };
 
 const initialAuthState = {
+  firstName: null,
+  lastName: null,
+  userId: null,
   jwt: undefined,
 };
 
@@ -72,12 +77,18 @@ const AuthProvider = ({ children }) => {
     try {
       await Auth.signIn(username, password);
 
+      const currentUser = await Auth.currentUserInfo();
       const currentSession = await Auth.currentSession();
       const accessToken = currentSession.getAccessToken();
       const jwt = accessToken.getJwtToken();
 
-      setUser({ ...user, jwt });
-      await AsyncStorage.setItem("@user", jwt);
+      setUser({
+        ...user,
+        firstName: currentUser.attributes["custom:firstName"],
+        lastName: currentUser.attributes["custom:lastName"],
+        userId: currentUser.attributes.sub,
+        jwt,
+      });
     } catch (error) {
       console.log("there was a problem signing you in: ", error);
     } finally {
@@ -87,6 +98,8 @@ const AuthProvider = ({ children }) => {
 
   // Sign out
   const signOut = async () => {
+    setIsLoading(true);
+
     try {
       await Auth.signOut();
 
@@ -94,6 +107,8 @@ const AuthProvider = ({ children }) => {
       await AsyncStorage.removeItem("@user");
     } catch (error) {
       console.log("error signing out: ", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
