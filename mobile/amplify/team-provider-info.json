@@ -16,9 +16,9 @@
         "whiteboard7465068b": {}
       },
       "function": {
-        "createUser": {
+        "upsertUser": {
           "deploymentBucketName": "amplify-whiteboard-dev-160137-deployment",
-          "s3Key": "amplify-builds/createUser-37596c504b486e754877-build.zip"
+          "s3Key": "amplify-builds/upsertUser-344139354f48792b2f58-build.zip"
         }
       }
     }
