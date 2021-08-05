@@ -340,9 +340,6 @@ export const createUser = /* GraphQL */ `
       lastName
       email
       phoneNumber
-      birthday
-      height
-      weight
       createdAt
       updatedAt
     }
@@ -359,9 +356,6 @@ export const updateUser = /* GraphQL */ `
       lastName
       email
       phoneNumber
-      birthday
-      height
-      weight
       createdAt
       updatedAt
     }
@@ -378,9 +372,6 @@ export const deleteUser = /* GraphQL */ `
       lastName
       email
       phoneNumber
-      birthday
-      height
-      weight
       createdAt
       updatedAt
     }
@@ -487,9 +478,6 @@ export const createWorkoutScore = /* GraphQL */ `
         lastName
         email
         phoneNumber
-        birthday
-        height
-        weight
         createdAt
         updatedAt
       }
@@ -561,9 +549,6 @@ export const updateWorkoutScore = /* GraphQL */ `
         lastName
         email
         phoneNumber
-        birthday
-        height
-        weight
         createdAt
         updatedAt
       }
@@ -635,9 +620,6 @@ export const deleteWorkoutScore = /* GraphQL */ `
         lastName
         email
         phoneNumber
-        birthday
-        height
-        weight
         createdAt
         updatedAt
       }

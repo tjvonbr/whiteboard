@@ -121,9 +121,6 @@ export const getUser = /* GraphQL */ `
       lastName
       email
       phoneNumber
-      birthday
-      height
-      weight
       createdAt
       updatedAt
     }
@@ -142,9 +139,6 @@ export const listUsers = /* GraphQL */ `
         lastName
         email
         phoneNumber
-        birthday
-        height
-        weight
         createdAt
         updatedAt
       }
@@ -222,9 +216,6 @@ export const getWorkoutScore = /* GraphQL */ `
         lastName
         email
         phoneNumber
-        birthday
-        height
-        weight
         createdAt
         updatedAt
       }
@@ -298,9 +289,6 @@ export const listWorkoutScores = /* GraphQL */ `
           lastName
           email
           phoneNumber
-          birthday
-          height
-          weight
           createdAt
           updatedAt
         }

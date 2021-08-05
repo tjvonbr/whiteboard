@@ -4,7 +4,4 @@ type User @model {
   lastName: String
   email: String!
   phoneNumber: String
-  birthday: String
-  height: String
-  weight: Float
 }
