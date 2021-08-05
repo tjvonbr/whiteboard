@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },
       },
-      TableName: process.env.API_whiteboard_UserTable,
+      TableName: process.env.API_WHITEBOARD_USERTABLE_NAME,
     };
 
     // Call DynamoDB

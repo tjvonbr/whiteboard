@@ -51,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "createUser",
+            "upsertUser",
             {
               "Fn::Join": [
                 "",
                 [
-                  "createUser",
+                  "upsertUser",
                   "-",
                   {
                     "Ref": "env"
@@ -113,7 +113,7 @@
         },
         "Runtime": "nodejs14.x",
         "Layers": [],
-        "Timeout": "25"
+        "Timeout": 25
       }
     },
     "LambdaExecutionRole": {
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "whiteboardLambdaRoleafdf4dfb",
+            "whiteboardLambdaRole0cbc4ff5",
             {
               "Fn::Join": [
                 "",
                 [
-                  "whiteboardLambdaRoleafdf4dfb",
+                  "whiteboardLambdaRole0cbc4ff5",
                   "-",
                   {
                     "Ref": "env"
