@@ -7,6 +7,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.white,
   },
+  alphaNavigator: {
+    width: 20,
+    position: "absolute",
+    top: "50%",
+    right: "1%",
+    alignItems: "center",
+    backgroundColor: colors.white,
+    borderRadius: 10,
+  },
 });
 
 export default styles;

@@ -15,6 +15,9 @@ type AuthContextData = {
 
 type UserData = {
   jwt: string;
+  firstName: string;
+  lastName: string;
+  userId: string;
 };
 
 const initialAuthState = {

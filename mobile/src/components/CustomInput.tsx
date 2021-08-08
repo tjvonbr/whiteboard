@@ -40,7 +40,7 @@ const CustomInput = ({
 };
 
 const styles = StyleSheet.create({
-  focusedInput: { borderColor: "blue" },
+  focusedInput: { borderColor: colors.blue09 },
   unfocusedInput: { borderColor: colors.inputBorderGray },
 });
 

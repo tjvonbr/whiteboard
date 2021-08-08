@@ -14,7 +14,6 @@ import RegisterPassword from "./components/RegisterPassword";
 import BackButton from "../../components/buttons/BackButton";
 import ExitButton from "../../components/buttons/ExitButton";
 import { useAuth } from "../../context/auth";
-import { upsertUser } from "./RegisterRequests";
 import { styles } from "./styles/RegisterStyles";
 
 const Register = ({ navigation }) => {

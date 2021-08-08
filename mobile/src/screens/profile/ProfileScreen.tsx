@@ -13,7 +13,7 @@ import styles from "./ProfileStyles";
 import { colors } from "../../styles/colors";
 
 const ProfileScreen = ({ navigation }) => {
-  const { isLoading, signOut } = useAuth();
+  const { isLoading, signOut, user } = useAuth();
 
   const renderItem = ({ item, index }) => {
     const { title, subtitle } = item;
@@ -50,7 +50,9 @@ const ProfileScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Profile</Text>
-        <Text style={styles.userName}>Trevor Von Bruenchenhein</Text>
+        <Text style={styles.userName}>{`${user.firstName} ${
+          user.lastName ? user.lastName : ""
+        }`}</Text>
         <View style={{ marginVertical: 20 }}>
           <FlatList
             data={profileDirectory}

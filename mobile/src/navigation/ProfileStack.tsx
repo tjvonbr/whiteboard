@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ExerciseScreen from "../screens/exercises/ExerciseScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";

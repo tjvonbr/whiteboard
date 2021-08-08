@@ -1,6 +1,5 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { fonts } from "../../styles/fonts";
 
 type FormBtnProps = {
   backgroundColor: string;
