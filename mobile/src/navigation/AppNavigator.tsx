@@ -19,7 +19,7 @@ const AppNavigator = () => {
             iconName = "home";
           } else if (route.name === "Calendar") {
             iconName = "event";
-          } else if (route.name === "ProfileStack") {
+          } else if (route.name === "Profile") {
             iconName = "person";
           } else {
             iconName = "leaderboard";
@@ -31,7 +31,7 @@ const AppNavigator = () => {
       <Tab.Screen name="Calendar" component={Calendar} />
       <Tab.Screen name="Dashboard" component={DashboardStack} />
       <Tab.Screen name="Statistics" component={Statistics} />
-      <Tab.Screen name="ProfileStack" component={ProfileStack} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

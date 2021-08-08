@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import IconButton from "../../../components/buttons/IconButton";
 import { colors } from "../../../styles/colors";
 
 type MenuItemProps = {
