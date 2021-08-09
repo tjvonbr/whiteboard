@@ -11,9 +11,15 @@ const styles = StyleSheet.create({
     width: 20,
     position: "absolute",
     top: "50%",
-    right: "1%",
+    right: "0%",
+    // TODO: GET ITEM LAYOUT
+    transform: [
+      {
+        translateY: -50,
+      },
+    ],
     alignItems: "center",
-    backgroundColor: colors.white,
+    backgroundColor: "transparent",
     borderRadius: 10,
   },
 });

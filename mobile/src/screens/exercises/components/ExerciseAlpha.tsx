@@ -1,11 +1,14 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import ExerciseItem from "./ExerciseItem";
 import { colors } from "../../../styles/colors";
 
-const ExerciseAlpha = ({ alpha, index }) => {
+const ExerciseAlpha = ({ alpha, index, handleScroll }) => {
+  console.log(index);
+
   return (
-    <TouchableOpacity style={styles.alphaBtn}>
+    <TouchableOpacity
+      style={styles.alphaBtn}
+      onPress={() => handleScroll(index)}>
       <Text style={styles.alphaBtnText}>{alpha}</Text>
     </TouchableOpacity>
   );
