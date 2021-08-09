@@ -7,31 +7,14 @@ import {
   Text,
   View,
 } from "react-native";
-import { addExercise } from "../ExerciseRequests";
 import Button from "../../../components/buttons/Button";
 import CustomInput from "../../../components/CustomInput";
 import Modal from "react-native-modal";
-import { useAuth } from "../../../context/auth";
 import { colors } from "../../../styles/colors";
 
-const AddExerciseModal = ({ closeModal, isVisible }) => {
+const AddExerciseModal = ({ closeModal, addExercise, isVisible }) => {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState(null);
-
-  const {
-    user: { userId },
-  } = useAuth();
-
-  const submitWorkout = async () => {
-    const exercise = { userId, name, description };
-    const response = await addExercise(exercise);
-
-    if (!response) {
-      console.log("Something went wrong!");
-    }
-
-    closeModal();
-  };
 
   return (
     <Modal
@@ -69,7 +52,7 @@ const AddExerciseModal = ({ closeModal, isVisible }) => {
             backgroundColor={colors.blue09}
             btnText={"Done"}
             color={colors.white}
-            handlePress={submitWorkout}
+            handlePress={() => addExercise(name, description)}
             width={"100%"}
           />
         </KeyboardAvoidingView>

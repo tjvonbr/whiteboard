@@ -1,31 +1,30 @@
 import * as React from "react";
-import {
-  ActivityIndicator,
-  Button,
-  FlatList,
-  SafeAreaView,
-  Text,
-  View,
-} from "react-native";
+import { Button, FlatList, SafeAreaView, Text, View } from "react-native";
 import AddExerciseModal from "./components/AddExerciseModal";
 import ExerciseAlpha from "./components/ExerciseAlpha";
 import ExerciseItem from "./components/ExerciseItem";
-import { fetchExercises } from "./ExerciseRequests";
+import FullPageLoading from "../../components/misc/FullPageLoading";
+import { addExercise, fetchExercises } from "./ExerciseRequests";
 import { useAuth } from "../../context/auth";
 import styles from "./ExerciseStyles";
+import { colors } from "../../styles/colors";
 
 const ExerciseScreen = ({ navigation }) => {
   const [exercises, setExercises] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const { user } = useAuth();
+  const flatListRef: any = React.createRef();
+
+  const {
+    user: { userId },
+  } = useAuth();
 
   React.useEffect(() => {
     const fetchUserExercises = async () => {
       setIsLoading(true);
 
-      const response: any = await fetchExercises(user.userId);
+      const response: any = await fetchExercises(userId);
       const myExercises = response.data?.listExercises?.items;
 
       myExercises.sort((a, b) => {
@@ -57,6 +56,26 @@ const ExerciseScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
+  // Scroll to letter after pressing proper alpha button
+  const scrollToAlpha = index =>
+    flatListRef?.current.scrollToIndex({ animated: true, index });
+
+  // Submits new workout for user
+  const submitExercise = async (name, description) => {
+    const exercise = { userId, name, description };
+
+    const response = await addExercise(exercise);
+    const newExercise: any = response.data.createExercise;
+
+    if (!response) {
+      console.log("Something went wrong!");
+    }
+
+    setExercises(prevState => [...prevState, newExercise]);
+    hideModal();
+  };
+
+  // Map used for alpha navigator and data source for list of exercises
   const alphaMap = {};
 
   exercises.forEach(exercise => {
@@ -75,17 +94,16 @@ const ExerciseScreen = ({ navigation }) => {
     return <ExerciseItem item={item} index={index} />;
   };
 
-  const renderExerciseAlpha = ({ item, index }) => (
-    <ExerciseAlpha alpha={item} index={index} />
-  );
+  const renderExerciseAlpha = ({ item, index }) => {
+    return (
+      <ExerciseAlpha alpha={item} index={index} handleScroll={scrollToAlpha} />
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       {isLoading ? (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <ActivityIndicator color="black" size="small" />
-        </View>
+        <FullPageLoading color={colors.black} size={"small"} />
       ) : exercises.length > 0 ? (
         <View
           style={{
@@ -96,11 +114,16 @@ const ExerciseScreen = ({ navigation }) => {
             data={Object.entries(alphaMap)}
             extraData={exercises}
             renderItem={renderExercise}
+            ref={flatListRef}
+            keyExtractor={(_, index) => index.toString()}
+            showsVerticalScrollIndicator={false}
           />
           <View style={styles.alphaNavigator}>
             <FlatList
               data={Object.keys(alphaMap)}
               renderItem={renderExerciseAlpha}
+              keyExtractor={(_, index) => index.toString()}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         </View>
@@ -110,7 +133,11 @@ const ExerciseScreen = ({ navigation }) => {
           <Text>You haven't created any exercises yet!</Text>
         </View>
       )}
-      <AddExerciseModal isVisible={isVisible} closeModal={hideModal} />
+      <AddExerciseModal
+        closeModal={hideModal}
+        addExercise={submitExercise}
+        isVisible={isVisible}
+      />
     </SafeAreaView>
   );
 };

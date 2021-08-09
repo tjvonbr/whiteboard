@@ -21,7 +21,10 @@ const ExerciseItem = ({ item, index }: ExerciseItemProps) => {
 
         return (
           <TouchableOpacity
-            style={styles.exerciseContainer}
+            style={[
+              styles.exerciseContainer,
+              exercises.length > 1 && i != 0 ? styles.multiple : null,
+            ]}
             onPress={() => console.log("Pressed exercise")}>
             <View>
               <Text style={styles.name}>{name}</Text>
@@ -29,7 +32,6 @@ const ExerciseItem = ({ item, index }: ExerciseItemProps) => {
                 muscles ? muscles : "None selected"
               }`}</Text>
             </View>
-            <Icon name="chevron-right" color="black" size={25} />
           </TouchableOpacity>
         );
       })}
@@ -57,8 +59,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottomColor: colors.inputBorderGray,
-    borderBottomWidth: 1,
   },
   name: {
     fontWeight: "600",
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   muscles: {
     color: "gray",
   },
-  first: {
+  multiple: {
     borderTopColor: colors.inputBorderGray,
     borderTopWidth: 1,
   },
