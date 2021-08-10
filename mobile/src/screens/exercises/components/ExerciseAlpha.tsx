@@ -3,8 +3,6 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { colors } from "../../../styles/colors";
 
 const ExerciseAlpha = ({ alpha, index, handleScroll }) => {
-  console.log(index);
-
   return (
     <TouchableOpacity
       style={styles.alphaBtn}
