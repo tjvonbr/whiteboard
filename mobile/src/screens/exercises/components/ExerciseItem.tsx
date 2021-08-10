@@ -1,14 +1,18 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../../../styles/colors";
 
 type ExerciseItemProps = {
   item: any;
-  index: number;
+  handlePress: (exercise) => void;
+  handleLongPress: (exercise) => void;
 };
 
-const ExerciseItem = ({ item, index }: ExerciseItemProps) => {
+const ExerciseItem = ({
+  item,
+  handlePress,
+  handleLongPress,
+}: ExerciseItemProps) => {
   const [alpha, exercises] = item;
 
   return (
@@ -25,7 +29,8 @@ const ExerciseItem = ({ item, index }: ExerciseItemProps) => {
               styles.exerciseContainer,
               exercises.length > 1 && i != 0 ? styles.multiple : null,
             ]}
-            onPress={() => console.log("Pressed exercise")}>
+            onPress={() => handlePress(exercise)}
+            onLongPress={() => handleLongPress(exercises[i])}>
             <View>
               <Text style={styles.name}>{name}</Text>
               <Text style={styles.muscles}>{`Emphasis: ${

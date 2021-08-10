@@ -2,17 +2,24 @@ import * as React from "react";
 import { Button, FlatList, SafeAreaView, Text, View } from "react-native";
 import AddExerciseModal from "./components/AddExerciseModal";
 import ExerciseAlpha from "./components/ExerciseAlpha";
+import ExerciseActionModal from "./components/ExerciseActionModal";
 import ExerciseItem from "./components/ExerciseItem";
 import FullPageLoading from "../../components/misc/FullPageLoading";
-import { addExercise, fetchExercises } from "./ExerciseRequests";
+import {
+  addExercise,
+  fetchExercises,
+  removeExercise,
+} from "./ExerciseRequests";
 import { useAuth } from "../../context/auth";
 import styles from "./ExerciseStyles";
 import { colors } from "../../styles/colors";
 
-const ExerciseScreen = ({ navigation }) => {
+const ExercisesScreen = ({ navigation }) => {
   const [exercises, setExercises] = React.useState([]);
+  const [selectedExercise, setSelectedExercise] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isAddVisible, setIsAddVisible] = React.useState(false);
+  const [isEditVisible, setIsEditVisible] = React.useState(false);
 
   const flatListRef: any = React.createRef();
 
@@ -51,10 +58,16 @@ const ExerciseScreen = ({ navigation }) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button title="Add" onPress={() => setIsVisible(true)} />
+        <Button title="Add" onPress={() => setIsAddVisible(true)} />
       ),
     });
   }, [navigation]);
+
+  // Handle navigation to screen for individual exercise
+  const navToExercise = exercise =>
+    navigation.navigate("Exercise", {
+      data: exercise,
+    });
 
   // Scroll to letter after pressing proper alpha button
   const scrollToAlpha = index =>
@@ -75,6 +88,16 @@ const ExerciseScreen = ({ navigation }) => {
     hideModal();
   };
 
+  const deleteExercise = async exercise => {
+    const id = { id: exercise.id };
+    await removeExercise(id);
+
+    const newExercises = exercises.filter(e => e.id! !== exercise.id);
+
+    hideEditModal();
+    setExercises(newExercises);
+  };
+
   // Map used for alpha navigator and data source for list of exercises
   const alphaMap = {};
 
@@ -88,10 +111,23 @@ const ExerciseScreen = ({ navigation }) => {
     }
   });
 
-  const hideModal = () => setIsVisible(false);
+  const showEditModal = exercise => {
+    setSelectedExercise(exercise);
+
+    setIsEditVisible(true);
+  };
+  const hideEditModal = () => setIsEditVisible(false);
+
+  const hideModal = () => setIsAddVisible(false);
 
   const renderExercise = ({ item, index }) => {
-    return <ExerciseItem item={item} index={index} />;
+    return (
+      <ExerciseItem
+        item={item}
+        handlePress={navToExercise}
+        handleLongPress={showEditModal}
+      />
+    );
   };
 
   const renderExerciseAlpha = ({ item, index }) => {
@@ -136,10 +172,16 @@ const ExerciseScreen = ({ navigation }) => {
       <AddExerciseModal
         closeModal={hideModal}
         addExercise={submitExercise}
-        isVisible={isVisible}
+        isVisible={isAddVisible}
+      />
+      <ExerciseActionModal
+        closeModal={hideEditModal}
+        deleteExercise={deleteExercise}
+        isVisible={isEditVisible}
+        exercise={selectedExercise}
       />
     </SafeAreaView>
   );
 };
 
-export default ExerciseScreen;
+export default ExercisesScreen;

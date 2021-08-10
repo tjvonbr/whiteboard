@@ -5,7 +5,7 @@ type FormBtnProps = {
   backgroundColor: string;
   btnText: string;
   color: string;
-  handlePress: () => void;
+  handlePress: any;
   width: string | number;
 };
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   formBtnText: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: "600",
   },
 });
 
