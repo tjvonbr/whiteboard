@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Alert, StyleSheet, View } from "react-native";
-import Button from "../../../components/buttons/Button";
+import CustomButton from "../../../components/buttons/CustomButton";
 import Modal from "react-native-modal";
 import { colors } from "../../../styles/colors";
 
@@ -40,15 +40,15 @@ const ExerciseActionModal = ({
       isVisible={isVisible}
       swipeDirection="down"
       onSwipeComplete={closeModal}>
-      <View style={styles.btnContainer}>
-        <Button
+      <View>
+        <CustomButton
           backgroundColor={"transparent"}
           btnText={"Delete"}
           color={"red"}
           handlePress={showDeleteAlert}
           width={"100%"}
         />
-        <Button
+        <CustomButton
           backgroundColor={"transparent"}
           btnText={"Cancel"}
           color={colors.blue09}
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
-  btnContainer: {},
 });
 
 export default ExerciseActionModal;

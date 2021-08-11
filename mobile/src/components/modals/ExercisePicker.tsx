@@ -84,7 +84,7 @@ const ExercisePicker = ({
 
 const styles = StyleSheet.create({
   modalView: {
-    flex: 1,
+    flex: 0.9,
     backgroundColor: colors.white,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-type FormBtnProps = {
+type CustomButtonProps = {
   backgroundColor: string;
   btnText: string;
   color: string;
@@ -9,13 +9,13 @@ type FormBtnProps = {
   width: string | number;
 };
 
-const FormButton = ({
+const CustomButton = ({
   backgroundColor,
   btnText,
   color,
   handlePress,
   width,
-}: FormBtnProps) => {
+}: CustomButtonProps) => {
   return (
     <TouchableOpacity
       style={[styles.formBtn, { backgroundColor, width }]}
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FormButton;
+export default CustomButton;

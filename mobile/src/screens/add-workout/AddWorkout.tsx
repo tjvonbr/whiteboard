@@ -15,7 +15,6 @@ const Dashboard = ({ navigation }) => {
   const [workoutTypes, setWorkoutTypes] = React.useState([
     { value: "AMRAP", label: "AMRAP" },
     { value: "EMOM", label: "EMOM" },
-    { value: "Max", label: "Max" },
     { value: "Traditional", label: "Traditional" },
   ]);
   const [scoringStyles, setScoringStyles] = React.useState([
@@ -25,11 +24,11 @@ const Dashboard = ({ navigation }) => {
   ]);
   const [workoutDropdownValue, setWorkoutDropdownValue] = React.useState(null);
   const [scoreDropdownValue, setScoreDropdownValue] = React.useState(null);
-  const [isWorkoutDropdownOpen, setIsWorkoutDropdownOpen] =
-    React.useState(false);
+  const [isWorkoutDropdownOpen, setIsWorkoutDropdownOpen] = React.useState(
+    false,
+  );
   const [isScoreDropdownOpen, setIsScoreDropdownOpen] = React.useState(false);
   const [isValidInput, setIsValidInput] = React.useState(false);
-  const [borderColor, setBorderColor] = React.useState(null);
 
   React.useEffect(() => {
     workoutDropdownValue != null
@@ -66,6 +65,17 @@ const Dashboard = ({ navigation }) => {
             />
           </View>
         );
+      case "Max":
+        <View style={styles.section}>
+          <Text style={styles.subtitle}>Minute Interval</Text>
+          <CustomInput
+            style={styles.timeLimitInput}
+            value={timeLimit}
+            onChangeText={handleTimeLimit}
+            placeholder="Enter a time interval (minute)"
+            keyboardType="number-pad"
+          />
+        </View>;
       default:
         return null;
     }
@@ -85,10 +95,6 @@ const Dashboard = ({ navigation }) => {
     setIsScoreDropdownOpen(false);
     setIsWorkoutDropdownOpen(!isWorkoutDropdownOpen);
   };
-
-  // Handle onFocus and onBlur
-  const handleFocus = () => setBorderColor("red");
-  const handleBlur = () => setBorderColor(colors.inputBorderGray);
 
   return (
     <SafeAreaView style={styles.container}>

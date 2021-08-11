@@ -1,10 +1,10 @@
 import * as React from "react";
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import CustomInput from "../../../components/CustomInput";
-import MoreButton from "../../../components/buttons/MoreButton";
-import InputModal from "./InputModal";
-import MoreModal from "../components/MoreModal";
-import styles from "../AddWorkoutStyles";
+import CustomInput from "./CustomInput";
+import MoreButton from "./buttons/MoreButton";
+import InputModal from "../screens/add-workout/components/InputModal";
+import MoreModal from "../screens/add-workout/components/MoreModal";
+import styles from "../screens/add-workout/AddWorkoutStyles";
 
 type ExerciseDetailProps = {
   name: string;
