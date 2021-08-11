@@ -4,6 +4,7 @@ import ExerciseScreen from "../screens/exercise/ExerciseScreen";
 import ExercisesScreen from "../screens/exercises/ExercisesScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import RoutineScreen from "../screens/routines/RoutineScreen";
+import AddRoutineScreen from "../screens/routines/AddRoutineScreen";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,11 @@ const ProfileStack = () => {
       <Stack.Screen name="Exercises" component={ExercisesScreen} />
       <Stack.Screen name="Exercise" component={ExerciseScreen} />
       <Stack.Screen name="Routines" component={RoutineScreen} />
+      <Stack.Screen
+        name="AddRoutine"
+        component={AddRoutineScreen}
+        options={{ title: "Add Routine" }}
+      />
     </Stack.Navigator>
   );
 };

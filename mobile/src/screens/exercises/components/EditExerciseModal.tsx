@@ -12,36 +12,49 @@ import CustomInput from "../../../components/CustomInput";
 import Modal from "react-native-modal";
 import { colors } from "../../../styles/colors";
 
-const AddExerciseModal = ({ closeModal, addExercise, isVisible }) => {
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState(null);
+type EditExerciseProps = {
+  exercise: any;
+  isVisible: boolean;
+  hideModal: () => void;
+};
+
+const EditExerciseModal = ({
+  exercise,
+  isVisible,
+  hideModal,
+}: EditExerciseProps) => {
+  const [newName, setNewName] = React.useState("");
+  const [newDescription, setNewDescription] = React.useState(null);
+
+  const { name, description } = exercise;
 
   return (
     <Modal
       style={{ margin: 0 }}
       isVisible={isVisible}
       swipeDirection="down"
-      onSwipeComplete={closeModal}>
+      onSwipeComplete={hideModal}>
       <SafeAreaView style={styles.modalView}>
         <View style={styles.modalHandle} />
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.contentContainer}>
           <View>
-            <Text style={styles.headerTitle}>Add Exercise</Text>
+            <Text style={styles.headerTitle}>Edit Exercise</Text>
             <View style={styles.inputContainer}>
               <Text style={styles.inputTitle}>Exercise name</Text>
               <CustomInput
-                value={name}
-                onChangeText={name => setName(name)}
+                value={newName}
+                onChangeText={name => setNewName(name)}
+                placeholder={name}
                 style={styles.input}
                 returnKeyType="done"
               />
               <Text style={styles.inputTitle}>Exercise description</Text>
               <CustomInput
-                value={description}
-                onChangeText={text => setDescription(text)}
-                placeholder={"Enter a description (optional)"}
+                value={newDescription}
+                onChangeText={text => setNewDescription(text)}
+                placeholder={description}
                 style={[styles.input, { height: 100, paddingTop: 10 }]}
                 multiline={true}
                 returnKeyType="done"
@@ -50,9 +63,9 @@ const AddExerciseModal = ({ closeModal, addExercise, isVisible }) => {
           </View>
           <CustomButton
             backgroundColor={colors.blue09}
-            btnText={"Done"}
+            btnText={"Save changes"}
             color={colors.white}
-            handlePress={() => addExercise(name, description)}
+            handlePress={() => console.log("Edit exercise pressed")}
             width={"100%"}
           />
         </KeyboardAvoidingView>
@@ -112,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddExerciseModal;
+export default EditExerciseModal;

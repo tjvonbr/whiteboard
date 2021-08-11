@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import ExerciseDetail from "./components/ExerciseDetail";
+import ExerciseDetail from "../../components/ExerciseDetail";
 import ExercisePicker from "../../components/modals/ExercisePicker";
 import styles from "./AddWorkoutStyles";
 
