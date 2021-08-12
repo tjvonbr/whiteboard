@@ -83,8 +83,8 @@ const AddRoutineScreen = ({ navigation }) => {
       userId,
       name,
       description,
-      workoutDropdownValue,
-      scoreDropdownValue,
+      workoutType: workoutDropdownValue,
+      scoringType: scoreDropdownValue,
       exercises,
     };
     const newRoutine = await addRoutine(routineDetails);

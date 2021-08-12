@@ -19,7 +19,7 @@ export const addRoutine = async routine => {
   try {
     const newRoutine = await API.graphql({
       query: createRoutine,
-      variables: routine,
+      variables: { input: routine },
     });
 
     console.log("new routine created: ", newRoutine);
