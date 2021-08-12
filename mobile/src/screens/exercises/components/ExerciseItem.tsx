@@ -5,7 +5,7 @@ import { colors } from "../../../styles/colors";
 type ExerciseItemProps = {
   item: any;
   handlePress: (exercise) => void;
-  handleLongPress: (exercise) => void;
+  handleLongPress?: (exercise) => void;
 };
 
 const ExerciseItem = ({

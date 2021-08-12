@@ -1,10 +1,13 @@
 import * as React from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Modal from "react-native-modal";
 import DoneButton from "../buttons/DoneButton";
-import ExerciseItem from "./ExerciseItem";
+import ExerciseAlpha from "../../screens/exercises/components/ExerciseAlpha";
+import ExerciseItem from "../../screens/exercises/components/ExerciseItem";
 import ExitButton from "../buttons/ExitButton";
-import { exercises } from "../../assets/data/exercises";
+import FullPageLoading from "../misc/FullPageLoading";
+import Modal from "react-native-modal";
+import { fetchExercises } from "../../screens/exercises/ExerciseRequests";
+import { useAuth } from "../../context/auth";
 import { colors } from "../../styles/colors";
 
 type ExercisePickerProps = {
@@ -20,11 +23,60 @@ const ExercisePicker = ({
   selected,
   handleSelect,
 }: ExercisePickerProps) => {
+  const {
+    user: { userId },
+  } = useAuth();
+
+  const [exercises, setExercises] = React.useState([]);
   const [isExerciseSelected, setIsExerciseSelected] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const flatListRef: any = React.createRef();
+
+  React.useEffect(() => {
+    const fetchUserExercises = async () => {
+      setIsLoading(true);
+
+      const response: any = await fetchExercises(userId);
+      const myExercises = response.data?.listExercises?.items;
+
+      myExercises.sort((a, b) => {
+        var nameA = a.name.toUpperCase();
+        var nameB = b.name.toUpperCase();
+
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        return 0;
+      });
+
+      setExercises(myExercises);
+      setIsLoading(false);
+    };
+
+    fetchUserExercises();
+  }, []);
 
   React.useEffect(() => {
     isTrue();
   }, [selected]);
+
+  // Map used for alpha navigator and data source for list of exercises
+  const alphaMap = {};
+
+  exercises.forEach(exercise => {
+    let firstLetter = exercise.name[0];
+
+    if (!alphaMap[firstLetter]) {
+      alphaMap[firstLetter] = [exercise];
+    } else {
+      alphaMap[firstLetter].push(exercise);
+    }
+  });
 
   const clearAndClose = () => {
     // Clears the previously selected exercises
@@ -39,13 +91,17 @@ const ExercisePicker = ({
       : setIsExerciseSelected(false);
   };
 
-  const renderItem = ({ item }) => {
+  // Scroll to letter after pressing proper alpha button
+  const scrollToAlpha = index =>
+    flatListRef?.current.scrollToIndex({ animated: true, index });
+
+  const renderExercise = ({ item }) => {
+    return <ExerciseItem item={item} handlePress={handleSelect} />;
+  };
+
+  const renderExerciseAlpha = ({ item, index }) => {
     return (
-      <ExerciseItem
-        exercise={item}
-        selected={!!selected.get(item.id)}
-        handleSelect={handleSelect}
-      />
+      <ExerciseAlpha alpha={item} index={index} handleScroll={scrollToAlpha} />
     );
   };
 
@@ -55,39 +111,61 @@ const ExercisePicker = ({
       isVisible={isVisible}
       swipeDirection="down"
       onSwipeComplete={closeModal}>
-      <SafeAreaView style={styles.modalView}>
-        <View style={styles.headerView}>
-          <View style={styles.exitBtnContainer}>
-            <ExitButton handlePress={clearAndClose} />
-          </View>
-          <View style={styles.headerTitleContainer}>
-            <Text style={styles.headerTitle}>Pick some exercises</Text>
-          </View>
-          <View style={styles.doneBtnContainer}>
-            <DoneButton
-              color={isExerciseSelected ? colors.black : "gray"}
-              handlePress={closeModal}
-              disabled={!isExerciseSelected}
+      <SafeAreaView style={styles.container}>
+        {isLoading ? (
+          <FullPageLoading color={colors.black} size={"small"} />
+        ) : exercises.length > 0 ? (
+          <View style={{ flex: 1, width: "100%" }}>
+            <FlatList
+              data={Object.entries(alphaMap)}
+              extraData={exercises}
+              renderItem={renderExercise}
+              ref={flatListRef}
+              keyExtractor={(_, index) => index.toString()}
+              showsVerticalScrollIndicator={false}
             />
+            <View style={styles.alphaNavigator}>
+              <FlatList
+                data={Object.keys(alphaMap)}
+                renderItem={renderExerciseAlpha}
+                keyExtractor={(_, index) => index.toString()}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
           </View>
-        </View>
-        <FlatList
-          data={exercises}
-          extraData={selected}
-          renderItem={renderItem}
-          keyExtractor={item => item.id.toString()}
-        />
+        ) : (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <Text>You haven't created any exercises yet!</Text>
+          </View>
+        )}
       </SafeAreaView>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  modalView: {
+  container: {
     flex: 0.9,
     backgroundColor: colors.white,
+    alignItems: "center",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+  },
+  alphaNavigator: {
+    width: 20,
+    position: "absolute",
+    top: "50%",
+    right: "0%",
+    // TODO: GET ITEM LAYOUT
+    transform: [
+      {
+        translateY: -50,
+      },
+    ],
+    alignItems: "center",
+    backgroundColor: "transparent",
+    borderRadius: 10,
   },
   headerView: {
     width: "100%",
