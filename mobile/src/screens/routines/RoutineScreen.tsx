@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Button, SafeAreaView } from "react-native";
+import { Button, SafeAreaView, TextInput, View } from "react-native";
 import AddRoutineModal from "./components/AddRoutineModal";
 import DeleteRoutineModal from "./components/DeleteRoutineModal";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import ListOfRoutines from "./components/ListOfRoutines";
 import NoRoutines from "./components/NoRoutines";
 import { fetchRoutines, removeRoutine } from "./RoutinesRequests";
@@ -88,11 +89,21 @@ const RoutineScreen = ({ navigation }) => {
       {isLoading ? (
         <FullPageLoading color={colors.black} size={"small"} />
       ) : routines.length > 0 ? (
-        <ListOfRoutines
-          routines={alphaMap}
-          showDelete={showDeleteModal}
-          setSelectedRoutine={setSelectedRoutine}
-        />
+        <>
+          <View style={styles.searchContainer}>
+            <View style={styles.innerSearchContainer}>
+              <TextInput style={styles.search} placeholder="Search..." />
+              <View style={{ marginRight: 10 }}>
+                <Icon name="search" color="gray" size={20} />
+              </View>
+            </View>
+          </View>
+          <ListOfRoutines
+            routines={alphaMap}
+            showDelete={showDeleteModal}
+            setSelectedRoutine={setSelectedRoutine}
+          />
+        </>
       ) : (
         <NoRoutines />
       )}
