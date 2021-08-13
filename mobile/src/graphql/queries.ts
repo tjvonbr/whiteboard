@@ -75,6 +75,7 @@ export const getRoutine = /* GraphQL */ `
           name
           notes
           status
+          score
           completedAt
           createdAt
           updatedAt
@@ -120,7 +121,7 @@ export const getUser = /* GraphQL */ `
       firstName
       lastName
       email
-      phoneNumber
+      birthday
       createdAt
       updatedAt
     }
@@ -138,7 +139,7 @@ export const listUsers = /* GraphQL */ `
         firstName
         lastName
         email
-        phoneNumber
+        birthday
         createdAt
         updatedAt
       }
@@ -155,17 +156,7 @@ export const getWorkout = /* GraphQL */ `
       name
       notes
       status
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
+      score
       completedAt
       createdAt
       updatedAt
@@ -186,144 +177,8 @@ export const listWorkouts = /* GraphQL */ `
         name
         notes
         status
-        score {
-          ... on IntScore {
-            value
-          }
-          ... on FloatScore {
-            value
-          }
-          ... on StringScore {
-            value
-          }
-        }
+        score
         completedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getWorkoutScore = /* GraphQL */ `
-  query GetWorkoutScore($id: ID!) {
-    getWorkoutScore(id: $id) {
-      id
-      scoreId
-      user {
-        id
-        firstName
-        lastName
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-      }
-      workoutId {
-        id
-        routineId
-        userId
-        name
-        notes
-        status
-        score {
-          ... on IntScore {
-            value
-          }
-          ... on FloatScore {
-            value
-          }
-          ... on StringScore {
-            value
-          }
-        }
-        completedAt
-        createdAt
-        updatedAt
-      }
-      routineId {
-        id
-        userId
-        name
-        description
-        exercises {
-          nextToken
-        }
-        workoutType
-        scoringType
-        workouts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listWorkoutScores = /* GraphQL */ `
-  query ListWorkoutScores(
-    $filter: ModelWorkoutScoreFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWorkoutScores(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        scoreId
-        user {
-          id
-          firstName
-          lastName
-          email
-          phoneNumber
-          createdAt
-          updatedAt
-        }
-        workoutId {
-          id
-          routineId
-          userId
-          name
-          notes
-          status
-          completedAt
-          createdAt
-          updatedAt
-        }
-        routineId {
-          id
-          userId
-          name
-          description
-          workoutType
-          scoringType
-          createdAt
-          updatedAt
-        }
-        score {
-          ... on IntScore {
-            value
-          }
-          ... on FloatScore {
-            value
-          }
-          ... on StringScore {
-            value
-          }
-        }
         createdAt
         updatedAt
       }

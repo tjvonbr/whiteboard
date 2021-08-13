@@ -9,7 +9,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7,
-              "description": "whiteboard-api"
+              "description": "y"
             }
           },
           "additionalAuthenticationProviders": []
@@ -26,7 +26,7 @@
     }
   },
   "function": {
-    "upsertUser": {
+    "createUser": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

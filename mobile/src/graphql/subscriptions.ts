@@ -98,6 +98,7 @@ export const onCreateRoutine = /* GraphQL */ `
           name
           notes
           status
+          score
           completedAt
           createdAt
           updatedAt
@@ -136,6 +137,7 @@ export const onUpdateRoutine = /* GraphQL */ `
           name
           notes
           status
+          score
           completedAt
           createdAt
           updatedAt
@@ -174,6 +176,7 @@ export const onDeleteRoutine = /* GraphQL */ `
           name
           notes
           status
+          score
           completedAt
           createdAt
           updatedAt
@@ -309,7 +312,7 @@ export const onCreateUser = /* GraphQL */ `
       firstName
       lastName
       email
-      phoneNumber
+      birthday
       createdAt
       updatedAt
     }
@@ -322,7 +325,7 @@ export const onUpdateUser = /* GraphQL */ `
       firstName
       lastName
       email
-      phoneNumber
+      birthday
       createdAt
       updatedAt
     }
@@ -335,7 +338,7 @@ export const onDeleteUser = /* GraphQL */ `
       firstName
       lastName
       email
-      phoneNumber
+      birthday
       createdAt
       updatedAt
     }
@@ -350,17 +353,7 @@ export const onCreateWorkout = /* GraphQL */ `
       name
       notes
       status
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
+      score
       completedAt
       createdAt
       updatedAt
@@ -376,17 +369,7 @@ export const onUpdateWorkout = /* GraphQL */ `
       name
       notes
       status
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
+      score
       completedAt
       createdAt
       updatedAt
@@ -402,222 +385,8 @@ export const onDeleteWorkout = /* GraphQL */ `
       name
       notes
       status
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
+      score
       completedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateWorkoutScore = /* GraphQL */ `
-  subscription OnCreateWorkoutScore {
-    onCreateWorkoutScore {
-      id
-      scoreId
-      user {
-        id
-        firstName
-        lastName
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-      }
-      workoutId {
-        id
-        routineId
-        userId
-        name
-        notes
-        status
-        score {
-          ... on IntScore {
-            value
-          }
-          ... on FloatScore {
-            value
-          }
-          ... on StringScore {
-            value
-          }
-        }
-        completedAt
-        createdAt
-        updatedAt
-      }
-      routineId {
-        id
-        userId
-        name
-        description
-        exercises {
-          nextToken
-        }
-        workoutType
-        scoringType
-        workouts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateWorkoutScore = /* GraphQL */ `
-  subscription OnUpdateWorkoutScore {
-    onUpdateWorkoutScore {
-      id
-      scoreId
-      user {
-        id
-        firstName
-        lastName
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-      }
-      workoutId {
-        id
-        routineId
-        userId
-        name
-        notes
-        status
-        score {
-          ... on IntScore {
-            value
-          }
-          ... on FloatScore {
-            value
-          }
-          ... on StringScore {
-            value
-          }
-        }
-        completedAt
-        createdAt
-        updatedAt
-      }
-      routineId {
-        id
-        userId
-        name
-        description
-        exercises {
-          nextToken
-        }
-        workoutType
-        scoringType
-        workouts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteWorkoutScore = /* GraphQL */ `
-  subscription OnDeleteWorkoutScore {
-    onDeleteWorkoutScore {
-      id
-      scoreId
-      user {
-        id
-        firstName
-        lastName
-        email
-        phoneNumber
-        createdAt
-        updatedAt
-      }
-      workoutId {
-        id
-        routineId
-        userId
-        name
-        notes
-        status
-        score {
-          ... on IntScore {
-            value
-          }
-          ... on FloatScore {
-            value
-          }
-          ... on StringScore {
-            value
-          }
-        }
-        completedAt
-        createdAt
-        updatedAt
-      }
-      routineId {
-        id
-        userId
-        name
-        description
-        exercises {
-          nextToken
-        }
-        workoutType
-        scoringType
-        workouts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      score {
-        ... on IntScore {
-          value
-        }
-        ... on FloatScore {
-          value
-        }
-        ... on StringScore {
-          value
-        }
-      }
       createdAt
       updatedAt
     }
