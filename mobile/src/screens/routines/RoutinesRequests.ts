@@ -1,5 +1,5 @@
 import { API } from "aws-amplify";
-import { createRoutine } from "../../graphql/mutations";
+import { createRoutine, deleteRoutine } from "../../graphql/mutations";
 import { listRoutines } from "../../graphql/queries";
 
 export const fetchRoutines = async userId => {
@@ -26,5 +26,19 @@ export const addRoutine = async routine => {
     return newRoutine;
   } catch (error) {
     console.log("error adding routine: ", error.errors);
+  }
+};
+
+export const removeRoutine = async routine => {
+  try {
+    const deletedRoutine = await API.graphql({
+      query: deleteRoutine,
+      variables: { input: routine },
+    });
+
+    console.log("routine deleted: ", deletedRoutine);
+    return deletedRoutine;
+  } catch (error) {
+    console.log(error.errors);
   }
 };

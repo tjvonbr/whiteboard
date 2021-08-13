@@ -25,6 +25,7 @@ const AddRoutineScreen = ({ navigation }) => {
   const [workoutTypes, setWorkoutTypes] = React.useState([
     { value: WorkoutType.AMRAP, label: "AMRAP" },
     { value: WorkoutType.EMOM, label: "EMOM" },
+    { value: WorkoutType.RFT, label: "RFT" },
     { value: WorkoutType.STRENGTH, label: "Traditional" },
   ]);
   const [scoringStyles, setScoringStyles] = React.useState([

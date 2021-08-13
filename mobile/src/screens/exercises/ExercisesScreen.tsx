@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Button, FlatList, SafeAreaView, Text, View } from "react-native";
 import AddExerciseModal from "./components/AddExerciseModal";
-import ExerciseAlpha from "./components/ExerciseAlpha";
 import ExerciseActionModal from "./components/ExerciseActionModal";
+import ExerciseAlpha from "./components/ExerciseAlpha";
 import ExerciseItem from "./components/ExerciseItem";
 import FullPageLoading from "../../components/misc/FullPageLoading";
 import {

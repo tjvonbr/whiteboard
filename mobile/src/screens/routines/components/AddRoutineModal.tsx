@@ -20,6 +20,7 @@ const AddRoutineModal = ({ isVisible, hideModal }) => {
   const [workoutTypes, setWorkoutTypes] = React.useState([
     { value: "AMRAP", label: "AMRAP" },
     { value: "EMOM", label: "EMOM" },
+    { value: "RFT", label: "RFT" },
     { value: "Max", label: "Max" },
     { value: "Traditional", label: "Traditional" },
   ]);
