@@ -1,22 +1,42 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { parse } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { colors } from "../../../styles/colors";
 
-const RoutineListItem = ({ item, handlePress, handleLongPress }) => {
-  const { name, createdAt } = item;
+const RoutineListItem = ({
+  item,
+  handlePress,
+  setSelectedRoutine,
+  showDelete,
+}) => {
+  const [alpha, routines] = item;
+
+  const longPressHelper = routine => {
+    setSelectedRoutine(routine);
+    showDelete();
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.exerciseContainer}
-        onPress={handlePress}
-        onLongPress={handleLongPress}>
-        <View>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.muscles}>{`Created at: ${createdAt}`}</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.alphaContainer}>
+        <Text style={styles.alpha}>{alpha}</Text>
+      </View>
+      {routines.map((routine, i) => {
+        const { name, createdAt } = routine;
+        const date = format(parseISO(createdAt), "MM/dd/yyyy");
+
+        return (
+          <TouchableOpacity
+            style={styles.routineContainer}
+            onPress={handlePress}
+            onLongPress={() => longPressHelper(routine)}>
+            <View>
+              <Text style={styles.name}>{name}</Text>
+              <Text style={styles.muscles}>{date}</Text>
+            </View>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -38,7 +58,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: colors.black,
   },
-  exerciseContainer: {
+  routineContainer: {
     width: "90%",
     height: 60,
     flexDirection: "row",

@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Button, SafeAreaView, Text, View } from "react-native";
+import { Button, SafeAreaView } from "react-native";
 import AddRoutineModal from "./components/AddRoutineModal";
+import DeleteRoutineModal from "./components/DeleteRoutineModal";
 import ListOfRoutines from "./components/ListOfRoutines";
 import NoRoutines from "./components/NoRoutines";
-import { fetchRoutines } from "./RoutinesRequests";
+import { fetchRoutines, removeRoutine } from "./RoutinesRequests";
 import { useAuth } from "../../context/auth";
 import styles from "./RoutinesStyles";
 import FullPageLoading from "../../components/misc/FullPageLoading";
@@ -14,6 +15,7 @@ const RoutineScreen = ({ navigation }) => {
   const [selectedRoutine, setSelectedRoutine] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
+  const [isDeleteVisible, setIsDeleteVisible] = React.useState(false);
 
   const {
     user: { userId },
@@ -47,6 +49,28 @@ const RoutineScreen = ({ navigation }) => {
     fetchUserRoutines();
   }, []);
 
+  const deleteRoutine = async routine => {
+    const id = { id: selectedRoutine.id };
+    await removeRoutine(id);
+
+    const filteredRoutines = routines.filter(r => r.id !== routine.id);
+
+    hideDeleteModal();
+    setRoutines(filteredRoutines);
+  };
+
+  const alphaMap = {};
+
+  routines.forEach(routine => {
+    let firstLetter = routine.name[0];
+
+    if (!alphaMap[firstLetter]) {
+      alphaMap[firstLetter] = [routine];
+    } else {
+      alphaMap[firstLetter].push(routine);
+    }
+  });
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -56,17 +80,29 @@ const RoutineScreen = ({ navigation }) => {
   }, [navigation]);
 
   const hideModal = () => setIsVisible(false);
+  const showDeleteModal = () => setIsDeleteVisible(true);
+  const hideDeleteModal = () => setIsDeleteVisible(false);
 
   return (
     <SafeAreaView style={styles.container}>
       {isLoading ? (
         <FullPageLoading color={colors.black} size={"small"} />
       ) : routines.length > 0 ? (
-        <ListOfRoutines routines={routines} />
+        <ListOfRoutines
+          routines={alphaMap}
+          showDelete={showDeleteModal}
+          setSelectedRoutine={setSelectedRoutine}
+        />
       ) : (
         <NoRoutines />
       )}
       <AddRoutineModal isVisible={isVisible} hideModal={hideModal} />
+      <DeleteRoutineModal
+        isVisible={isDeleteVisible}
+        closeModal={hideDeleteModal}
+        deleteRoutine={deleteRoutine}
+        routine={selectedRoutine}
+      />
     </SafeAreaView>
   );
 };
