@@ -51,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "upsertUser",
+            "createUser",
             {
               "Fn::Join": [
                 "",
                 [
-                  "upsertUser",
+                  "createUser",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "whiteboardLambdaRole0cbc4ff5",
+            "whiteboardLambdaRole339f95d2",
             {
               "Fn::Join": [
                 "",
                 [
-                  "whiteboardLambdaRole0cbc4ff5",
+                  "whiteboardLambdaRole339f95d2",
                   "-",
                   {
                     "Ref": "env"

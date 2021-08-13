@@ -32,7 +32,7 @@ const ExercisesScreen = ({ navigation }) => {
       setIsLoading(true);
 
       const response: any = await fetchExercises(userId);
-      const myExercises = response.data?.listExercises?.items;
+      const myExercises = response?.data?.listExercises?.items;
 
       myExercises.sort((a, b) => {
         var nameA = a.name.toUpperCase();

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Button, SafeAreaView, Text, View } from "react-native";
 import AddRoutineModal from "./components/AddRoutineModal";
+import ListOfRoutines from "./components/ListOfRoutines";
+import NoRoutines from "./components/NoRoutines";
 import { fetchRoutines } from "./RoutinesRequests";
 import { useAuth } from "../../context/auth";
 import styles from "./RoutinesStyles";
@@ -59,8 +61,10 @@ const RoutineScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       {isLoading ? (
         <FullPageLoading color={colors.black} size={"small"} />
+      ) : routines.length > 0 ? (
+        <ListOfRoutines routines={routines} />
       ) : (
-        <Text>Routines</Text>
+        <NoRoutines />
       )}
       <AddRoutineModal isVisible={isVisible} hideModal={hideModal} />
     </SafeAreaView>

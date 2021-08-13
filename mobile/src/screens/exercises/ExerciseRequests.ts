@@ -11,7 +11,7 @@ export const fetchExercises = async userId => {
 
     return exercises;
   } catch (error) {
-    console.log("error fetching exercises: ", error);
+    console.log("error fetching exercises: ", error.errors);
   }
 };
 
