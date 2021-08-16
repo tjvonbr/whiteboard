@@ -4,8 +4,7 @@ import ExercisePicker from "../../components/modals/ExercisePicker";
 import CustomButton from "../../components/buttons/CustomButton";
 import { colors } from "../../styles/colors";
 import styles from "./RoutinesStyles";
-import { ConsoleLogger } from "@aws-amplify/core";
-import { addRoutineExercise } from "./RoutinesRequests";
+import { addRoutineExercises } from "./RoutinesRequests";
 
 const AddExercisesToRoutineScreen = ({ navigation, route }) => {
   const [exercises, setExercises] = React.useState([]);
@@ -13,7 +12,7 @@ const AddExercisesToRoutineScreen = ({ navigation, route }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const { routineId } = route.params;
+  const { routineId, routineName } = route.params;
 
   // // Handle selection of exercises in modal
   const handleSelect = React.useCallback(
@@ -33,23 +32,31 @@ const AddExercisesToRoutineScreen = ({ navigation, route }) => {
   );
 
   const renderExercise = ({ item }) => {
-    return <Text>{item.name}</Text>;
+    return <Text key={item.id}>{item.name}</Text>;
   };
 
   const submitExercises = async () => {
     setIsLoading(true);
 
-    try {
-      exercises.forEach(exercise => {
-        let ids = {
-          routineId,
-          exerciseId: exercise.id,
-        };
+    const routineExercises = [];
 
-        await addRoutineExercise(ids);
+    exercises.forEach(exercise => {
+      routineExercises.push({
+        routineId,
+        exerciseId: exercise.id,
       });
+    });
+
+    try {
+      const newRoutineExercise = await addRoutineExercises(routineExercises);
+      navigation.navigate("Routine", {
+        routineName,
+      });
+      return;
     } catch (error) {
-      console.log(error);
+      console.log(error.errors);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,7 +80,7 @@ const AddExercisesToRoutineScreen = ({ navigation, route }) => {
             backgroundColor={colors.blue09}
             btnText={"Save routine"}
             color={colors.white}
-            handlePress={() => console.log("Submitted!")}
+            handlePress={submitExercises}
             width={"100%"}
             isLoading={isLoading}
           />

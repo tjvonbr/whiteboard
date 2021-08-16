@@ -1,7 +1,7 @@
 import { API } from "aws-amplify";
 import {
   createRoutine,
-  createRoutineExercise,
+  batchAdd,
   deleteRoutine,
 } from "../../graphql/mutations";
 import { listRoutines } from "../../graphql/queries";
@@ -47,11 +47,11 @@ export const removeRoutine = async routine => {
   }
 };
 
-export const addRoutineExercise = async ids => {
+export const addRoutineExercises = async routineExercises => {
   try {
     const routineExercise = await API.graphql({
-      query: createRoutineExercise,
-      variables: { input: ids },
+      query: batchAdd,
+      variables: { exercises: routineExercises },
     });
 
     console.log("routine exercise created: ", routineExercise);

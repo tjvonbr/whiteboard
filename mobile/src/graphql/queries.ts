@@ -14,6 +14,7 @@ export const getExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -62,6 +63,7 @@ export const getRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }

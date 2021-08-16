@@ -3,20 +3,27 @@ import { FlatList, StyleSheet, View } from "react-native";
 import AlphaItem from "../../../components/lists/AlphaItem";
 import RoutineListItem from "./RoutineListItem";
 
-const ListOfRoutines = ({ routines, showDelete, setSelectedRoutine }) => {
+const ListOfRoutines = ({
+  routines,
+  showDelete,
+  setSelectedRoutine,
+  handlePress,
+}) => {
   const routineListRef: any = React.createRef();
 
   const scrollToAlpha = index =>
     routineListRef?.current?.scrollToIndex({ animated: true, index });
 
-  const renderRoutine = ({ item }) => (
-    <RoutineListItem
-      item={item}
-      handlePress={() => console.log("Press")}
-      setSelectedRoutine={setSelectedRoutine}
-      showDelete={showDelete}
-    />
-  );
+  const renderRoutine = ({ item }) => {
+    return (
+      <RoutineListItem
+        item={item}
+        handlePress={handlePress}
+        setSelectedRoutine={setSelectedRoutine}
+        showDelete={showDelete}
+      />
+    );
+  };
 
   const renderRoutineAlpha = ({ item, index }) => {
     return (

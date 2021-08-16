@@ -11,7 +11,7 @@ import styles from "./RoutinesStyles";
 import FullPageLoading from "../../components/misc/FullPageLoading";
 import { colors } from "../../styles/colors";
 
-const RoutineScreen = ({ navigation }) => {
+const RoutinesScreen = ({ navigation }) => {
   const [routines, setRoutines] = React.useState([]);
   const [selectedRoutine, setSelectedRoutine] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -84,6 +84,17 @@ const RoutineScreen = ({ navigation }) => {
   const showDeleteModal = () => setIsDeleteVisible(true);
   const hideDeleteModal = () => setIsDeleteVisible(false);
 
+  const navigateToRoutine = routine => {
+    const { createdAt, name, scoringType, workoutType } = routine;
+
+    navigation.navigate("Routine", {
+      createdAt,
+      name,
+      scoringType,
+      workoutType,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {isLoading ? (
@@ -102,6 +113,7 @@ const RoutineScreen = ({ navigation }) => {
             routines={alphaMap}
             showDelete={showDeleteModal}
             setSelectedRoutine={setSelectedRoutine}
+            handlePress={navigateToRoutine}
           />
         </>
       ) : (
@@ -118,4 +130,4 @@ const RoutineScreen = ({ navigation }) => {
   );
 };
 
-export default RoutineScreen;
+export default RoutinesScreen;

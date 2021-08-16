@@ -65,7 +65,8 @@ const AddRoutineScreen = ({ navigation }) => {
     const newRoutine: any = await addRoutine(routineDetails);
 
     navigation.navigate("AddExercises", {
-      routineId: newRoutine.data.id,
+      routineId: newRoutine.data.createRoutine.id,
+      routineName: newRoutine.data.createRoutine.name,
     });
     setIsLoading(false);
     return newRoutine;

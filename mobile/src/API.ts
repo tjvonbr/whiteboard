@@ -2,6 +2,104 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateRoutineExerciseInput = {
+  id?: string | null,
+  routineId: string,
+  exerciseId: string,
+};
+
+export type RoutineExercise = {
+  __typename: "RoutineExercise",
+  id?: string,
+  routineId?: string,
+  exerciseId?: string,
+  routine?: Routine,
+  exercise?: Exercise,
+  createdAt?: string,
+  updatedAt?: string,
+  owner?: string | null,
+};
+
+export type Routine = {
+  __typename: "Routine",
+  id?: string,
+  userId?: string,
+  name?: string,
+  description?: string | null,
+  exercises?: ModelRoutineExerciseConnection,
+  workoutType?: WorkoutType,
+  scoringType?: ScoringType,
+  workouts?: ModelWorkoutConnection,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type ModelRoutineExerciseConnection = {
+  __typename: "ModelRoutineExerciseConnection",
+  items?:  Array<RoutineExercise | null > | null,
+  nextToken?: string | null,
+};
+
+export enum WorkoutType {
+  AMRAP = "AMRAP",
+  CHIPPER = "CHIPPER",
+  EMOM = "EMOM",
+  LADDER = "LADDER",
+  RFT = "RFT",
+  STRENGTH = "STRENGTH",
+  TABATA = "TABATA",
+}
+
+
+export enum ScoringType {
+  MAX = "MAX",
+  NO_SCORE = "NO_SCORE",
+  ROUNDS = "ROUNDS",
+  ROUNDS_PLUS_REPS = "ROUNDS_PLUS_REPS",
+  SLOWEST_SET = "SLOWEST_SET",
+  TIME = "TIME",
+  WEIGHT = "WEIGHT",
+}
+
+
+export type ModelWorkoutConnection = {
+  __typename: "ModelWorkoutConnection",
+  items?:  Array<Workout | null > | null,
+  nextToken?: string | null,
+};
+
+export type Workout = {
+  __typename: "Workout",
+  id?: string,
+  routineId?: string,
+  userId?: string,
+  name?: string,
+  notes?: string | null,
+  status?: WorkoutStatus | null,
+  score?: string | null,
+  completedAt?: string | null,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export enum WorkoutStatus {
+  COMPLETE = "COMPLETE",
+  INCOMPLETE = "INCOMPLETE",
+}
+
+
+export type Exercise = {
+  __typename: "Exercise",
+  id?: string,
+  userId?: string,
+  routine?: ModelRoutineExerciseConnection,
+  name?: string,
+  description?: string | null,
+  muscles?: string | null,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
 export type CreateExerciseInput = {
   id?: string | null,
   userId: string,
@@ -76,97 +174,6 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
-export type Exercise = {
-  __typename: "Exercise",
-  id?: string,
-  userId?: string,
-  routine?: ModelRoutineExerciseConnection,
-  name?: string,
-  description?: string | null,
-  muscles?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
-};
-
-export type ModelRoutineExerciseConnection = {
-  __typename: "ModelRoutineExerciseConnection",
-  items?:  Array<RoutineExercise | null > | null,
-  nextToken?: string | null,
-};
-
-export type RoutineExercise = {
-  __typename: "RoutineExercise",
-  id?: string,
-  routineId?: string,
-  exerciseId?: string,
-  routine?: Routine,
-  exercise?: Exercise,
-  createdAt?: string,
-  updatedAt?: string,
-};
-
-export type Routine = {
-  __typename: "Routine",
-  id?: string,
-  userId?: string,
-  name?: string,
-  description?: string | null,
-  exercises?: ModelRoutineExerciseConnection,
-  workoutType?: WorkoutType,
-  scoringType?: ScoringType,
-  workouts?: ModelWorkoutConnection,
-  createdAt?: string,
-  updatedAt?: string,
-};
-
-export enum WorkoutType {
-  AMRAP = "AMRAP",
-  CHIPPER = "CHIPPER",
-  EMOM = "EMOM",
-  LADDER = "LADDER",
-  RFT = "RFT",
-  STRENGTH = "STRENGTH",
-  TABATA = "TABATA",
-}
-
-
-export enum ScoringType {
-  MAX = "MAX",
-  NO_SCORE = "NO_SCORE",
-  ROUNDS = "ROUNDS",
-  ROUNDS_PLUS_REPS = "ROUNDS_PLUS_REPS",
-  SLOWEST_SET = "SLOWEST_SET",
-  TIME = "TIME",
-  WEIGHT = "WEIGHT",
-}
-
-
-export type ModelWorkoutConnection = {
-  __typename: "ModelWorkoutConnection",
-  items?:  Array<Workout | null > | null,
-  nextToken?: string | null,
-};
-
-export type Workout = {
-  __typename: "Workout",
-  id?: string,
-  routineId?: string,
-  userId?: string,
-  name?: string,
-  notes?: string | null,
-  status?: WorkoutStatus | null,
-  score?: string | null,
-  completedAt?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
-};
-
-export enum WorkoutStatus {
-  COMPLETE = "COMPLETE",
-  INCOMPLETE = "INCOMPLETE",
-}
-
-
 export type UpdateExerciseInput = {
   id: string,
   userId?: string | null,
@@ -220,12 +227,6 @@ export type UpdateRoutineInput = {
 
 export type DeleteRoutineInput = {
   id: string,
-};
-
-export type CreateRoutineExerciseInput = {
-  id?: string | null,
-  routineId: string,
-  exerciseId: string,
 };
 
 export type ModelRoutineExerciseConditionInput = {
@@ -467,6 +468,55 @@ export type SearchableRoutineConnection = {
   total?: number | null,
 };
 
+export type BatchAddMutationVariables = {
+  exercises?: Array< CreateRoutineExerciseInput | null > | null,
+};
+
+export type BatchAddMutation = {
+  batchAdd?:  Array< {
+    __typename: "RoutineExercise",
+    id: string,
+    routineId: string,
+    exerciseId: string,
+    routine:  {
+      __typename: "Routine",
+      id: string,
+      userId: string,
+      name: string,
+      description?: string | null,
+      exercises?:  {
+        __typename: "ModelRoutineExerciseConnection",
+        nextToken?: string | null,
+      } | null,
+      workoutType: WorkoutType,
+      scoringType: ScoringType,
+      workouts?:  {
+        __typename: "ModelWorkoutConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    exercise:  {
+      __typename: "Exercise",
+      id: string,
+      userId: string,
+      routine?:  {
+        __typename: "ModelRoutineExerciseConnection",
+        nextToken?: string | null,
+      } | null,
+      name: string,
+      description?: string | null,
+      muscles?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null > | null,
+};
+
 export type CreateExerciseMutationVariables = {
   input?: CreateExerciseInput,
   condition?: ModelExerciseConditionInput | null,
@@ -486,6 +536,7 @@ export type CreateExerciseMutation = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -516,6 +567,7 @@ export type UpdateExerciseMutation = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -546,6 +598,7 @@ export type DeleteExerciseMutation = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -578,6 +631,7 @@ export type CreateRoutineMutation = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -626,6 +680,7 @@ export type UpdateRoutineMutation = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -674,6 +729,7 @@ export type DeleteRoutineMutation = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -747,6 +803,7 @@ export type CreateRoutineExerciseMutation = {
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -796,6 +853,7 @@ export type UpdateRoutineExerciseMutation = {
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -845,6 +903,7 @@ export type DeleteRoutineExerciseMutation = {
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -983,6 +1042,7 @@ export type GetExerciseQuery = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1041,6 +1101,7 @@ export type GetRoutineQuery = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1235,6 +1296,7 @@ export type OnCreateExerciseSubscription = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1260,6 +1322,7 @@ export type OnUpdateExerciseSubscription = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1285,6 +1348,7 @@ export type OnDeleteExerciseSubscription = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1312,6 +1376,7 @@ export type OnCreateRoutineSubscription = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1355,6 +1420,7 @@ export type OnUpdateRoutineSubscription = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1398,6 +1464,7 @@ export type OnDeleteRoutineSubscription = {
         exerciseId: string,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null > | null,
       nextToken?: string | null,
     } | null,
@@ -1423,6 +1490,10 @@ export type OnDeleteRoutineSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnCreateRoutineExerciseSubscriptionVariables = {
+  owner?: string,
 };
 
 export type OnCreateRoutineExerciseSubscription = {
@@ -1466,7 +1537,12 @@ export type OnCreateRoutineExerciseSubscription = {
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateRoutineExerciseSubscriptionVariables = {
+  owner?: string,
 };
 
 export type OnUpdateRoutineExerciseSubscription = {
@@ -1510,7 +1586,12 @@ export type OnUpdateRoutineExerciseSubscription = {
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteRoutineExerciseSubscriptionVariables = {
+  owner?: string,
 };
 
 export type OnDeleteRoutineExerciseSubscription = {
@@ -1554,6 +1635,7 @@ export type OnDeleteRoutineExerciseSubscription = {
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
