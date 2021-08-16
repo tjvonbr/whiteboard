@@ -1,9 +1,7 @@
 import * as React from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import DoneButton from "../buttons/DoneButton";
 import ExerciseAlpha from "../../screens/exercises/components/ExerciseAlpha";
 import ExerciseItem from "../../screens/exercises/components/ExerciseItem";
-import ExitButton from "../buttons/ExitButton";
 import FullPageLoading from "../misc/FullPageLoading";
 import Modal from "react-native-modal";
 import { fetchExercises } from "../../screens/exercises/ExerciseRequests";

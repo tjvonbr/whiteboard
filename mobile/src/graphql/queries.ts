@@ -186,3 +186,39 @@ export const listWorkouts = /* GraphQL */ `
     }
   }
 `;
+export const searchRoutines = /* GraphQL */ `
+  query SearchRoutines(
+    $filter: SearchableRoutineFilterInput
+    $sort: SearchableRoutineSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchRoutines(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;

@@ -1,5 +1,11 @@
 import * as React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { colors } from "../../styles/colors";
 
 type CustomButtonProps = {
   backgroundColor: string;
@@ -7,6 +13,8 @@ type CustomButtonProps = {
   color: string;
   handlePress: any;
   width: string | number;
+  isLoading?: boolean;
+  loadingColor?: string;
 };
 
 const CustomButton = ({
@@ -15,12 +23,18 @@ const CustomButton = ({
   color,
   handlePress,
   width,
+  isLoading,
+  loadingColor = colors.white,
 }: CustomButtonProps) => {
   return (
     <TouchableOpacity
       style={[styles.formBtn, { backgroundColor, width }]}
       onPress={handlePress}>
-      <Text style={[styles.formBtnText, { color }]}>{btnText}</Text>
+      {isLoading ? (
+        <ActivityIndicator color={loadingColor} size={25} />
+      ) : (
+        <Text style={[styles.formBtnText, { color }]}>{btnText}</Text>
+      )}
     </TouchableOpacity>
   );
 };
