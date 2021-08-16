@@ -1,7 +1,8 @@
 type Routine
   @model
   @key(name: "byUser", fields: ["userId"])
-  @key(name: "byName", fields: ["name"]) {
+  @key(name: "byName", fields: ["name"])
+  @searchable {
   id: ID!
   userId: ID!
   name: String!

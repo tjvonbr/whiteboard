@@ -20,7 +20,6 @@ const AddRoutineScreen = ({ navigation }) => {
   );
   const [description, setDescription] = React.useState(null);
   const [timeLimit, setTimeLimit] = React.useState(null);
-  const [selected, setSelected] = React.useState(new Map());
   const [exercises, setExercises] = React.useState([]);
   const [workoutTypes, setWorkoutTypes] = React.useState([
     { value: WorkoutType.AMRAP, label: "AMRAP" },
@@ -40,9 +39,7 @@ const AddRoutineScreen = ({ navigation }) => {
   const [isWorkoutDropdownOpen, setIsWorkoutDropdownOpen] = React.useState(
     false,
   );
-
-  console.log(workoutType);
-  console.log(scoringType);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleScoreOpen = () => {
     setIsWorkoutDropdownOpen(false);
@@ -54,24 +51,9 @@ const AddRoutineScreen = ({ navigation }) => {
     setIsWorkoutDropdownOpen(!isWorkoutDropdownOpen);
   };
 
-  // Handle selection of exercises in modal
-  const handleSelect = React.useCallback(
-    item => {
-      const newSelected = new Map(selected);
-      newSelected.set(item.id, !selected.get(item.id));
-      setSelected(newSelected);
-
-      if (exercises.includes(item)) {
-        const filtered = exercises.filter(e => e.id != item.id);
-        setExercises(filtered);
-      } else {
-        setExercises([...exercises, item]);
-      }
-    },
-    [selected],
-  );
-
   const submitRoutine = async () => {
+    setIsLoading(true);
+
     const routineDetails = {
       userId,
       name,
@@ -80,10 +62,12 @@ const AddRoutineScreen = ({ navigation }) => {
       scoringType,
     };
 
-    console.log(routineDetails);
-    const newRoutine = await addRoutine(routineDetails);
+    const newRoutine: any = await addRoutine(routineDetails);
 
-    console.log(newRoutine);
+    navigation.navigate("AddExercises", {
+      routineId: newRoutine.data.id,
+    });
+    setIsLoading(false);
     return newRoutine;
   };
 
@@ -180,6 +164,7 @@ const AddRoutineScreen = ({ navigation }) => {
             color={colors.white}
             handlePress={submitRoutine}
             width={"100%"}
+            isLoading={isLoading}
           />
         </View>
       </View>
