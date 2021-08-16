@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "whiteboard",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authwhiteboard7465068b",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

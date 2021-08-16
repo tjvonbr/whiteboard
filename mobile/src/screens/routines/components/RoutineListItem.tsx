@@ -22,13 +22,14 @@ const RoutineListItem = ({
         <Text style={styles.alpha}>{alpha}</Text>
       </View>
       {routines.map((routine, i) => {
-        const { name, createdAt } = routine;
+        const { createdAt, name } = routine;
+
         const date = format(parseISO(createdAt), "MM/dd/yyyy");
 
         return (
           <TouchableOpacity
             style={styles.routineContainer}
-            onPress={handlePress}
+            onPress={() => handlePress(routine)}
             onLongPress={() => longPressHelper(routine)}>
             <View>
               <Text style={styles.name}>{name}</Text>

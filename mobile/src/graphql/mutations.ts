@@ -2,6 +2,46 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const batchAdd = /* GraphQL */ `
+  mutation BatchAdd($exercises: [CreateRoutineExerciseInput]) {
+    batchAdd(exercises: $exercises) {
+      id
+      routineId
+      exerciseId
+      routine {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      exercise {
+        id
+        userId
+        routine {
+          nextToken
+        }
+        name
+        description
+        muscles
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createExercise = /* GraphQL */ `
   mutation CreateExercise(
     $input: CreateExerciseInput!
@@ -17,6 +57,7 @@ export const createExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -43,6 +84,7 @@ export const updateExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -69,6 +111,7 @@ export const deleteExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -97,6 +140,7 @@ export const createRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -139,6 +183,7 @@ export const updateRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -181,6 +226,7 @@ export const deleteRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -245,6 +291,7 @@ export const createRoutineExercise = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -287,6 +334,7 @@ export const updateRoutineExercise = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -329,6 +377,7 @@ export const deleteRoutineExercise = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

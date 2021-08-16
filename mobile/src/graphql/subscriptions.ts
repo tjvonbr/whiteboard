@@ -14,6 +14,7 @@ export const onCreateExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -37,6 +38,7 @@ export const onUpdateExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -60,6 +62,7 @@ export const onDeleteExercise = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -85,6 +88,7 @@ export const onCreateRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -124,6 +128,7 @@ export const onUpdateRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -163,6 +168,7 @@ export const onDeleteRoutine = /* GraphQL */ `
           exerciseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -189,8 +195,8 @@ export const onDeleteRoutine = /* GraphQL */ `
   }
 `;
 export const onCreateRoutineExercise = /* GraphQL */ `
-  subscription OnCreateRoutineExercise {
-    onCreateRoutineExercise {
+  subscription OnCreateRoutineExercise($owner: String!) {
+    onCreateRoutineExercise(owner: $owner) {
       id
       routineId
       exerciseId
@@ -224,12 +230,13 @@ export const onCreateRoutineExercise = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateRoutineExercise = /* GraphQL */ `
-  subscription OnUpdateRoutineExercise {
-    onUpdateRoutineExercise {
+  subscription OnUpdateRoutineExercise($owner: String!) {
+    onUpdateRoutineExercise(owner: $owner) {
       id
       routineId
       exerciseId
@@ -263,12 +270,13 @@ export const onUpdateRoutineExercise = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteRoutineExercise = /* GraphQL */ `
-  subscription OnDeleteRoutineExercise {
-    onDeleteRoutineExercise {
+  subscription OnDeleteRoutineExercise($owner: String!) {
+    onDeleteRoutineExercise(owner: $owner) {
       id
       routineId
       exerciseId
@@ -302,6 +310,7 @@ export const onDeleteRoutineExercise = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
