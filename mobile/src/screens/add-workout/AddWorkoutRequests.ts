@@ -1,12 +1,30 @@
 import { API } from "aws-amplify";
-import * as mutations from "../../graphql/mutations";
+import { createWorkout } from "../../graphql/mutations";
+import { listWorkouts } from "../../graphql/queries";
 
-const exerciseDetails = {
-  userId: 1,
-  name: "Push Press",
+export const fetchWorkouts = async (userId, routineId) => {
+  try {
+    const workouts = await API.graphql({
+      query: listWorkouts,
+      variables: { input: { userId, routineId } },
+    });
+
+    return workouts;
+  } catch (error) {
+    console.log("error fetching workouts: ", error.errors);
+  }
 };
 
-const newExercise = API.graphql({
-  query: mutations.createExercise,
-  variables: { input: exerciseDetails },
-});
+export const addWorkout = async workout => {
+  try {
+    const newWorkout = await API.graphql({
+      query: createWorkout,
+      variables: { input: workout },
+    });
+
+    console.log("new workout created: ", newWorkout);
+    return newWorkout;
+  } catch (error) {
+    console.log("error creating workout: ", error.errors);
+  }
+};

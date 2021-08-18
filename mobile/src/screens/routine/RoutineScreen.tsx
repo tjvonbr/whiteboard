@@ -3,7 +3,8 @@ import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import styles from "./RoutineStyles";
 
 const RoutineScreen = ({ navigation, route }) => {
-  const { name, createdAt, workoutType, scoringType } = route.params;
+  console.log(route.params);
+  const { id, name, createdAt, workoutType, scoringType } = route.params;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({

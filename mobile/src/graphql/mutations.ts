@@ -155,8 +155,8 @@ export const createRoutine = /* GraphQL */ `
           notes
           status
           score
-          completedAt
           createdAt
+          completedAt
           updatedAt
         }
         nextToken
@@ -198,8 +198,8 @@ export const updateRoutine = /* GraphQL */ `
           notes
           status
           score
-          completedAt
           createdAt
+          completedAt
           updatedAt
         }
         nextToken
@@ -241,8 +241,8 @@ export const deleteRoutine = /* GraphQL */ `
           notes
           status
           score
-          completedAt
           createdAt
+          completedAt
           updatedAt
         }
         nextToken
@@ -437,13 +437,29 @@ export const createWorkout = /* GraphQL */ `
     createWorkout(input: $input, condition: $condition) {
       id
       routineId
+      routine {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       userId
       name
       notes
       status
       score
-      completedAt
       createdAt
+      completedAt
       updatedAt
     }
   }
@@ -456,13 +472,29 @@ export const updateWorkout = /* GraphQL */ `
     updateWorkout(input: $input, condition: $condition) {
       id
       routineId
+      routine {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       userId
       name
       notes
       status
       score
-      completedAt
       createdAt
+      completedAt
       updatedAt
     }
   }
@@ -475,13 +507,29 @@ export const deleteWorkout = /* GraphQL */ `
     deleteWorkout(input: $input, condition: $condition) {
       id
       routineId
+      routine {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       userId
       name
       notes
       status
       score
-      completedAt
       createdAt
+      completedAt
       updatedAt
     }
   }

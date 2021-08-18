@@ -2,6 +2,38 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const listWorkoutsInDateRange = /* GraphQL */ `
+  query ListWorkoutsInDateRange($start: String!, $end: String) {
+    listWorkoutsInDateRange(start: $start, end: $end) {
+      id
+      routineId
+      routine {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      name
+      notes
+      status
+      score
+      createdAt
+      completedAt
+      updatedAt
+    }
+  }
+`;
 export const getExercise = /* GraphQL */ `
   query GetExercise($id: ID!) {
     getExercise(id: $id) {
@@ -78,8 +110,8 @@ export const getRoutine = /* GraphQL */ `
           notes
           status
           score
-          completedAt
           createdAt
+          completedAt
           updatedAt
         }
         nextToken
@@ -154,13 +186,29 @@ export const getWorkout = /* GraphQL */ `
     getWorkout(id: $id) {
       id
       routineId
+      routine {
+        id
+        userId
+        name
+        description
+        exercises {
+          nextToken
+        }
+        workoutType
+        scoringType
+        workouts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       userId
       name
       notes
       status
       score
-      completedAt
       createdAt
+      completedAt
       updatedAt
     }
   }
@@ -175,13 +223,23 @@ export const listWorkouts = /* GraphQL */ `
       items {
         id
         routineId
+        routine {
+          id
+          userId
+          name
+          description
+          workoutType
+          scoringType
+          createdAt
+          updatedAt
+        }
         userId
         name
         notes
         status
         score
-        completedAt
         createdAt
+        completedAt
         updatedAt
       }
       nextToken
@@ -217,6 +275,48 @@ export const searchRoutines = /* GraphQL */ `
           nextToken
         }
         createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+export const searchWorkouts = /* GraphQL */ `
+  query SearchWorkouts(
+    $filter: SearchableWorkoutFilterInput
+    $sort: SearchableWorkoutSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchWorkouts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        routineId
+        routine {
+          id
+          userId
+          name
+          description
+          workoutType
+          scoringType
+          createdAt
+          updatedAt
+        }
+        userId
+        name
+        notes
+        status
+        score
+        createdAt
+        completedAt
         updatedAt
       }
       nextToken

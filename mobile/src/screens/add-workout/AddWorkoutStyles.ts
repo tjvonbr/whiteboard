@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 15,
     borderColor: colors.inputBorderGray,
-    borderWidth: 2,
+    borderWidth: 1,
     borderRadius: 7,
   },
   inputTitle: {
