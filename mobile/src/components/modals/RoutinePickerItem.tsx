@@ -1,26 +1,14 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { format, parseISO } from "date-fns";
-import { colors } from "../../../styles/colors";
+import { colors } from "../../styles/colors";
 
-type RoutineListItemProps = {
-  item: any;
-  handlePress: () => void;
-  setSelectedRoutine?: (routine) => void;
-  showDelete?: () => void;
-};
-
-const RoutineListItem = ({
-  item,
-  handlePress,
-  setSelectedRoutine,
-  showDelete,
-}: RoutineListItemProps) => {
+const RoutinePickerItem = ({ item, handlePress, closeModal }) => {
   const [alpha, routines] = item;
 
-  const longPressHelper = routine => {
-    setSelectedRoutine(routine);
-    showDelete();
+  const selectRoutine = routine => {
+    handlePress(routine);
+    closeModal();
   };
 
   return (
@@ -36,8 +24,7 @@ const RoutineListItem = ({
         return (
           <TouchableOpacity
             style={styles.routineContainer}
-            onPress={handlePress}
-            onLongPress={() => longPressHelper(routine)}>
+            onPress={() => selectRoutine(routine)}>
             <View>
               <Text style={styles.name}>{name}</Text>
               <Text style={styles.muscles}>{date}</Text>
@@ -86,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RoutineListItem;
+export default RoutinePickerItem;

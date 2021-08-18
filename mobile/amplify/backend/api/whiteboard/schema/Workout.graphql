@@ -1,14 +1,21 @@
+type Query {
+  listWorkoutsInDateRange(start: String!, end: String): [Workout]
+}
+
 type Workout
   @model
   @key(name: "byRoutine", fields: ["routineId", "id"])
-  @key(name: "byUser", fields: ["userId"]) {
+  @key(name: "byUser", fields: ["userId"])
+  @searchable {
   id: ID!
   routineId: ID!
+  routine: Routine @connection(fields: ["routineId"])
   userId: ID!
   name: String!
   notes: String
   status: WorkoutStatus
   score: String
+  createdAt: String!
   completedAt: String
 }
 

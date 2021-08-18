@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AddWorkout from "../screens/add-workout/AddWorkout";
+import AddWorkoutScreen from "../screens/add-workout/AddWorkoutScreen";
 import DashboardScreen from "../screens/dashboard/DashboardScreen";
 import SubmitWorkoutScreen from "../screens/add-workout/SubmitWorkoutScreen";
 import WorkoutDetails from "../screens/add-workout/WorkoutDetails";
@@ -16,7 +16,7 @@ function DashboardStack() {
     <Stack.Navigator initialRouteName="Dashboard">
       <Stack.Screen
         name="AddWorkout"
-        component={AddWorkout}
+        component={AddWorkoutScreen}
         options={{ title: "Add Workout" }}
       />
       <Stack.Screen
