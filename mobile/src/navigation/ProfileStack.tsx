@@ -33,7 +33,15 @@ const ProfileStack = () => {
         component={AddExercisesToRoutineScreen}
         options={{ title: "Add Exercises", headerBackTitle: "Routine" }}
       />
-      <Stack.Screen name="Workouts" component={WorkoutsScreen} />
+      <Stack.Screen
+        name="Workouts"
+        component={WorkoutsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#F4F6F6",
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
