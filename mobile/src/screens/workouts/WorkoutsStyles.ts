@@ -5,7 +5,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.white,
+    backgroundColor: "#F4F6F6",
+  },
+  innerContainer: {
+    flex: 1,
+    width: "90%",
   },
 });
 

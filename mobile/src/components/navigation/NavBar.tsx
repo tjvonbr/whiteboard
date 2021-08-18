@@ -13,10 +13,12 @@ const NavBar = ({ leftHeader = null, title = null, rightHeader = null }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
+    height: 40,
+    borderWidth: 1,
+    borderColor: "black",
     width: "90%",
     flexDirection: "row",
-    marginTop: 10,
+    alignItems: "center",
   },
   leftBtnContainer: {
     height: "100%",

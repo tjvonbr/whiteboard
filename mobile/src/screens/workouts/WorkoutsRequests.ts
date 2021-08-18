@@ -8,8 +8,7 @@ export const fetchWorkouts = async userId => {
       variables: { input: userId },
     });
 
-    console.log(response.data.listWorkouts.items);
-    return response;
+    return response?.data?.listWorkouts?.items;
   } catch (error) {
     console.log("error fetching workouts: ", error.errors);
   }

@@ -42,8 +42,8 @@ const TodayWidget = ({ handlePress }: TodayWidgetProps) => {
           {todaysWorkout ? todaysWorkout.routine.name : null}
         </Text>
         <View style={styles.detailsContainer}>
-          <TodayWorkoutScore score={todaysWorkout.score} />
-          <TodayWorkoutTrend />
+          {/* <TodayWorkoutScore score={todaysWorkout.score} />
+          <TodayWorkoutTrend /> */}
         </View>
       </View>
     </TouchableOpacity>
