@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardStack from "./DashboardStack";
-import Calendar from "../screens/calendar/Calendar";
+import CalendarScreen from "../screens/calendar/CalendarScreen";
 import ProfileStack from "./ProfileStack";
 import Statistics from "../screens/statistics/Statistics";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -28,7 +28,7 @@ const AppNavigator = () => {
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}>
-      <Tab.Screen name="Calendar" component={Calendar} />
+      <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen name="Dashboard" component={DashboardStack} />
       <Tab.Screen name="Statistics" component={Statistics} />
       <Tab.Screen name="Profile" component={ProfileStack} />
