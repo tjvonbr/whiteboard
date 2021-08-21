@@ -3,23 +3,26 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { format, isSameDay, isSameMonth } from "date-fns";
 import styles from "../CalendarStyles";
 import { colors } from "../../../styles/colors";
-import { takeMonth } from "../CalendarHelpers";
 
-const CalendarDay = ({ day, selectDate, selectedDate }) => {
+const CalendarDay = ({ month, day, selectDate, selectedDate }) => {
   const dayColor = () => {
-    if (!isSameMonth(day, new Date())) {
-      return "gray";
+    let fontColor;
+
+    if (isSameMonth(day, month)) {
+      fontColor = colors.black;
     } else {
-      colors.black;
+      fontColor = "gray";
     }
 
     if (isSameDay(day, new Date()) && !isSameDay(day, selectedDate)) {
-      return colors.blue09;
+      fontColor = colors.blue09;
     }
 
     if (isSameDay(day, selectedDate)) {
-      return colors.white;
+      fontColor = colors.white;
     }
+
+    return fontColor;
   };
 
   const backgroundColor = () => {
@@ -34,7 +37,9 @@ const CalendarDay = ({ day, selectDate, selectedDate }) => {
       onPress={() => selectDate(day)}>
       <View
         style={[styles.selectedDay, { backgroundColor: backgroundColor() }]}>
-        <Text style={{ color: dayColor() }}>{format(day, "d")}</Text>
+        <Text style={{ fontWeight: "600", color: dayColor() }}>
+          {format(day, "d")}
+        </Text>
       </View>
     </TouchableOpacity>
   );
