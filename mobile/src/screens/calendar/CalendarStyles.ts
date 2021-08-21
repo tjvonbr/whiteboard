@@ -5,6 +5,11 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "whitesmoke",
+  },
+  selected: {
+    borderWidth: 1,
+    borderColor: "red",
   },
   monthNavigation: {
     marginTop: 20,
@@ -12,9 +17,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   month: {
-    marginHorizontal: 20,
-    fontWeight: "600",
-    fontSize: 21,
+    width: 150,
+    textAlign: "center",
+    fontWeight: "700",
+    fontSize: 24,
     color: colors.black,
   },
   calendarRow: {
@@ -30,13 +36,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dayOfWeek: {
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 14,
     color: colors.black,
   },
+  year: {
+    fontWeight: "600",
+    fontSize: 14,
+  },
   selectedDay: {
-    width: 27,
-    height: 27,
+    width: 35,
+    height: 35,
     backgroundColor: colors.white,
     borderRadius: 50,
     alignItems: "center",

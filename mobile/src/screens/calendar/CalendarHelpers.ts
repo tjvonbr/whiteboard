@@ -1,3 +1,4 @@
+import { QuickSelect } from "./CalendarScreen";
 import {
   startOfDay,
   startOfWeek,
@@ -45,14 +46,12 @@ const takeMonth = (start = new Date()) => {
   };
 };
 
-const addMonth = (start = new Date()) => {
-  let date = start;
+const iterateEnum = (enumerable: any) => {
+  let enumMembers = Object.keys(enumerable).map(key => enumerable[key]);
 
-  let nextMonth = addMonths(date, 1);
+  let enumValues: number[] = enumMembers.filter(v => typeof v === "string");
 
-  console.log(nextMonth);
-
-  return takeMonth(nextMonth)();
+  return enumValues;
 };
 
-export { takeWeek, takeMonth, addMonth };
+export { takeWeek, takeMonth, iterateEnum };
