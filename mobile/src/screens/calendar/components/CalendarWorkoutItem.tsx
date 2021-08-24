@@ -2,11 +2,13 @@ import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../../../styles/colors";
 
-const CalendarWorkoutItem = ({ workout }) => {
+const CalendarWorkoutItem = ({ workout, navigateTo }) => {
   const { name, routine } = workout;
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigateTo(workout)}>
       <View style={styles.innerContainer}>
         <View style={{ justifyContent: "space-between" }}>
           <Text style={styles.workout}>{name}</Text>

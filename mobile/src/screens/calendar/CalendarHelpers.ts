@@ -1,4 +1,4 @@
-import { QuickSelect } from "./CalendarScreen";
+import { Workout } from "../../API";
 import {
   startOfDay,
   startOfWeek,
@@ -6,7 +6,6 @@ import {
   endOfWeek,
   endOfMonth,
   addDays,
-  addMonths,
 } from "date-fns";
 
 const takeWeek = (start = new Date()) => {
