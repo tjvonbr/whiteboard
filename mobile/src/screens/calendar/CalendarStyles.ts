@@ -3,9 +3,22 @@ import { colors } from "../../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "whitesmoke",
+  },
+  exercisesContainer: {
+    flex: 1,
+    width: "90%",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  subheader: {
+    width: "100%",
+    fontWeight: "600",
+    fontSize: 21,
+    color: colors.black,
+    textAlign: "left",
   },
   selected: {
     borderWidth: 1,
@@ -51,6 +64,9 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
+  },
+  exercisesListContainer: {
+    width: "100%",
   },
 });
 
