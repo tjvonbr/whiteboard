@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DashboardStack from "./DashboardStack";
-import CalendarScreen from "../screens/calendar/CalendarScreen";
+import CalendarStack from "./CalendarStack";
 import ProfileStack from "./ProfileStack";
 import Statistics from "../screens/statistics/Statistics";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -11,6 +11,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Dashboard"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
@@ -28,7 +29,7 @@ const AppNavigator = () => {
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}>
-      <Tab.Screen name="Calendar" component={CalendarScreen} />
+      <Tab.Screen name="Calendar" component={CalendarStack} />
       <Tab.Screen name="Dashboard" component={DashboardStack} />
       <Tab.Screen name="Statistics" component={Statistics} />
       <Tab.Screen name="Profile" component={ProfileStack} />

@@ -8,6 +8,7 @@ import RoutineScreen from "../screens/routine/RoutineScreen";
 import AddRoutineScreen from "../screens/routines/AddRoutineScreen";
 import AddExercisesToRoutineScreen from "../screens/routines/AddExercisesToRoutineScreen";
 import WorkoutsScreen from "../screens/workouts/WorkoutsScreen";
+import WorkoutScreen from "../screens/workout/WorkoutScreen";
 
 const Stack = createStackNavigator();
 

@@ -9,8 +9,8 @@ import {
 import CalendarDay from "./components/CalendarDay";
 import CalendarWorkoutItem from "./components/CalendarWorkoutItem";
 import FullPageLoading from "../../components/misc/FullPageLoading";
-import WorkoutItem from "./../workouts/components/WorkoutItem";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { Workout } from "../../API";
 import { takeMonth } from "./CalendarHelpers";
 import { daysOfWeek } from "./calendar-data";
 import { format, addMonths, subMonths, startOfDay, endOfDay } from "date-fns";
@@ -20,6 +20,15 @@ import styles from "./CalendarStyles";
 import { colors } from "../../styles/colors";
 import getYear from "date-fns/getYear";
 import isSameDay from "date-fns/isSameDay";
+
+type State = {
+  month: Date;
+  selectedDate: Date;
+  beginningDate: Date;
+  endDate: Date;
+  workouts: [Workout];
+  isLoading: boolean;
+};
 
 export enum QuickSelect {
   TODAY = "Today",
@@ -55,7 +64,9 @@ const Calendar = ({ navigation }) => {
     fetchExercisesForTimePeriod();
   }, [selectedDate]);
 
-  const renderWorkout = ({ item }) => <CalendarWorkoutItem workout={item} />;
+  const renderWorkout = ({ item }) => (
+    <CalendarWorkoutItem workout={item} navigateTo={navigateTo} />
+  );
 
   const monthData = takeMonth(month)();
 
@@ -119,6 +130,17 @@ const Calendar = ({ navigation }) => {
     }
   }
 
+  function navigateTo(workout: Workout): void {
+    const { id, routine } = workout;
+
+    navigation.navigate("Workout", {
+      id: id,
+      name: routine.name,
+    });
+
+    return;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.monthNavigation}>
@@ -155,7 +177,7 @@ const Calendar = ({ navigation }) => {
         </View>
       ))}
       <View style={styles.exercisesContainer}>
-        <Text style={styles.subheader}>Exercises</Text>
+        <Text style={styles.subheader}>Workouts</Text>
         {isLoading ? (
           <FullPageLoading color={colors.black} size={"small"} />
         ) : workouts.length > 0 ? (

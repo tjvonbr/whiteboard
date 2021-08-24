@@ -37,6 +37,7 @@ const ListOfRoutines = ({
         data={Object.entries(routines)}
         renderItem={renderRoutine}
         keyExtractor={(_, i) => i.toString()}
+        showsVerticalScrollIndicator={false}
       />
       <View style={styles.alphaNavigator}>
         <FlatList

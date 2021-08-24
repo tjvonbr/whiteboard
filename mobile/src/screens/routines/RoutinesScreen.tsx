@@ -100,22 +100,12 @@ const RoutinesScreen = ({ navigation }) => {
       {isLoading ? (
         <FullPageLoading color={colors.black} size={"small"} />
       ) : routines.length > 0 ? (
-        <>
-          <View style={styles.searchContainer}>
-            <View style={styles.innerSearchContainer}>
-              <TextInput style={styles.search} placeholder="Search..." />
-              <View style={{ marginRight: 10 }}>
-                <Icon name="search" color="gray" size={20} />
-              </View>
-            </View>
-          </View>
-          <ListOfRoutines
-            routines={alphaMap}
-            showDelete={showDeleteModal}
-            setSelectedRoutine={setSelectedRoutine}
-            handlePress={navigateToRoutine}
-          />
-        </>
+        <ListOfRoutines
+          routines={alphaMap}
+          showDelete={showDeleteModal}
+          setSelectedRoutine={setSelectedRoutine}
+          handlePress={navigateToRoutine}
+        />
       ) : (
         <NoRoutines />
       )}
