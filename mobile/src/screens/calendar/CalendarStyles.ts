@@ -5,7 +5,17 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "whitesmoke",
+  },
+  exercisesContainer: {
+    width: "90%",
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: "black",
+  },
+  subheader: {
+    fontWeight: "600",
+    fontSize: 21,
+    color: colors.black,
   },
   selected: {
     borderWidth: 1,

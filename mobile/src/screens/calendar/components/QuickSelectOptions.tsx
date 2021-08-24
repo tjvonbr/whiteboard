@@ -4,18 +4,13 @@ import QuickSelectButton from "./QuickSelectButton";
 import { QuickSelect } from "../CalendarScreen";
 import { iterateEnum } from "../CalendarHelpers";
 
-const QuickSelectOptions = ({ selectedPeriod, changeSelectedPeriod }) => {
+const QuickSelectOptions = ({ selectedPeriod }) => {
   let timePeriods = iterateEnum(QuickSelect);
-  console.log(selectedPeriod);
 
   return (
     <View style={styles.quickSelectContainer}>
       {timePeriods.map(period => (
-        <QuickSelectButton
-          period={period}
-          selectedPeriod={selectedPeriod}
-          changeSelectedPeriod={changeSelectedPeriod}
-        />
+        <QuickSelectButton period={period} selectedPeriod={selectedPeriod} />
       ))}
     </View>
   );

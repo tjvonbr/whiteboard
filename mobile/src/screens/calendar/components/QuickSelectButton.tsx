@@ -2,11 +2,7 @@ import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { colors } from "../../../styles/colors";
 
-const QuickSelectButton = ({
-  period,
-  selectedPeriod,
-  changeSelectedPeriod,
-}) => {
+const QuickSelectButton = ({ period, selectedPeriod }) => {
   const isSelected = () => period == selectedPeriod;
 
   return (
@@ -15,7 +11,7 @@ const QuickSelectButton = ({
         styles.quickSelectButton,
         isSelected() ? styles.selectedBtn : null,
       ]}
-      onPress={() => changeSelectedPeriod(period)}>
+      onPress={() => console.log("Hello")}>
       <Text
         style={[
           styles.quickSelectText,
