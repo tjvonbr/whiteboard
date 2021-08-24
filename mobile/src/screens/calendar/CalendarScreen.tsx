@@ -1,11 +1,19 @@
 import * as React from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import CalendarDay from "./components/CalendarDay";
-import QuickSelectOptions from "./components/QuickSelectOptions";
+import CalendarWorkoutItem from "./components/CalendarWorkoutItem";
+import FullPageLoading from "../../components/misc/FullPageLoading";
+import WorkoutItem from "./../workouts/components/WorkoutItem";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { takeMonth, takeWeek } from "./CalendarHelpers";
+import { takeMonth } from "./CalendarHelpers";
 import { daysOfWeek } from "./calendar-data";
-import { format, addMonths, subMonths } from "date-fns";
+import { format, addMonths, subMonths, startOfDay, endOfDay } from "date-fns";
 import { useAuth } from "../../context/auth";
 import { fetchWorkoutsFor } from "./CalendarRequests";
 import styles from "./CalendarStyles";
@@ -27,22 +35,27 @@ const Calendar = ({ navigation }) => {
   const [beginningDate, setBeginningDate] = React.useState(null);
   const [endDate, setEndDate] = React.useState(null);
   const [workouts, setWorkouts] = React.useState([]);
+  const [isLoading, setisLoading] = React.useState(false);
 
   const {
     user: { userId },
   } = useAuth();
 
   React.useEffect(() => {
-    const timePeriods = [selectedDate, selectedDate];
+    const timePeriods = [startOfDay(selectedDate), endOfDay(selectedDate)];
 
     async function fetchExercisesForTimePeriod() {
+      setisLoading(true);
       const response = await fetchWorkoutsFor(userId, timePeriods);
 
-      console.log(response);
+      setWorkouts(response);
+      setisLoading(false);
     }
 
     fetchExercisesForTimePeriod();
-  }, [selectedPeriod]);
+  }, [selectedDate]);
+
+  const renderWorkout = ({ item }) => <CalendarWorkoutItem workout={item} />;
 
   const monthData = takeMonth(month)();
 
@@ -143,6 +156,29 @@ const Calendar = ({ navigation }) => {
       ))}
       <View style={styles.exercisesContainer}>
         <Text style={styles.subheader}>Exercises</Text>
+        {isLoading ? (
+          <FullPageLoading color={colors.black} size={"small"} />
+        ) : workouts.length > 0 ? (
+          <FlatList
+            style={styles.exercisesListContainer}
+            data={workouts}
+            renderItem={renderWorkout}
+            keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              width: "50%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+            <Text style={{ textAlign: "center" }}>
+              You haven't logged any workouts for this date.
+            </Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
