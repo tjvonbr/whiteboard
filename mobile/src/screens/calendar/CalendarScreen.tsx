@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -21,15 +21,6 @@ import { colors } from "../../styles/colors";
 import getYear from "date-fns/getYear";
 import isSameDay from "date-fns/isSameDay";
 
-type State = {
-  month: Date;
-  selectedDate: Date;
-  beginningDate: Date;
-  endDate: Date;
-  workouts: [Workout];
-  isLoading: boolean;
-};
-
 export enum QuickSelect {
   TODAY = "Today",
   WEEK = "Week",
@@ -38,13 +29,13 @@ export enum QuickSelect {
 }
 
 const Calendar = ({ navigation }) => {
-  const [month, setMonth] = React.useState(new Date());
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-  const [selectedPeriod, setSelectedPeriod] = React.useState(QuickSelect.TODAY);
-  const [beginningDate, setBeginningDate] = React.useState(null);
-  const [endDate, setEndDate] = React.useState(null);
-  const [workouts, setWorkouts] = React.useState([]);
-  const [isLoading, setisLoading] = React.useState(false);
+  const [month, setMonth] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [period, setPeriod] = useState<QuickSelect>(QuickSelect.TODAY);
+  const [beginningDate, setBeginningDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   const {
     user: { userId },
@@ -133,7 +124,7 @@ const Calendar = ({ navigation }) => {
   function navigateTo(workout: Workout): void {
     const { id, routine } = workout;
 
-    navigation.navigate("Workout", {
+    navigation.navigate("CalendarWorkout", {
       id: id,
       name: routine.name,
     });
@@ -177,7 +168,22 @@ const Calendar = ({ navigation }) => {
         </View>
       ))}
       <View style={styles.exercisesContainer}>
-        <Text style={styles.subheader}>Workouts</Text>
+        <View
+          style={{
+            width: "90%",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+          <Text style={styles.subheader}>Workouts</Text>
+          <View>
+            <TouchableOpacity
+              style={styles.addWorkoutButton}
+              onPress={() => navigation.navigate("CalendarAddWorkout")}>
+              <Text style={styles.addWorkoutText}>Add Workout</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         {isLoading ? (
           <FullPageLoading color={colors.black} size={"small"} />
         ) : workouts.length > 0 ? (

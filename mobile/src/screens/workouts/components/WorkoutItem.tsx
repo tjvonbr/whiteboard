@@ -3,18 +3,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { format, parseISO } from "date-fns";
 import { colors } from "../../../styles/colors";
 
-const WorkoutItem = ({ workout }) => {
+const WorkoutItem = ({ workout, navigateTo }) => {
   const { createdAt, name, routine } = workout;
-  const dateCreated = format(parseISO(createdAt), "MM/dd/yyyy");
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigateTo(workout)}>
       <View style={styles.innerContainer}>
         <View style={{ justifyContent: "space-between" }}>
           <Text style={styles.workout}>{name}</Text>
           <Text style={styles.routine}>{routine.name}</Text>
         </View>
-        <Text style={styles.routine}>{dateCreated}</Text>
+        <Text style={styles.routine}>
+          {format(parseISO(createdAt), "MM/dd/yyyy")}
+        </Text>
       </View>
     </TouchableOpacity>
   );

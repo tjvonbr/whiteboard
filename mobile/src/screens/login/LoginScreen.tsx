@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -8,17 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import CustomInput from "../../components/CustomInput";
 import ExitButton from "../../components/buttons/ExitButton";
 import styles from "./styles/LoginStyles";
 import { useAuth } from "../../context/auth";
 
-const Login = ({ navigation }) => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const { signIn, isLoading } = useAuth();
-
-  const toLanding = (): void => navigation.navigate("Landing");
 
   const handleEmail = (email: string): void => setEmail(email);
   const handlePassword = (password: string): void => setPassword(password);
@@ -27,14 +26,14 @@ const Login = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.keyboardView}>
         <View style={styles.customHeader}>
-          <ExitButton handlePress={toLanding} />
+          <ExitButton handlePress={() => navigation.navigate("Landing")} />
         </View>
         <Text style={styles.title}>Welcome back!</Text>
         <Text style={styles.subtitle}>
           Sign in to record your last workout or check your progress!
         </Text>
         <Text style={styles.inputTitle}>Email</Text>
-        <TextInput
+        <CustomInput
           style={styles.registerInput}
           value={email}
           onChangeText={handleEmail}
@@ -42,7 +41,7 @@ const Login = ({ navigation }) => {
           autoCapitalize="none"
         />
         <Text style={styles.inputTitle}>Password</Text>
-        <TextInput
+        <CustomInput
           style={styles.registerInput}
           value={password}
           onChangeText={handlePassword}
@@ -65,4 +64,4 @@ const Login = ({ navigation }) => {
   );
 };
 
-export default Login;
+export default LoginScreen;

@@ -1,10 +1,9 @@
 import * as React from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
-import BackButton from "../../components/buttons/BackButton";
 import FullPageLoading from "../../components/misc/FullPageLoading";
-import NavBar from "../../components/navigation/NavBar";
 import SortButton from "./components/SortButton";
 import WorkoutItem from "./components/WorkoutItem";
+import { Workout } from "../../API";
 import { fetchWorkouts } from "./WorkoutsRequests";
 import { useAuth } from "../../context/auth";
 import styles from "./WorkoutsStyles";
@@ -20,7 +19,7 @@ const sortTypeOptions = [
   { value: SortType.BY_DATE, label: "Date" },
 ];
 
-const WorkoutsScreen = () => {
+const WorkoutsScreen = ({ navigation }) => {
   const [workouts, setWorkouts] = React.useState([]);
   const [sortType, setSortType] = React.useState(SortType.BY_DATE);
   const [isDropdownVisible, setIsDropdownVisible] = React.useState(false);
@@ -50,7 +49,9 @@ const WorkoutsScreen = () => {
     return dateSort;
   };
 
-  const renderWorkout = ({ item }) => <WorkoutItem workout={item} />;
+  const renderWorkout = ({ item }) => (
+    <WorkoutItem workout={item} navigateTo={navigateTo} />
+  );
 
   React.useEffect(() => {
     const listWorkouts = async () => {
@@ -79,6 +80,21 @@ const WorkoutsScreen = () => {
         return;
     }
   }, [sortType]);
+
+  function navigateTo(workout: Workout) {
+    const { id, routine, score } = workout;
+
+    navigation.navigate("Workout", {
+      id: id,
+      routineName: routine.name,
+      routineCreatedAt: routine.createdAt,
+      routineWorkoutType: routine.workoutType,
+      routineScoringType: routine.scoringType,
+      score: score,
+    });
+
+    return;
+  }
 
   return (
     <SafeAreaView style={styles.container}>

@@ -43,6 +43,7 @@ const ProfileStack = () => {
           },
         }}
       />
+      <Stack.Screen name="Workout" component={WorkoutScreen} />
     </Stack.Navigator>
   );
 };
