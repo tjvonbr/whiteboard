@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   subheader: {
-    width: "100%",
     fontWeight: "600",
     fontSize: 21,
     color: colors.black,
@@ -67,6 +66,21 @@ const styles = StyleSheet.create({
   },
   exercisesListContainer: {
     width: "100%",
+    alignItems: "center",
+  },
+  addWorkoutButton: {
+    height: 40,
+    width: 125,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    backgroundColor: "#e6e6ff",
+  },
+  addWorkoutText: {
+    fontWeight: "600",
+    fontSize: 15,
+    color: "blue",
+    padding: 10,
   },
 });
 

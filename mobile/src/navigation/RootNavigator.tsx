@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./AppNavigator";
 import ConfirmRegistration from "../screens/register/ConfirmRegistration";
 import Landing from "../screens/landing/Landing";
-import Login from "../screens/login/Login";
+import LoginScreen from "../screens/login/LoginScreen";
 import Register from "../screens/register/Register";
 import Splash from "../screens/splash/Splash";
 import { useAuth } from "../context/auth";
@@ -31,7 +31,7 @@ const RootNavigator = () => {
         ) : (
           <>
             <Stack.Screen name="Landing" component={Landing} />
-            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Confirm" component={ConfirmRegistration} />
           </>

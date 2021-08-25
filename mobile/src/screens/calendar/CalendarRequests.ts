@@ -15,7 +15,6 @@ export async function fetchWorkoutsFor(userId, timePeriod) {
       variables: { filter: filter },
     });
 
-    console.log("WHAT THE FUCK: ", response?.data?.listWorkouts?.items);
     return response?.data?.listWorkouts?.items;
   } catch (error) {
     console.log("error fetching workouts: ", error.errors);

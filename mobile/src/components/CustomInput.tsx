@@ -1,17 +1,6 @@
 import * as React from "react";
-import { StyleSheet, TextInput } from "react-native";
-import { KeyboardTypeOptions, ReturnKeyTypeOptions } from "react-native";
+import { StyleSheet, TextInput, TextInputProps } from "react-native";
 import { colors } from "../styles/colors";
-
-type CustomInputProps = {
-  style: any;
-  value: any;
-  onChangeText: (text: string) => void;
-  placeholder?: string;
-  multiline?: boolean;
-  keyboardType?: KeyboardTypeOptions;
-  returnKeyType?: ReturnKeyTypeOptions;
-};
 
 const CustomInput = ({
   style,
@@ -21,7 +10,9 @@ const CustomInput = ({
   multiline,
   keyboardType,
   returnKeyType,
-}: CustomInputProps) => {
+  autoCapitalize,
+  secureTextEntry,
+}: TextInputProps) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -33,6 +24,8 @@ const CustomInput = ({
       multiline={multiline}
       keyboardType={keyboardType}
       returnKeyType={returnKeyType}
+      autoCapitalize={autoCapitalize}
+      secureTextEntry={secureTextEntry}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     />
