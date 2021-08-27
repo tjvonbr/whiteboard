@@ -33,7 +33,16 @@ const CustomInput = ({
 };
 
 const styles = StyleSheet.create({
-  focusedInput: { borderColor: colors.blue09 },
+  focusedInput: {
+    borderColor: "#4d4dff",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowColor: "#4d4dff",
+    shadowRadius: 5,
+    shadowOpacity: 0.4,
+  },
   unfocusedInput: { borderColor: colors.inputBorderGray },
 });
 

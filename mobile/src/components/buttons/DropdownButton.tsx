@@ -16,10 +16,11 @@ const DropdownButton = ({ text, handlePress }) => {
 
 const styles = StyleSheet.create({
   btnContainer: {
-    height: 44,
+    height: 50,
     width: "100%",
     borderWidth: 0.5,
     borderColor: colors.inputBorderGray,
+    backgroundColor: colors.white,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",

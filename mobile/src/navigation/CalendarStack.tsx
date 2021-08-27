@@ -17,7 +17,7 @@ const CalendarStack = () => {
       <Stack.Screen
         name="CalendarAddWorkout"
         component={AddWorkoutScreen}
-        options={{ headerTitle: "Add Workout" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="CalendarWorkout" component={WorkoutScreen} />
     </Stack.Navigator>

@@ -1,24 +1,29 @@
 import * as React from "react";
 import { SafeAreaView, Text, View } from "react-native";
+import BackButton from "../../components/buttons/BackButton";
 import CustomButton from "../../components/buttons/CustomButton";
 import CustomInput from "../../components/CustomInput";
+import NavigationBar from "../../components/navigation/NavigationBar";
 import RoutinePicker from "../../components/modals/RoutinePicker";
 import { addWorkout } from "../add-workout/AddWorkoutRequests";
 import { useAuth } from "../../context/auth";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import styles from "./AddWorkoutStyles";
 import { colors } from "../../styles/colors";
 import DropdownButton from "../../components/buttons/DropdownButton";
 
-const Dashboard = ({ navigation }) => {
-  const [name, setName] = React.useState(
-    "New Workout " + format(new Date(), "M/d/y"),
-  );
-  const [notes, setNotes] = React.useState(null);
+const AddWorkoutScreen = ({ navigation, route }) => {
   const [routine, setRoutine] = React.useState(null);
+  const [notes, setNotes] = React.useState(null);
   const [score, setScore] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
+
+  let date = null;
+
+  if (route.params) {
+    date = format(parseISO(route.params.date), "");
+  }
 
   const {
     user: { userId },
@@ -37,35 +42,45 @@ const Dashboard = ({ navigation }) => {
       score,
     };
 
+    setIsLoading(true);
+
     const newExercise = await addWorkout(workoutDetails);
 
     if (newExercise) {
       navigation.navigate("Dashboard");
+      setIsLoading(false);
     }
   };
 
-  // Handle user input
-  const handleName = (name: string) => setName(name);
   const handleDescription = (text: string) => setNotes(text);
 
   return (
     <SafeAreaView style={styles.container}>
+      <NavigationBar leftHeader={<BackButton navigation={navigation} />} />
       <View style={styles.innerContainer}>
-        <CustomInput
-          style={styles.title}
-          value={name}
-          onChangeText={handleName}
-        />
+        {date ? (
+          <Text style={styles.header}>{`Add Workout for ${format(
+            parseISO(date),
+            "cccc, LLLL dd, yyyy",
+          )}`}</Text>
+        ) : (
+          <Text style={styles.header}>Add Workout</Text>
+        )}
+        <Text style={styles.subheader}>
+          Select a workout template and add your score! Feel free to leave a
+          note too.
+        </Text>
         <View style={styles.section}>
+          <Text style={styles.subtitle}>Workout</Text>
           <DropdownButton
-            text={routine ? `Routine: ${routine.name}` : "Select a routine"}
+            text={routine ? `${routine.name}` : "Select a workout"}
             handlePress={() => setIsVisible(true)}
           />
         </View>
         <View style={styles.section}>
           <Text style={styles.subtitle}>Notes</Text>
           <CustomInput
-            style={styles.description}
+            style={styles.notes}
             value={notes}
             onChangeText={handleDescription}
             placeholder="Enter some notes (optional)"
@@ -83,7 +98,7 @@ const Dashboard = ({ navigation }) => {
         </View>
         <View style={styles.btnContainer}>
           <CustomButton
-            backgroundColor={colors.blue09}
+            backgroundColor={"#4d4dff"}
             btnText={"Create workout"}
             color={colors.white}
             handlePress={createWorkout}
@@ -102,4 +117,4 @@ const Dashboard = ({ navigation }) => {
   );
 };
 
-export default Dashboard;
+export default AddWorkoutScreen;
