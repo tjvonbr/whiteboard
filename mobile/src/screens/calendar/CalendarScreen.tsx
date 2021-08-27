@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import CalendarDay from "./components/CalendarDay";
 import CalendarWorkoutItem from "./components/CalendarWorkoutItem";
+import ColoredButton from "../../components/buttons/ColoredButton";
 import FullPageLoading from "../../components/misc/FullPageLoading";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Workout } from "../../API";
@@ -177,11 +178,16 @@ const Calendar = ({ navigation }) => {
           }}>
           <Text style={styles.subheader}>Workouts</Text>
           <View>
-            <TouchableOpacity
-              style={styles.addWorkoutButton}
-              onPress={() => navigation.navigate("CalendarAddWorkout")}>
-              <Text style={styles.addWorkoutText}>Add Workout</Text>
-            </TouchableOpacity>
+            <ColoredButton
+              buttonText={"Add Workout"}
+              handlePress={() =>
+                navigation.navigate("CalendarAddWorkout", {
+                  date: selectedDate,
+                })
+              }
+              backgroundColor={"#e6e6ff"}
+              color={"blue"}
+            />
           </View>
         </View>
         {isLoading ? (

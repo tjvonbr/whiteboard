@@ -10,44 +10,34 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     width: "90%",
+    marginTop: 15,
   },
-  customHeader: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
-  contentContainer: {
-    flex: 3,
-    width: "100%",
-    alignItems: "flex-start",
-  },
-  addExerciseContainer: {
-    flex: 1,
-  },
-  title: {
-    marginVertical: 20,
-    textAlign: "left",
-    borderColor: "black",
+  header: {
     fontWeight: "600",
-    fontSize: 24,
+    fontSize: 21,
+    color: "black",
+  },
+  subheader: {
+    marginTop: 10,
+    marginBottom: 40,
+    color: colors.black,
   },
   section: {
     marginBottom: 20,
   },
   subtitle: {
     color: colors.black,
-    fontWeight: "500",
-    fontSize: 18,
-    marginLeft: 10,
+    fontSize: 15,
     marginBottom: 5,
   },
-  description: {
+  notes: {
     height: 100,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: colors.inputBorderGray,
-    padding: 7,
+    paddingTop: 7,
+    paddingLeft: 7,
+    backgroundColor: colors.white,
     color: colors.black,
   },
   timeLimitInput: {
@@ -92,8 +82,10 @@ const styles = StyleSheet.create({
   },
   registerInput: {
     width: "100%",
+    height: 50,
     marginBottom: 20,
     padding: 10,
+    backgroundColor: colors.white,
     color: colors.black,
     fontSize: 15,
     borderColor: colors.inputBorderGray,
