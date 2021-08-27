@@ -7,7 +7,6 @@ import NavigationBar from "../../components/navigation/NavigationBar";
 import RoutinePicker from "../../components/modals/RoutinePicker";
 import { addWorkout } from "../add-workout/AddWorkoutRequests";
 import { useAuth } from "../../context/auth";
-import { format, parseISO } from "date-fns";
 import styles from "./AddWorkoutStyles";
 import { colors } from "../../styles/colors";
 import DropdownButton from "../../components/buttons/DropdownButton";
@@ -18,12 +17,6 @@ const AddWorkoutScreen = ({ navigation, route }) => {
   const [score, setScore] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
-
-  let date = null;
-
-  if (route.params) {
-    date = format(parseISO(route.params.date), "");
-  }
 
   const {
     user: { userId },
@@ -58,11 +51,11 @@ const AddWorkoutScreen = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       <NavigationBar leftHeader={<BackButton navigation={navigation} />} />
       <View style={styles.innerContainer}>
-        {date ? (
-          <Text style={styles.header}>{`Add Workout for ${format(
-            parseISO(date),
-            "cccc, LLLL dd, yyyy",
-          )}`}</Text>
+        {route.params.date ? (
+          <Text
+            style={
+              styles.header
+            }>{`Add Workout for ${route.params.date}`}</Text>
         ) : (
           <Text style={styles.header}>Add Workout</Text>
         )}

@@ -34,12 +34,12 @@ const CustomInput = ({
 
 const styles = StyleSheet.create({
   focusedInput: {
-    borderColor: "#4d4dff",
+    borderColor: colors.primaryPurple,
     shadowOffset: {
       width: 1,
       height: 1,
     },
-    shadowColor: "#4d4dff",
+    shadowColor: colors.purpleShadow,
     shadowRadius: 5,
     shadowOpacity: 0.4,
   },
