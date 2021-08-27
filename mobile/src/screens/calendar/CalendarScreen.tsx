@@ -14,7 +14,14 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { Workout } from "../../API";
 import { takeMonth } from "./CalendarHelpers";
 import { daysOfWeek } from "./calendar-data";
-import { format, addMonths, subMonths, startOfDay, endOfDay } from "date-fns";
+import {
+  format,
+  addMonths,
+  subMonths,
+  startOfDay,
+  endOfDay,
+  parseISO,
+} from "date-fns";
 import { useAuth } from "../../context/auth";
 import { fetchWorkoutsFor } from "./CalendarRequests";
 import styles from "./CalendarStyles";
@@ -182,7 +189,7 @@ const Calendar = ({ navigation }) => {
               buttonText={"Add Workout"}
               handlePress={() =>
                 navigation.navigate("CalendarAddWorkout", {
-                  date: selectedDate,
+                  date: format(selectedDate, "LLLL dd, yyyy"),
                 })
               }
               backgroundColor={"#e6e6ff"}

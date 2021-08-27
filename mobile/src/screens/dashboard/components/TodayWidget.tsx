@@ -12,7 +12,6 @@ type TodayWidgetProps = {
 
 const TodayWidget = ({ handlePress }: TodayWidgetProps) => {
   const [todaysWorkout, setTodaysWorkout] = React.useState(null);
-  console.log(todaysWorkout);
 
   const today = format(new Date(), "cccc, LLLL dd, yyyy");
 
