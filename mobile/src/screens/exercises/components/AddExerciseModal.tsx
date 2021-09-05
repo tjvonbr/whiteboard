@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -13,68 +13,79 @@ import Modal from "react-native-modal";
 import { colors } from "../../../styles/colors";
 
 const AddExerciseModal = ({ closeModal, addExercise, isVisible }) => {
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState(null);
+  const [name, setName] = React.useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
   return (
-    <Modal
-      style={{ margin: 0 }}
-      isVisible={isVisible}
-      swipeDirection="down"
-      onSwipeComplete={closeModal}>
-      <SafeAreaView style={styles.modalView}>
-        <View style={styles.modalHandle} />
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.contentContainer}>
-          <View>
-            <Text style={styles.headerTitle}>Add Exercise</Text>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputTitle}>Exercise name</Text>
-              <CustomInput
-                value={name}
-                onChangeText={name => setName(name)}
-                style={styles.input}
-                returnKeyType="done"
-              />
-              <Text style={styles.inputTitle}>Exercise description</Text>
-              <CustomInput
-                value={description}
-                onChangeText={text => setDescription(text)}
-                placeholder={"Enter a description (optional)"}
-                style={[styles.input, { height: 100, paddingTop: 10 }]}
-                multiline={true}
-                returnKeyType="done"
+    <SafeAreaView>
+      <Modal
+        style={styles.modal}
+        isVisible={isVisible}
+        swipeDirection="down"
+        onSwipeComplete={closeModal}
+        useNativeDriver={true}>
+        <View style={styles.modalView}>
+          <View style={styles.modalHandle} />
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.contentContainer}>
+            <View>
+              <Text style={styles.header}>Add Exercise</Text>
+              <Text style={styles.subheader}>
+                Add a new exercise to include in your workouts and track your
+                progress over time.
+              </Text>
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputTitle}>Exercise name</Text>
+                <CustomInput
+                  value={name}
+                  onChangeText={name => setName(name)}
+                  style={styles.input}
+                  returnKeyType="done"
+                />
+                <Text style={styles.inputTitle}>Exercise description</Text>
+                <CustomInput
+                  value={description}
+                  onChangeText={text => setDescription(text)}
+                  placeholder={"Enter a description (optional)"}
+                  style={[styles.input, { height: 100, paddingTop: 10 }]}
+                  multiline={true}
+                  returnKeyType="done"
+                />
+              </View>
+            </View>
+            <View style={styles.btnContainer}>
+              <CustomButton
+                backgroundColor={colors.primaryPurple}
+                btnText={"Done"}
+                color={colors.white}
+                handlePress={() => addExercise(name, description)}
+                width={"100%"}
               />
             </View>
-          </View>
-          <CustomButton
-            backgroundColor={colors.blue09}
-            btnText={"Done"}
-            color={colors.white}
-            handlePress={() => addExercise(name, description)}
-            width={"100%"}
-          />
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </Modal>
+          </KeyboardAvoidingView>
+        </View>
+      </Modal>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  modal: {
+    margin: 0,
+    justifyContent: "flex-end",
+  },
   modalView: {
-    flex: 0.95,
+    flex: 0.93,
     backgroundColor: colors.white,
     alignItems: "center",
-    justifyContent: "center",
-    top: 20,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   contentContainer: {
-    flex: 0.9,
+    flex: 1,
     width: "90%",
-    justifyContent: "space-between",
+    marginTop: 40,
   },
   modalHandle: {
     width: 50,
@@ -89,26 +100,39 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inputTitle: {
-    color: "#4F4F4F",
-    fontWeight: "600",
+    color: colors.black,
+    fontSize: 15,
     marginBottom: 5,
-    paddingLeft: 5,
   },
   input: {
     width: "100%",
+    height: 50,
     marginBottom: 20,
     padding: 10,
+    backgroundColor: colors.white,
     color: colors.black,
     fontSize: 15,
     borderColor: colors.inputBorderGray,
     borderWidth: 1,
     borderRadius: 7,
   },
-  headerTitle: {
-    fontSize: 21,
+  header: {
     fontWeight: "600",
+    fontSize: 21,
     color: colors.black,
-    marginBottom: 20,
+  },
+  subheader: {
+    marginTop: 10,
+    marginBottom: 40,
+    fontSize: 14,
+    color: colors.black,
+  },
+  btnContainer: {
+    width: "100%",
+    position: "absolute",
+    bottom: 40,
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
   },
 });
 

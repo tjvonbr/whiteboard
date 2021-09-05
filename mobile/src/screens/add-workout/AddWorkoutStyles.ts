@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: "600",
     fontSize: 21,
-    color: "black",
+    color: colors.black,
   },
   subheader: {
     marginTop: 10,

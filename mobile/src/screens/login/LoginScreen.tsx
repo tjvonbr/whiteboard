@@ -4,14 +4,15 @@ import {
   KeyboardAvoidingView,
   SafeAreaView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import CustomButton from "../../components/buttons/CustomButton";
 import CustomInput from "../../components/CustomInput";
 import ExitButton from "../../components/buttons/ExitButton";
 import styles from "./styles/LoginStyles";
 import { useAuth } from "../../context/auth";
+import { colors } from "../../styles/colors";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState<string>("");
@@ -49,15 +50,14 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry={true}
         />
         <View style={styles.btnContainer}>
-          <TouchableOpacity
-            style={[styles.btnPrimary]}
-            onPress={() => signIn(email, password)}>
-            {isLoading ? (
-              <ActivityIndicator color="white" size="small" />
-            ) : (
-              <Text style={styles.btnTextPrimary}>Login</Text>
-            )}
-          </TouchableOpacity>
+          <CustomButton
+            backgroundColor={colors.primaryPurple}
+            btnText={"Login"}
+            color={colors.white}
+            handlePress={() => signIn(email, password)}
+            width={"100%"}
+            isLoading={isLoading}
+          />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

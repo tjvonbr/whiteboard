@@ -84,7 +84,7 @@ const RoutinePicker = ({ isVisible, closeModal, selected, selectRoutine }) => {
       isVisible={isVisible}
       swipeDirection="down"
       onSwipeComplete={closeModal}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.modalView}>
         {isLoading ? (
           <FullPageLoading color={colors.black} size={"small"} />
         ) : routines.length > 0 ? (
@@ -109,7 +109,7 @@ const RoutinePicker = ({ isVisible, closeModal, selected, selectRoutine }) => {
         ) : (
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>You haven't created any exercises yet!</Text>
+            <Text>You haven't created any routines yet!</Text>
           </View>
         )}
       </SafeAreaView>
@@ -118,10 +118,12 @@ const RoutinePicker = ({ isVisible, closeModal, selected, selectRoutine }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 0.9,
+  modalView: {
+    flex: 0.8,
     backgroundColor: colors.white,
     alignItems: "center",
+    justifyContent: "center",
+    top: 100,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
