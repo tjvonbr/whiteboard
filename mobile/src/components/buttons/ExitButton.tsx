@@ -18,8 +18,6 @@ const ExitButton = ({ handlePress }: ExitButtonProps) => {
 const styles = StyleSheet.create({
   button: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: "black",
     justifyContent: "center",
     alignItems: "center",
   },
