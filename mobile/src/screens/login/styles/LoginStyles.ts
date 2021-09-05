@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 15,
   },
+  inputContainer: {
+    marginBottom: 20,
+  },
   btnContainer: {
     flex: 1,
     width: "100%",
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
   },
   registerInput: {
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 3,
     padding: 10,
     color: colors.black,
     backgroundColor: colors.white,
@@ -86,6 +89,10 @@ const styles = StyleSheet.create({
     color: "#4F4F4F",
     marginBottom: 3,
     paddingLeft: 5,
+  },
+  error: {
+    fontWeight: "500",
+    color: "red",
   },
 });
 

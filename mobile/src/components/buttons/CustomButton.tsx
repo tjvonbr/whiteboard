@@ -15,6 +15,7 @@ type CustomButtonProps = {
   width: string | number;
   isLoading?: boolean;
   loadingColor?: string;
+  isDisabled?: boolean;
 };
 
 const CustomButton = ({
@@ -25,10 +26,12 @@ const CustomButton = ({
   width,
   isLoading,
   loadingColor = colors.white,
+  isDisabled,
 }: CustomButtonProps) => {
   return (
     <TouchableOpacity
       style={[styles.formBtn, { backgroundColor, width }]}
+      disabled={isDisabled}
       onPress={handlePress}>
       {isLoading ? (
         <ActivityIndicator color={loadingColor} size={25} />
