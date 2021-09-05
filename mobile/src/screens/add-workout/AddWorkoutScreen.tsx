@@ -1,5 +1,7 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, Text, View } from "react-native";
+import AddNotesModal from "../../components/modals/AddNotesModal";
+import AddNotesModalButton from "../../components/modals/AddNotesModalButton";
 import BackButton from "../../components/buttons/BackButton";
 import CustomButton from "../../components/buttons/CustomButton";
 import CustomInput from "../../components/CustomInput";
@@ -12,11 +14,12 @@ import { colors } from "../../styles/colors";
 import DropdownButton from "../../components/buttons/DropdownButton";
 
 const AddWorkoutScreen = ({ navigation, route }) => {
-  const [routine, setRoutine] = React.useState(null);
-  const [notes, setNotes] = React.useState(null);
-  const [score, setScore] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [routine, setRoutine] = useState(null);
+  const [notes, setNotes] = useState(null);
+  const [score, setScore] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAddNotesVisible, setIsAddNotesVisible] = useState(false);
+  const [isPickerVisible, setIsPickerVisible] = useState(false);
 
   const {
     user: { userId },
@@ -67,17 +70,15 @@ const AddWorkoutScreen = ({ navigation, route }) => {
           <Text style={styles.subtitle}>Workout</Text>
           <DropdownButton
             text={routine ? `${routine.name}` : "Select a workout"}
-            handlePress={() => setIsVisible(true)}
+            handlePress={() => setIsPickerVisible(true)}
           />
         </View>
         <View style={styles.section}>
           <Text style={styles.subtitle}>Notes</Text>
-          <CustomInput
-            style={styles.notes}
-            value={notes}
-            onChangeText={handleDescription}
-            placeholder="Enter some notes (optional)"
-            multiline={true}
+          <AddNotesModalButton
+            buttonStyles={styles.registerInput}
+            text={notes}
+            showModal={() => setIsAddNotesVisible(true)}
           />
         </View>
         <View style={styles.section}>
@@ -91,7 +92,7 @@ const AddWorkoutScreen = ({ navigation, route }) => {
         </View>
         <View style={styles.btnContainer}>
           <CustomButton
-            backgroundColor={"#4d4dff"}
+            backgroundColor={colors.primaryPurple}
             btnText={"Create workout"}
             color={colors.white}
             handlePress={createWorkout}
@@ -101,10 +102,14 @@ const AddWorkoutScreen = ({ navigation, route }) => {
         </View>
       </View>
       <RoutinePicker
-        isVisible={isVisible}
-        closeModal={() => setIsVisible(false)}
+        isVisible={isPickerVisible}
+        closeModal={() => setIsPickerVisible(false)}
         selected={routine}
         selectRoutine={selectRoutine}
+      />
+      <AddNotesModal
+        isVisible={isAddNotesVisible}
+        hideModal={() => setIsAddNotesVisible(false)}
       />
     </SafeAreaView>
   );

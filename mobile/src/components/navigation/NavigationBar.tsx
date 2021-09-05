@@ -18,8 +18,10 @@ const NavigationBar = ({
 
 const styles = StyleSheet.create({
   container: {
+    borderWidth: 1,
+    borderColor: "black",
     height: 40,
-    width: "90%",
+    width: "100%",
     marginTop: 10,
     flexDirection: "row",
     alignItems: "center",
